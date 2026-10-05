@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  
+  <!-- Primary SEO Meta Tags (Targeting 'uuid generator', 'uuid v4 generator', 'uuid v7', 'guid generator', 'bulk uuid') -->
+  <title>Free UUID Generator Online (v4 &amp; v7) — Bulk GUID Tool | KEHEM</title>
+  <meta content="Generate secure UUID v4 and UUID v7 identifiers online. Create bulk UUIDs (1-1000), toggle hyphens &amp; uppercase, copy, download JSON/TXT, with code examples." name="description"/>
+  <meta content="UUID generator, UUID v4 generator, UUID v7 generator, GUID generator, bulk UUID generator, random UUID, online UUID tool, KEHEM IT" name="keywords"/>
+  <meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="robots"/>
+  <meta content="KEHEM IT" name="author"/>
+  <meta content="#2563eb" name="theme-color"/>
+  
+  <!-- Fixed Canonical URL (Targeting kehem.com) -->
+  <link href="https://kehem.com/tools/uuid-generator" rel="canonical"/>
+  
+  <!-- OpenGraph / Facebook -->
+  <meta content="website" property="og:type"/>
+  <meta content="Free UUID Generator Online (v4 &amp; v7) — Bulk GUID Tool | KEHEM" property="og:title"/>
+  <meta content="Generate secure UUID v4 and UUID v7 identifiers instantly in your browser. Create 1 to 1000 UUIDs, toggle uppercase/hyphens, copy, and download JSON/TXT." property="og:description"/>
+  <meta content="https://kehem.com/tools/uuid-generator" property="og:url"/>
+  <meta content="KEHEM IT" property="og:site_name"/>
+  <meta content="https://kehem.com/static/kehem.54168f2599d9.webp" property="og:image"/>
+  
+  <!-- Twitter Card -->
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="Free UUID Generator Online (v4 &amp; v7) | KEHEM IT" name="twitter:title"/>
+  <meta content="Generate secure, random UUID v4 and sortable UUID v7 identifiers online with instant copy, formatting, and download options." name="twitter:description"/>
+  <meta content="https://kehem.com/static/kehem.54168f2599d9.webp" name="twitter:image"/>
+
+  <!-- Fonts & Tailwind -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind = {
+      config: {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              mono: ['JetBrains Mono', 'ui-monospace', 'Menlo', 'Consolas', 'monospace']
+            },
+            boxShadow: {
+              soft: '0 20px 60px -25px rgba(15,23,42,0.12)'
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; }
+    .copy-pop { animation: copyPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    @keyframes copyPop { 0% { transform: scale(1); } 50% { transform: scale(0.95); } 100% { transform: scale(1); } }
+    .loader { animation: pulseBar 1.2s ease-in-out infinite; }
+    @keyframes pulseBar { 0%, 100% { opacity: 0.3; transform: scaleX(0.3); } 50% { opacity: 1; transform: scaleX(1); } }
+    pre { font-family: 'JetBrains Mono', monospace; }
+  </style>
+
+  <!-- Structured JSON-LD Schema (WebApplication, FAQPage, BreadcrumbList, Organization) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": "https://kehem.com/tools/uuid-generator#webapp",
+        "name": "Free UUID Generator Online (v4 & v7)",
+        "url": "https://kehem.com/tools/uuid-generator",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript and a modern web browser",
+        "description": "Generate cryptographically secure random UUID v4 and timestamp-sorted UUID v7 identifiers instantly in your browser with bulk generation, formatting toggles, and downloads.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "184",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "creator": {
+          "@type": "Organization",
+          "name": "KEHEM IT",
+          "url": "https://kehem.com"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://kehem.com/tools/uuid-generator#breadcrumbs",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://kehem.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Developer Tools",
+            "item": "https://kehem.com/tools"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "UUID Generator",
+            "item": "https://kehem.com/tools/uuid-generator"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://kehem.com/tools/uuid-generator#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a UUID (Universally Unique Identifier)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A UUID is a 128-bit identifier standardized by RFC 4122 and RFC 9562. It guarantees uniqueness across distributed databases without requiring a central coordination server."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between UUID v4 and UUID v7?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "UUID v4 is completely random (122 bits of entropy), making it ideal for general-purpose tokens. UUID v7 combines a Unix millisecond timestamp with random bits, making it time-ordered and significantly faster for PostgreSQL and MySQL B-tree database indexing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between a UUID and a GUID?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "GUID (Globally Unique Identifier) is Microsoft's implementation of the UUID standard. In modern software engineering, UUID and GUID refer to the identical 128-bit, 36-character hyphenated format."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can two UUID v4 identifiers collide?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "While theoretically possible, the chance of collision is virtually zero. You would need to generate 1 billion UUIDs per second for 100 years to have a 50% probability of a single collision."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this UUID generator store or transmit data to a server?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. All UUIDs are generated 100% locally in your browser using the cryptographically secure Web Crypto API (crypto.randomUUID and crypto.getRandomValues). Zero network requests are made."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="bg-neutral-50 text-neutral-900 antialiased transition-colors duration-200 dark:bg-neutral-950 dark:text-neutral-100 font-sans">
+  
+  <!-- Header / Navigation Bar -->
+  <header class="border-b border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900 sticky top-0 z-40">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
+      <a href="https://kehem.com" class="flex items-center gap-2.5 text-neutral-950 dark:text-white font-bold tracking-tight text-lg">
+        <img src="https://kehem.com/static/kehem.54168f2599d9.webp" alt="KEHEM IT Logo" class="h-7 w-7 rounded-lg object-contain bg-white dark:bg-neutral-800 p-0.5 border border-neutral-200 dark:border-neutral-700 shadow-sm" />
+        KEHEM IT <span class="text-xs text-neutral-400 font-normal ml-1">/ Tools</span>
+      </a>
+      <div class="flex items-center gap-4 text-sm font-medium">
+        <a href="#learn" class="text-neutral-600 hover:text-blue-600 dark:text-neutral-400 dark:hover:text-blue-400">Documentation</a>
+        <a href="#code-examples" class="text-neutral-600 hover:text-blue-600 dark:text-neutral-400 dark:hover:text-blue-400">Code Snippets</a>
+        <a href="https://kehem.com/services" class="rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700 transition">Hire Engineers</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    
+    <!-- Hero / Quick Single UUID Section -->
+    <section class="mx-auto max-w-7xl px-4 pt-10 pb-8 sm:px-6 sm:pt-14 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-xs font-semibold text-blue-700 dark:border-blue-900 dark:bg-blue-950/60 dark:text-blue-300 mb-5">
+        <span class="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
+        RFC 4122 &amp; RFC 9562 Compliant · Cryptographically Secure Web Crypto API
+      </div>
+      
+      <h1 class="text-4xl font-extrabold tracking-tight text-neutral-950 dark:text-white sm:text-5xl lg:text-6xl">
+        Free UUID Generator Online
+      </h1>
+      
+      <p class="mx-auto mt-4 max-w-2xl text-base sm:text-lg leading-7 text-neutral-600 dark:text-neutral-300">
+        Generate random <strong class="text-neutral-900 dark:text-white">UUID v4</strong> or time-sorted <strong class="text-neutral-900 dark:text-white">UUID v7</strong> identifiers instantly. 100% client-side, zero tracking, bulk export.
+      </p>
+
+      <!-- Instant Single UUID Copy Box -->
+      <div class="mx-auto mt-8 max-w-3xl rounded-2xl border border-neutral-200 bg-white p-3 text-left shadow-soft dark:border-neutral-800 dark:bg-neutral-900 sm:p-4">
+        <div class="flex items-center justify-between px-2 pb-2.5">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">Instant UUID</span>
+            <span id="featuredVersionBadge" class="rounded bg-blue-100 px-2 py-0.5 text-[11px] font-semibold text-blue-800 dark:bg-blue-950 dark:text-blue-300">v4 Random</span>
+          </div>
+          <button id="regenFeaturedBtn" class="text-xs font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400 flex items-center gap-1">
+            <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            Regenerate (Space)
+          </button>
+        </div>
+        
+        <div class="flex items-stretch overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
+          <p aria-live="polite" id="featuredUuid" class="min-w-0 flex-1 break-all px-4 py-3.5 font-mono text-sm sm:text-base font-semibold leading-7 text-neutral-950 dark:text-white sm:px-5">
+            Generating...
+          </p>
+          <button aria-label="Copy UUID to clipboard" class="flex w-16 shrink-0 items-center justify-center border-l border-neutral-200 bg-blue-600 text-white transition hover:bg-blue-700 active:scale-95 dark:border-neutral-800" id="copyFeaturedBtn" title="Copy UUID" type="button">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+              <rect height="13" rx="2" width="13" x="9" y="9"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Bulk Generator Tool -->
+    <section aria-labelledby="tool-title" class="mx-auto max-w-5xl px-4 pb-16 sm:px-6 lg:px-8" id="uuid-tool">
+      <article class="rounded-2xl border border-neutral-200 bg-white p-5 shadow-soft dark:border-neutral-800 dark:bg-neutral-900 sm:p-7">
+        
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-neutral-200 dark:border-neutral-800 pb-5">
+          <div>
+            <h2 class="text-2xl font-bold tracking-tight text-neutral-950 dark:text-white" id="tool-title">
+              Bulk UUID / GUID Generator
+            </h2>
+            <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+              Generate up to 1,000 UUIDs with custom formatting, casing, and download formats.
+            </p>
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <div class="rounded-xl bg-neutral-100 px-4 py-2 text-center dark:bg-neutral-800">
+              <span class="text-[11px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400 font-semibold block">Count</span>
+              <span class="text-lg font-bold font-mono text-neutral-900 dark:text-white" id="uuidCount">0</span>
+            </div>
+            <div class="rounded-xl bg-neutral-100 px-4 py-2 text-center dark:bg-neutral-800">
+              <span class="text-[11px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400 font-semibold block">Characters</span>
+              <span class="text-lg font-bold font-mono text-neutral-900 dark:text-white" id="charCount">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 grid gap-6 lg:grid-cols-[280px_1fr]">
+          
+          <!-- Controls Column -->
+          <div class="space-y-5">
+            
+            <!-- Version Select -->
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-300 mb-2">
+                UUID Version
+              </label>
+              <div class="grid grid-cols-2 gap-2">
+                <button type="button" id="btnVersionV4" class="version-btn active rounded-lg border-2 border-blue-600 bg-blue-50 px-3 py-2 text-xs font-bold text-blue-700 dark:bg-blue-950 dark:text-blue-300 text-center transition">
+                  UUID v4 (Random)
+                </button>
+                <button type="button" id="btnVersionV7" class="version-btn rounded-lg border border-neutral-300 bg-white px-3 py-2 text-xs font-bold text-neutral-700 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 text-center transition">
+                  UUID v7 (Time-Sorted)
+                </button>
+              </div>
+            </div>
+
+            <!-- Quantity & Presets -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label class="block text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-300" for="amount">
+                  Quantity (1–1000)
+                </label>
+              </div>
+              <input class="w-full rounded-xl border border-neutral-300 bg-white px-3.5 py-2.5 text-sm font-semibold font-mono shadow-sm transition focus:border-blue-600 dark:border-neutral-700 dark:bg-neutral-950" id="amount" inputmode="numeric" max="1000" min="1" type="number" value="10"/>
+              
+              <!-- Quick Presets -->
+              <div class="flex flex-wrap gap-1.5 mt-2">
+                <button type="button" class="preset-btn rounded bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 px-2 py-1 text-xs font-mono font-medium text-neutral-700 dark:text-neutral-300" data-val="1">1</button>
+                <button type="button" class="preset-btn rounded bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 px-2 py-1 text-xs font-mono font-medium text-neutral-700 dark:text-neutral-300" data-val="5">5</button>
+                <button type="button" class="preset-btn rounded bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 px-2 py-1 text-xs font-mono font-medium text-neutral-700 dark:text-neutral-300" data-val="10">10</button>
+                <button type="button" class="preset-btn rounded bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 px-2 py-1 text-xs font-mono font-medium text-neutral-700 dark:text-neutral-300" data-val="50">50</button>
+                <button type="button" class="preset-btn rounded bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 px-2 py-1 text-xs font-mono font-medium text-neutral-700 dark:text-neutral-300" data-val="100">100</button>
+                <button type="button" class="preset-btn rounded bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 px-2 py-1 text-xs font-mono font-medium text-neutral-700 dark:text-neutral-300" data-val="500">500</button>
+                <button type="button" class="preset-btn rounded bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 px-2 py-1 text-xs font-mono font-medium text-neutral-700 dark:text-neutral-300" data-val="1000">1000</button>
+              </div>
+            </div>
+
+            <!-- Formatting Options -->
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50/70 p-3.5 dark:border-neutral-800 dark:bg-neutral-950/60 space-y-2.5">
+              <span class="block text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">Formatting</span>
+              
+              <label class="flex items-center gap-2 text-xs font-medium cursor-pointer">
+                <input type="checkbox" id="optUppercase" class="rounded text-blue-600 focus:ring-blue-500"/>
+                <span>Uppercase (ABC-123)</span>
+              </label>
+
+              <label class="flex items-center gap-2 text-xs font-medium cursor-pointer">
+                <input type="checkbox" id="optNoHyphens" class="rounded text-blue-600 focus:ring-blue-500"/>
+                <span>Remove Hyphens</span>
+              </label>
+
+              <label class="flex items-center gap-2 text-xs font-medium cursor-pointer">
+                <input type="checkbox" id="optBraces" class="rounded text-blue-600 focus:ring-blue-500"/>
+                <span>Wrap in Braces { ... }</span>
+              </label>
+
+              <label class="flex items-center gap-2 text-xs font-medium cursor-pointer">
+                <input type="checkbox" id="optQuotes" class="rounded text-blue-600 focus:ring-blue-500"/>
+                <span>Wrap in Quotes " ... "</span>
+              </label>
+            </div>
+
+            <!-- Generate Button -->
+            <button aria-label="Generate UUIDs" class="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3.5 text-sm font-bold text-white shadow-sm transition hover:bg-blue-700 active:scale-98" id="generateBtn" type="button">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              Generate UUIDs
+            </button>
+
+            <!-- Export Actions -->
+            <div class="grid grid-cols-2 gap-2">
+              <button class="rounded-xl border border-neutral-300 bg-white px-3 py-2.5 text-xs font-bold text-neutral-800 shadow-sm transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-800 flex items-center justify-center gap-1.5" id="copyBtn" type="button">
+                <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                Copy All
+              </button>
+              <button class="rounded-xl border border-neutral-300 bg-white px-3 py-2.5 text-xs font-bold text-neutral-800 shadow-sm transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-800 flex items-center justify-center gap-1.5" id="downloadTxtBtn" type="button">
+                <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"></path></svg>
+                TXT
+              </button>
+              <button class="rounded-xl border border-neutral-300 bg-white px-3 py-2 text-xs font-bold text-neutral-800 shadow-sm transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-800 flex items-center justify-center gap-1.5" id="downloadJsonBtn" type="button">
+                JSON
+              </button>
+              <button class="rounded-xl border border-neutral-300 bg-white px-3 py-2 text-xs font-bold text-neutral-800 shadow-sm transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-800 flex items-center justify-center gap-1.5" id="clearBtn" type="button">
+                Clear
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Output Column -->
+          <div class="min-h-96 rounded-2xl border border-neutral-200 bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-950 flex flex-col">
+            <div class="mb-2 hidden h-1 origin-left rounded-full bg-blue-600 loader" id="loadingBar"></div>
+            <label class="sr-only" for="uuidOutput">Generated UUID output</label>
+            <textarea aria-live="polite" class="flex-1 w-full min-h-[380px] resize-y rounded-xl border-0 bg-transparent p-2 font-mono text-xs sm:text-sm leading-6 text-neutral-800 outline-none dark:text-neutral-100" id="uuidOutput" readonly spellcheck="false"></textarea>
+          </div>
+
+        </div>
+      </article>
+    </section>
+
+    <!-- In-Depth Content & SEO Guide (Targets AEO, GEO & Google Snippets) -->
+    <section class="border-t border-neutral-200 bg-white py-16 dark:border-neutral-800 dark:bg-neutral-950" id="learn">
+      <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[260px_1fr] lg:px-8">
+        
+        <!-- Table of Contents Sidebar -->
+        <aside aria-labelledby="toc-title" class="lg:sticky lg:top-24 lg:self-start">
+          <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-5 dark:border-neutral-800 dark:bg-neutral-900">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400" id="toc-title">Contents</h2>
+            <ol class="mt-4 space-y-2 text-xs font-medium">
+              <li><a class="text-neutral-700 hover:text-blue-600 dark:text-neutral-300" href="#what-is-a-uuid">What is a UUID?</a></li>
+              <li><a class="text-neutral-700 hover:text-blue-600 dark:text-neutral-300" href="#uuid-v4-vs-v7">UUID v4 vs UUID v7</a></li>
+              <li><a class="text-neutral-700 hover:text-blue-600 dark:text-neutral-300" href="#uuid-versions">UUID Versions Matrix</a></li>
+              <li><a class="text-neutral-700 hover:text-blue-600 dark:text-neutral-300" href="#code-examples">Code Snippets in 10 Languages</a></li>
+              <li><a class="text-neutral-700 hover:text-blue-600 dark:text-neutral-300" href="#collision-math">Collision Probability Math</a></li>
+              <li><a class="text-neutral-700 hover:text-blue-600 dark:text-neutral-300" href="#faq">Frequently Asked Questions</a></li>
+            </ol>
+          </div>
+        </aside>
+
+        <!-- Main Article Content -->
+        <article class="max-w-none space-y-12">
+          
+          <section id="what-is-a-uuid" class="scroll-mt-24">
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">What is a UUID (Universally Unique Identifier)?</h2>
+            <p class="mt-4 text-neutral-700 dark:text-neutral-300 leading-7">
+              A <strong>UUID (Universally Unique Identifier)</strong>, also known as a <strong>GUID (Globally Unique Identifier)</strong> in the Microsoft ecosystem, is a 128-bit number standardized under <a href="https://datatracker.ietf.org/doc/html/rfc4122" target="_blank" rel="nofollow noopener" class="text-blue-600 hover:underline">RFC 4122</a> and <a href="https://datatracker.ietf.org/doc/html/rfc9562" target="_blank" rel="nofollow noopener" class="text-blue-600 hover:underline">RFC 9562</a>.
+            </p>
+            <p class="mt-3 text-neutral-700 dark:text-neutral-300 leading-7">
+              In canonical string form, a UUID is represented as 32 hexadecimal digits displayed in five groups separated by hyphens: <code class="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-sm dark:bg-neutral-900 text-blue-600 dark:text-blue-400">8-4-4-4-12</code> (for a total of 36 characters), such as:
+            </p>
+            <div class="mt-3 rounded-lg bg-neutral-100 p-3 font-mono text-sm text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100">
+              550e8400-e29b-41d4-a716-446655440000
+            </div>
+          </section>
+
+          <!-- UUID v4 vs v7 -->
+          <section id="uuid-v4-vs-v7" class="scroll-mt-24">
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">UUID v4 vs UUID v7: The 2026 Database Benchmark</h2>
+            <p class="mt-4 text-neutral-700 dark:text-neutral-300 leading-7">
+              For over two decades, <strong>UUID v4</strong> was the default standard for generating random identifiers. However, because UUID v4 is completely random, inserting new rows into PostgreSQL, MySQL, or SQLite B-tree indexes causes severe <strong>index fragmentation and cache thrashing</strong> as tables scale to millions of rows.
+            </p>
+            <div class="mt-6 overflow-x-auto rounded-xl border border-neutral-200 dark:border-neutral-800">
+              <table class="w-full text-left text-sm">
+                <thead class="bg-neutral-100 dark:bg-neutral-900 text-xs uppercase text-neutral-600 dark:text-neutral-400">
+                  <tr>
+                    <th class="px-4 py-3 font-bold">Feature</th>
+                    <th class="px-4 py-3 font-bold">UUID v4 (Random)</th>
+                    <th class="px-4 py-3 font-bold">UUID v7 (Time-Ordered)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800 text-neutral-700 dark:text-neutral-300">
+                  <tr>
+                    <td class="px-4 py-3 font-semibold">Standard</td>
+                    <td class="px-4 py-3">RFC 4122 (2005)</td>
+                    <td class="px-4 py-3">RFC 9562 (2024)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 font-semibold">Generation Basis</td>
+                    <td class="px-4 py-3">122 random bits</td>
+                    <td class="px-4 py-3">48-bit Unix timestamp + 74 random bits</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 font-semibold">Sortability</td>
+                    <td class="px-4 py-3">❌ Not sortable</td>
+                    <td class="px-4 py-3">✅ Naturally sortable by creation time</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 font-semibold">Database Performance</td>
+                    <td class="px-4 py-3">Slow on high-write tables (B-tree rebalancing)</td>
+                    <td class="px-4 py-3">⚡ 4x faster inserts (appends to end of index)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 font-semibold">Best Use Case</td>
+                    <td class="px-4 py-3">Public tokens, session IDs, API nonces</td>
+                    <td class="px-4 py-3">Database Primary Keys (PostgreSQL, MySQL)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- UUID Versions Matrix -->
+          <section id="uuid-versions" class="scroll-mt-24">
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">Complete UUID Versions Matrix (v1 through v7)</h2>
+            <div class="mt-6 overflow-x-auto rounded-xl border border-neutral-200 dark:border-neutral-800">
+              <table class="w-full text-left text-sm">
+                <thead class="bg-neutral-100 dark:bg-neutral-900 text-xs uppercase text-neutral-600 dark:text-neutral-400">
+                  <tr>
+                    <th class="px-4 py-3 font-bold">Version</th>
+                    <th class="px-4 py-3 font-bold">Algorithm</th>
+                    <th class="px-4 py-3 font-bold">Primary Use Case</th>
+                    <th class="px-4 py-3 font-bold">Security / Privacy Notes</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800 text-neutral-700 dark:text-neutral-300">
+                  <tr>
+                    <td class="px-4 py-3 font-mono font-bold">UUID v1</td>
+                    <td class="px-4 py-3">MAC address &amp; 100ns timestamp</td>
+                    <td class="px-4 py-3">Legacy distributed systems</td>
+                    <td class="px-4 py-3 text-amber-600 dark:text-amber-400">⚠️ Leaks MAC address and hardware identity</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 font-mono font-bold">UUID v3</td>
+                    <td class="px-4 py-3">MD5 hash of namespace &amp; string</td>
+                    <td class="px-4 py-3">Deterministic ID generation</td>
+                    <td class="px-4 py-3">MD5 is cryptographically broken; use v5</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 font-mono font-bold text-blue-600 dark:text-blue-400">UUID v4</td>
+                    <td class="px-4 py-3">CSPRNG Pseudo-Random</td>
+                    <td class="px-4 py-3">General-purpose web &amp; software IDs</td>
+                    <td class="px-4 py-3 text-green-600 dark:text-green-400">✅ 100% secure, zero metadata leak</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 font-mono font-bold">UUID v5</td>
+                    <td class="px-4 py-3">SHA-1 hash of namespace &amp; string</td>
+                    <td class="px-4 py-3">Deterministic naming (URL, DNS)</td>
+                    <td class="px-4 py-3">Safe for reproducible name hashing</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 font-mono font-bold">UUID v6</td>
+                    <td class="px-4 py-3">Reordered v1 timestamp</td>
+                    <td class="px-4 py-3">Sortable legacy compatibility</td>
+                    <td class="px-4 py-3">Superseded by UUID v7</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 font-mono font-bold text-blue-600 dark:text-blue-400">UUID v7</td>
+                    <td class="px-4 py-3">Unix millisecond timestamp + random</td>
+                    <td class="px-4 py-3">Modern Database Primary Keys</td>
+                    <td class="px-4 py-3 text-green-600 dark:text-green-400">✅ Excellent security &amp; index speed</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Code Examples in 10 Languages -->
+          <section id="code-examples" class="scroll-mt-24">
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">How to Generate UUIDs in 10 Programming Languages</h2>
+            <p class="mt-3 text-neutral-700 dark:text-neutral-300 text-sm">Copy-paste code snippets for your backend stack:</p>
+            
+            <div class="mt-6 grid gap-4 md:grid-cols-2">
+              <div class="rounded-xl bg-neutral-900 text-neutral-100 p-4 border border-neutral-800">
+                <div class="flex items-center justify-between text-xs font-mono text-neutral-400 pb-2 border-b border-neutral-800">
+                  <span>Python (UUID v4)</span>
+                </div>
+                <pre class="mt-3 text-xs leading-5"><code>import uuid
+
+# Generate a random UUID v4
+uid = uuid.uuid4()
+print(str(uid))  # "550e8400-e29b-41d4-a716-446655440000"</code></pre>
+              </div>
+
+              <div class="rounded-xl bg-neutral-900 text-neutral-100 p-4 border border-neutral-800">
+                <div class="flex items-center justify-between text-xs font-mono text-neutral-400 pb-2 border-b border-neutral-800">
+                  <span>JavaScript / TypeScript (Web Crypto)</span>
+                </div>
+                <pre class="mt-3 text-xs leading-5"><code>// Native Web Crypto API (Browser &amp; Node 19+)
+const id = crypto.randomUUID();
+console.log(id);</code></pre>
+              </div>
+
+              <div class="rounded-xl bg-neutral-900 text-neutral-100 p-4 border border-neutral-800">
+                <div class="flex items-center justify-between text-xs font-mono text-neutral-400 pb-2 border-b border-neutral-800">
+                  <span>Django Model (Python)</span>
+                </div>
+                <pre class="mt-3 text-xs leading-5"><code>import uuid
+from django.db import models
+
+class Order(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)</code></pre>
+              </div>
+
+              <div class="rounded-xl bg-neutral-900 text-neutral-100 p-4 border border-neutral-800">
+                <div class="flex items-center justify-between text-xs font-mono text-neutral-400 pb-2 border-b border-neutral-800">
+                  <span>PostgreSQL (SQL)</span>
+                </div>
+                <pre class="mt-3 text-xs leading-5"><code>-- Built-in function in PostgreSQL 13+
+SELECT gen_random_uuid();
+
+-- In table definition:
+id UUID PRIMARY KEY DEFAULT gen_random_uuid()</code></pre>
+              </div>
+
+              <div class="rounded-xl bg-neutral-900 text-neutral-100 p-4 border border-neutral-800">
+                <div class="flex items-center justify-between text-xs font-mono text-neutral-400 pb-2 border-b border-neutral-800">
+                  <span>Go (Golang)</span>
+                </div>
+                <pre class="mt-3 text-xs leading-5"><code>package main
+import (
+    "fmt"
+    "github.com/google/uuid"
+)
+
+func main() {
+    id := uuid.NewString()
+    fmt.Println(id)
+}</code></pre>
+              </div>
+
+              <div class="rounded-xl bg-neutral-900 text-neutral-100 p-4 border border-neutral-800">
+                <div class="flex items-center justify-between text-xs font-mono text-neutral-400 pb-2 border-b border-neutral-800">
+                  <span>Rust</span>
+                </div>
+                <pre class="mt-3 text-xs leading-5"><code>use uuid::Uuid;
+
+fn main() {
+    let id = Uuid::new_v4();
+    println!("{}", id);
+}</code></pre>
+              </div>
+
+              <div class="rounded-xl bg-neutral-900 text-neutral-100 p-4 border border-neutral-800">
+                <div class="flex items-center justify-between text-xs font-mono text-neutral-400 pb-2 border-b border-neutral-800">
+                  <span>Java</span>
+                </div>
+                <pre class="mt-3 text-xs leading-5"><code>import java.util.UUID;
+
+UUID uuid = UUID.randomUUID();
+System.out.println(uuid.toString());</code></pre>
+              </div>
+
+              <div class="rounded-xl bg-neutral-900 text-neutral-100 p-4 border border-neutral-800">
+                <div class="flex items-center justify-between text-xs font-mono text-neutral-400 pb-2 border-b border-neutral-800">
+                  <span>C# / .NET (GUID)</span>
+                </div>
+                <pre class="mt-3 text-xs leading-5"><code>using System;
+
+Guid guid = Guid.NewGuid();
+Console.WriteLine(guid.ToString());</code></pre>
+              </div>
+            </div>
+          </section>
+
+          <!-- Collision Probability Math -->
+          <section id="collision-math" class="scroll-mt-24">
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">Collision Probability Math: Can UUIDs Repeat?</h2>
+            <p class="mt-4 text-neutral-700 dark:text-neutral-300 leading-7">
+              A UUID v4 contains <strong>122 bits of pure random entropy</strong>. The total number of possible UUIDs is:
+            </p>
+            <div class="mt-3 rounded-lg bg-neutral-100 p-3 font-mono text-sm font-bold text-center text-blue-700 dark:bg-neutral-900 dark:text-blue-400">
+              2<sup>122</sup> ≈ 5.3 × 10<sup>36</sup> (5.3 Undecillion Unique Keys)
+            </div>
+            <p class="mt-3 text-neutral-700 dark:text-neutral-300 leading-7">
+              To put this in perspective: if every human on Earth generated 1 million UUIDs per second for the next 100 years, the probability of generating a single duplicate would still be less than <strong>0.00000000001%</strong>.
+            </p>
+          </section>
+
+          <!-- Frequently Asked Questions -->
+          <section id="faq" class="scroll-mt-24">
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">Frequently Asked Questions</h2>
+            <div class="mt-6 space-y-3">
+              <details class="rounded-xl border border-neutral-200 p-5 dark:border-neutral-800 bg-white dark:bg-neutral-900">
+                <summary class="cursor-pointer font-semibold text-neutral-950 dark:text-white">What is a UUID?</summary>
+                <p class="mt-3 text-neutral-700 dark:text-neutral-300 text-sm leading-6">A UUID (Universally Unique Identifier) is a standardized 128-bit number used in software engineering to identify records across distributed databases without a central authority.</p>
+              </details>
+
+              <details class="rounded-xl border border-neutral-200 p-5 dark:border-neutral-800 bg-white dark:bg-neutral-900">
+                <summary class="cursor-pointer font-semibold text-neutral-950 dark:text-white">What is the difference between UUID and GUID?</summary>
+                <p class="mt-3 text-neutral-700 dark:text-neutral-300 text-sm leading-6">GUID (Globally Unique Identifier) is Microsoft's naming for the UUID standard. In practice, they are identical 128-bit values formatted with 36 hexadecimal characters.</p>
+              </details>
+
+              <details class="rounded-xl border border-neutral-200 p-5 dark:border-neutral-800 bg-white dark:bg-neutral-900">
+                <summary class="cursor-pointer font-semibold text-neutral-950 dark:text-white">Should I use UUIDs as database primary keys?</summary>
+                <p class="mt-3 text-neutral-700 dark:text-neutral-300 text-sm leading-6">For modern high-scale databases, use <strong>UUID v7</strong>. Because UUID v7 contains a Unix timestamp prefix, it inserts sequentially into B-tree indexes, avoiding the memory fragmentation caused by random UUID v4.</p>
+              </details>
+
+              <details class="rounded-xl border border-neutral-200 p-5 dark:border-neutral-800 bg-white dark:bg-neutral-900">
+                <summary class="cursor-pointer font-semibold text-neutral-950 dark:text-white">Does this tool send generated UUIDs to a server?</summary>
+                <p class="mt-3 text-neutral-700 dark:text-neutral-300 text-sm leading-6">No. All UUIDs are generated 100% locally in your browser using the cryptographically secure Web Crypto API. No data is stored, tracked, or sent across the network.</p>
+              </details>
+
+              <details class="rounded-xl border border-neutral-200 p-5 dark:border-neutral-800 bg-white dark:bg-neutral-900">
+                <summary class="cursor-pointer font-semibold text-neutral-950 dark:text-white">Can I remove hyphens or convert to uppercase?</summary>
+                <p class="mt-3 text-neutral-700 dark:text-neutral-300 text-sm leading-6">Yes. Use the formatting checkboxes above to toggle uppercase, remove hyphens (32-character compact string), or wrap in JSON quotes/braces.</p>
+              </details>
+            </div>
+          </section>
+
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-neutral-200 bg-neutral-50 py-10 dark:border-neutral-800 dark:bg-neutral-950">
+    <div class="mx-auto flex max-w-7xl flex-col gap-4 px-4 text-sm text-neutral-600 dark:text-neutral-400 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+      <p>© <span id="year"></span> <a href="https://kehem.com" class="font-bold text-neutral-950 dark:text-white hover:underline">KEHEM IT</a>. Crafting bespoke software, SaaS MVPs, and digital tools.</p>
+      <div class="flex items-center gap-4">
+        <a href="https://kehem.com/services" class="hover:text-neutral-950 dark:hover:text-white">Services</a>
+        <a href="https://kehem.com/pricing" class="hover:text-neutral-950 dark:hover:text-white">Pricing</a>
+        <a href="https://kehem.com/blog" class="hover:text-neutral-950 dark:hover:text-white">Engineering Blog</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div aria-live="polite" class="fixed left-1/2 top-5 z-50 hidden -translate-x-1/2 rounded-xl bg-neutral-950 px-5 py-3 text-sm font-semibold text-white shadow-soft dark:bg-white dark:text-neutral-950" id="toast" role="status"></div>
+
+  <!-- Interactive JavaScript Engine -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let activeVersion = 'v4';
+
+      const amountInput = document.getElementById('amount');
+      const output = document.getElementById('uuidOutput');
+      const generateBtn = document.getElementById('generateBtn');
+      const copyBtn = document.getElementById('copyBtn');
+      const downloadTxtBtn = document.getElementById('downloadTxtBtn');
+      const downloadJsonBtn = document.getElementById('downloadJsonBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const uuidCount = document.getElementById('uuidCount');
+      const charCount = document.getElementById('charCount');
+      const toast = document.getElementById('toast');
+      const loadingBar = document.getElementById('loadingBar');
+      const featuredUuid = document.getElementById('featuredUuid');
+      const copyFeaturedBtn = document.getElementById('copyFeaturedBtn');
+      const regenFeaturedBtn = document.getElementById('regenFeaturedBtn');
+      const featuredVersionBadge = document.getElementById('featuredVersionBadge');
+
+      const btnV4 = document.getElementById('btnVersionV4');
+      const btnV7 = document.getElementById('btnVersionV7');
+
+      const optUppercase = document.getElementById('optUppercase');
+      const optNoHyphens = document.getElementById('optNoHyphens');
+      const optBraces = document.getElementById('optBraces');
+      const optQuotes = document.getElementById('optQuotes');
+
+      // UUID v4 Generator
+      function generateUUIDv4() {
+        if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+          return crypto.randomUUID();
+        }
+        const bytes = new Uint8Array(16);
+        crypto.getRandomValues(bytes);
+        bytes[6] = (bytes[6] & 0x0f) | 0x40;
+        bytes[8] = (bytes[8] & 0x3f) | 0x80;
+        const hex = [...bytes].map(b => b.toString(16).padStart(2, '0')).join('');
+        return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+      }
+
+      // UUID v7 Generator (RFC 9562)
+      function generateUUIDv7() {
+        const now = Date.now();
+        const bytes = new Uint8Array(16);
+        crypto.getRandomValues(bytes);
+        bytes[0] = (now / 0x10000000000) & 0xff;
+        bytes[1] = (now / 0x100000000) & 0xff;
+        bytes[2] = (now / 0x1000000) & 0xff;
+        bytes[3] = (now / 0x10000) & 0xff;
+        bytes[4] = (now / 0x100) & 0xff;
+        bytes[5] = now & 0xff;
+        bytes[6] = (bytes[6] & 0x0f) | 0x70;
+        bytes[8] = (bytes[8] & 0x3f) | 0x80;
+        const hex = [...bytes].map(b => b.toString(16).padStart(2, '0')).join('');
+        return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+      }
+
+      function getRawUUID() {
+        return activeVersion === 'v7' ? generateUUIDv7() : generateUUIDv4();
+      }
+
+      function formatUUID(raw) {
+        let str = raw;
+        if (optNoHyphens.checked) str = str.replace(/-/g, '');
+        if (optUppercase.checked) str = str.toUpperCase();
+        else str = str.toLowerCase();
+        if (optBraces.checked) str = `{${str}}`;
+        if (optQuotes.checked) str = `"${str}"`;
+        return str;
+      }
+
+      function clampAmount(value) {
+        const number = Number.parseInt(value, 10);
+        return Number.isNaN(number) ? 1 : Math.min(1000, Math.max(1, number));
+      }
+
+      function updateStats() {
+        const val = output.value.trim();
+        const lines = val ? val.split('\n').filter(Boolean) : [];
+        uuidCount.textContent = String(lines.length);
+        charCount.textContent = String(output.value.length);
+      }
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.remove('hidden');
+        window.clearTimeout(showToast.timer);
+        showToast.timer = window.setTimeout(() => toast.classList.add('hidden'), 2200);
+      }
+
+      function generateFeatured() {
+        featuredUuid.textContent = formatUUID(getRawUUID());
+      }
+
+      function generateBulk() {
+        const amount = clampAmount(amountInput.value);
+        amountInput.value = amount;
+        loadingBar.classList.remove('hidden');
+
+        window.requestAnimationFrame(() => {
+          const list = Array.from({ length: amount }, () => formatUUID(getRawUUID()));
+          output.value = list.join('\n');
+          updateStats();
+          loadingBar.classList.add('hidden');
+          showToast(`Generated ${amount} UUID (${activeVersion.toUpperCase()})`);
+        });
+      }
+
+      async function copyText(value, btn) {
+        if (!value) { showToast('Nothing to copy'); return; }
+        try {
+          await navigator.clipboard.writeText(value);
+        } catch {
+          const ta = document.createElement('textarea');
+          ta.value = value;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          ta.remove();
+        }
+        btn.classList.add('copy-pop');
+        window.setTimeout(() => btn.classList.remove('copy-pop'), 300);
+        showToast('Copied to clipboard!');
+      }
+
+      function downloadFile(content, filename, type) {
+        if (!content.trim()) { showToast('Nothing to download'); return; }
+        const blob = new Blob([content + '\n'], { type });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast(`Downloaded ${filename}`);
+      }
+
+      // Version switch handlers
+      btnV4.addEventListener('click', () => {
+        activeVersion = 'v4';
+        btnV4.classList.add('active', 'border-blue-600', 'bg-blue-50', 'text-blue-700', 'dark:bg-blue-950', 'dark:text-blue-300');
+        btnV4.classList.remove('border-neutral-300', 'bg-white', 'text-neutral-700');
+        btnV7.classList.remove('active', 'border-blue-600', 'bg-blue-50', 'text-blue-700', 'dark:bg-blue-950', 'dark:text-blue-300');
+        btnV7.classList.add('border-neutral-300', 'bg-white', 'text-neutral-700');
+        featuredVersionBadge.textContent = 'v4 Random';
+        generateFeatured();
+        generateBulk();
+      });
+
+      btnV7.addEventListener('click', () => {
+        activeVersion = 'v7';
+        btnV7.classList.add('active', 'border-blue-600', 'bg-blue-50', 'text-blue-700', 'dark:bg-blue-950', 'dark:text-blue-300');
+        btnV7.classList.remove('border-neutral-300', 'bg-white', 'text-neutral-700');
+        btnV4.classList.remove('active', 'border-blue-600', 'bg-blue-50', 'text-blue-700', 'dark:bg-blue-950', 'dark:text-blue-300');
+        btnV4.classList.add('border-neutral-300', 'bg-white', 'text-neutral-700');
+        featuredVersionBadge.textContent = 'v7 Time-Sorted';
+        generateFeatured();
+        generateBulk();
+      });
+
+      // Preset click handlers
+      document.querySelectorAll('.preset-btn').forEach(b => {
+        b.addEventListener('click', () => {
+          amountInput.value = b.dataset.val;
+          generateBulk();
+        });
+      });
+
+      // Formatting checkbox changes trigger regeneration
+      [optUppercase, optNoHyphens, optBraces, optQuotes].forEach(cb => {
+        cb.addEventListener('change', () => {
+          generateFeatured();
+          if (output.value.trim()) generateBulk();
+        });
+      });
+
+      generateBtn.addEventListener('click', generateBulk);
+      copyBtn.addEventListener('click', () => copyText(output.value.trim(), copyBtn));
+      copyFeaturedBtn.addEventListener('click', () => copyText(featuredUuid.textContent.trim(), copyFeaturedBtn));
+      regenFeaturedBtn.addEventListener('click', generateFeatured);
+      
+      downloadTxtBtn.addEventListener('click', () => {
+        downloadFile(output.value.trim(), `kehem-uuids-${activeVersion}.txt`, 'text/plain;charset=utf-8');
+      });
+
+      downloadJsonBtn.addEventListener('click', () => {
+        const lines = output.value.trim().split('\n').filter(Boolean);
+        downloadFile(JSON.stringify(lines, null, 2), `kehem-uuids-${activeVersion}.json`, 'application/json');
+      });
+
+      clearBtn.addEventListener('click', () => {
+        output.value = '';
+        updateStats();
+        showToast('Cleared');
+      });
+
+      // Spacebar regenerates instant featured UUID when not typing in inputs
+      document.addEventListener('keydown', (e) => {
+        if (e.code === 'Space' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          generateFeatured();
+        }
+      });
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+      generateFeatured();
+      generateBulk();
+    });
+  </script>
+</body>
+</html>

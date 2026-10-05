@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JWT Decoder & Inspector | KEHEM IT</title>
+  <meta name="description" content="Decode and inspect JWT tokens instantly in your browser. View JWT header, payload, signature, expiration countdown, issued time, and not-before claims client-side.">
+  <meta name="keywords" content="JWT decoder, JWT inspector, decode JWT, JSON Web Token decoder, JWT payload, JWT header, JWT exp, JWT validator, Base64URL decoder, KEHEM IT">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="KEHEM IT">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="canonical" href=""{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JWT Decoder & Inspector | KEHEM IT">
+  <meta property="og:description" content="Decode JWT header, payload, signature, timestamps, and expiration status safely in your browser.">
+  <meta property="og:url" content=""{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+  <meta property="og:site_name" content="KEHEM IT">
+  <meta property="og:image" content="https://kehemit.com/og/jwt-decoder-inspector.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JWT Decoder & Inspector | KEHEM IT">
+  <meta name="twitter:description" content="Inspect JWT tokens client-side with decoded header, payload, signature, and expiration status.">
+  <meta name="twitter:image" content="https://kehemit.com/og/jwt-decoder-inspector.png">
+  <script>
+    tailwind={config:{darkMode:'class',theme:{extend:{fontFamily:{sans:['Inter','ui-sans-serif','system-ui','Segoe UI','Arial','sans-serif'],mono:['ui-monospace','SFMono-Regular','Menlo','Consolas','monospace']},boxShadow:{soft:'0 24px 70px -36px rgba(15,23,42,.38)'}}}}};
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :focus-visible{outline:3px solid #2563eb;outline-offset:3px}.fade-in{animation:fadeIn .22s ease}.loader{animation:pulseLine 1s ease-in-out infinite}.copy-pop{animation:copyPop .35s ease}.bad-token{box-shadow:0 0 0 3px rgba(220,38,38,.25)}@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}@keyframes pulseLine{0%,100%{opacity:.35;transform:scaleX(.35)}50%{opacity:1;transform:scaleX(1)}}@keyframes copyPop{0%{transform:scale(1)}45%{transform:scale(.97)}100%{transform:scale(1)}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"KEHEM IT","url":"https://kehemit.com","logo":"https://kehemit.com/logo.png"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JWT Decoder & Inspector","url":""{{ request.scheme }}://{{ request.get_host }}{{ request.path }}","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"A client-side JWT decoder and inspector for viewing token header, payload, signature, expiration, issued time, and not-before claims.","creator":{"@type":"Organization","name":"KEHEM IT","url":"https://kehemit.com"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kehemit.com"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://kehemit.com/tools"},{"@type":"ListItem","position":3,"name":"JWT Decoder & Inspector","item":""{{ request.scheme }}://{{ request.get_host }}{{ request.path }}"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a JWT?","acceptedAnswer":{"@type":"Answer","text":"A JWT is a JSON Web Token used to transmit claims between parties as a compact encoded string."}},{"@type":"Question","name":"Does this tool verify JWT signatures?","acceptedAnswer":{"@type":"Answer","text":"No. Signature verification requires the signing secret or public key, which should not be entered into a simple decoder."}},{"@type":"Question","name":"Is JWT decoding safe?","acceptedAnswer":{"@type":"Answer","text":"Decoding reads Base64URL-encoded data, but sensitive tokens should still be handled carefully."}},{"@type":"Question","name":"Does this tool send tokens to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Tokens are decoded completely in your browser."}},{"@type":"Question","name":"What is the JWT header?","acceptedAnswer":{"@type":"Answer","text":"The header usually describes the token type and signing algorithm."}},{"@type":"Question","name":"What is the JWT payload?","acceptedAnswer":{"@type":"Answer","text":"The payload contains claims such as subject, issuer, audience, roles, and timestamps."}},{"@type":"Question","name":"What is the JWT signature?","acceptedAnswer":{"@type":"Answer","text":"The signature is used to verify that the token was issued by a trusted party and was not changed."}},{"@type":"Question","name":"What does exp mean in JWT?","acceptedAnswer":{"@type":"Answer","text":"The exp claim is the expiration time as a Unix timestamp in seconds."}},{"@type":"Question","name":"What does iat mean in JWT?","acceptedAnswer":{"@type":"Answer","text":"The iat claim is the issued-at time as a Unix timestamp in seconds."}},{"@type":"Question","name":"What does nbf mean in JWT?","acceptedAnswer":{"@type":"Answer","text":"The nbf claim means not before. The token should not be accepted before that time."}},{"@type":"Question","name":"Can an expired JWT be decoded?","acceptedAnswer":{"@type":"Answer","text":"Yes. Expired tokens can still be decoded, but applications should reject them for authentication."}},{"@type":"Question","name":"Are JWT payloads encrypted?","acceptedAnswer":{"@type":"Answer","text":"Standard signed JWT payloads are encoded, not encrypted. Encrypted tokens use JWE."}},{"@type":"Question","name":"Should I store JWT in localStorage?","acceptedAnswer":{"@type":"Answer","text":"localStorage is convenient but vulnerable to XSS theft. HttpOnly secure cookies are often safer."}},{"@type":"Question","name":"What is Base64URL?","acceptedAnswer":{"@type":"Answer","text":"Base64URL is a URL-safe variant of Base64 used by JWT segments."}},{"@type":"Question","name":"Why does JWT have three parts?","acceptedAnswer":{"@type":"Answer","text":"A typical JWT has header, payload, and signature segments separated by dots."}}]}</script>
+</head>
+<body class="bg-neutral-50 text-neutral-950 antialiased transition-colors duration-300 dark:bg-neutral-950 dark:text-neutral-100">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-2xl focus:bg-blue-600 focus:px-4 focus:py-3 focus:text-white">Skip to content</a>
+
+  <main id="main">
+    <section class="mx-auto max-w-7xl px-4 pb-10 pt-12 sm:px-6 sm:pt-16 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="mb-5 text-sm font-semibold uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400">KEHEM IT</p>
+        <h1 class="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">JWT Decoder & Inspector</h1>
+        <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-neutral-600 dark:text-neutral-300">Decode JWT header, payload, signature, timestamps, and expiration status instantly in your browser.</p>
+      </div>
+    </section>
+
+    <section id="tool" class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8" aria-labelledby="tool-title">
+      <article class="rounded-2xl border border-neutral-200 bg-white p-4 shadow-soft dark:border-neutral-800 dark:bg-neutral-900 sm:p-6 lg:p-8">
+        <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <h2 id="tool-title" class="text-2xl font-semibold tracking-tight">Decode and inspect JWT</h2>
+            <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300">This tool decodes tokens only. It does not verify signatures because verification requires the signing secret or public key.</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
+            <div class="rounded-2xl bg-neutral-100 p-4 dark:bg-neutral-800"><p class="text-neutral-500 dark:text-neutral-400">Length</p><p id="tokenLength" class="mt-1 text-xl font-semibold">0</p></div>
+            <div class="rounded-2xl bg-neutral-100 p-4 dark:bg-neutral-800"><p class="text-neutral-500 dark:text-neutral-400">Status</p><p id="tokenStatus" class="mt-1 text-xl font-semibold">Empty</p></div>
+            <div class="rounded-2xl bg-neutral-100 p-4 dark:bg-neutral-800"><p class="text-neutral-500 dark:text-neutral-400">Expires</p><p id="expShort" class="mt-1 text-xl font-semibold">-</p></div>
+            <div class="rounded-2xl bg-neutral-100 p-4 dark:bg-neutral-800"><p class="text-neutral-500 dark:text-neutral-400">Countdown</p><p id="countdown" class="mt-1 text-xl font-semibold">-</p></div>
+          </div>
+        </div>
+
+        <div id="statusBox" class="mt-6 rounded-2xl border border-neutral-200 bg-neutral-50 p-4 text-sm text-neutral-700 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-300" role="status" aria-live="polite">Paste a JWT to begin.</div>
+        <div id="loadingBar" class="mt-4 hidden h-1 origin-left rounded-full bg-blue-600 loader"></div>
+
+        <div class="mt-6 grid gap-6 lg:grid-cols-[1fr_300px]">
+          <div>
+            <label for="jwtInput" class="mb-3 block text-sm font-semibold">JWT input</label>
+            <textarea id="jwtInput" spellcheck="false" class="h-44 w-full resize-y rounded-2xl border border-neutral-300 bg-neutral-50 p-5 font-mono text-sm leading-7 text-neutral-900 shadow-sm outline-none transition focus:border-blue-600 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100" aria-describedby="statusBox" aria-label="Paste JWT token" placeholder="Paste your JWT here"></textarea>
+
+            <div class="mt-6 grid gap-4 md:grid-cols-3">
+              <div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-950"><h3 class="text-sm font-semibold text-neutral-500 dark:text-neutral-400">Issued At (iat)</h3><p id="iatValue" class="mt-2 text-sm font-medium">-</p></div>
+              <div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-950"><h3 class="text-sm font-semibold text-neutral-500 dark:text-neutral-400">Expiration (exp)</h3><p id="expValue" class="mt-2 text-sm font-medium">-</p></div>
+              <div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-950"><h3 class="text-sm font-semibold text-neutral-500 dark:text-neutral-400">Not Before (nbf)</h3><p id="nbfValue" class="mt-2 text-sm font-medium">-</p></div>
+            </div>
+
+            <div class="mt-6 grid gap-4 lg:grid-cols-2">
+              <section class="rounded-2xl border border-neutral-200 bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-950" aria-labelledby="header-title">
+                <div class="flex items-center justify-between gap-3"><h3 id="header-title" class="text-lg font-semibold">Header</h3><button id="copyHeaderBtn" type="button" class="rounded-2xl border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800">Copy</button></div>
+                <pre class="mt-4 max-h-80 overflow-auto rounded-2xl bg-white p-4 text-sm dark:bg-neutral-900"><code id="headerOutput">{}</code></pre>
+              </section>
+
+              <section class="rounded-2xl border border-neutral-200 bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-950" aria-labelledby="payload-title">
+                <div class="flex items-center justify-between gap-3"><h3 id="payload-title" class="text-lg font-semibold">Payload</h3><button id="copyPayloadBtn" type="button" class="rounded-2xl border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800">Copy</button></div>
+                <pre class="mt-4 max-h-80 overflow-auto rounded-2xl bg-white p-4 text-sm dark:bg-neutral-900"><code id="payloadOutput">{}</code></pre>
+              </section>
+            </div>
+
+            <section class="mt-4 rounded-2xl border border-neutral-200 bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-950" aria-labelledby="signature-title">
+              <h3 id="signature-title" class="text-lg font-semibold">Signature</h3>
+              <p id="signatureOutput" class="mt-4 break-all rounded-2xl bg-white p-4 font-mono text-sm text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300">-</p>
+            </section>
+          </div>
+
+          <aside class="space-y-3" aria-label="JWT actions">
+            <button id="sampleBtn" type="button" class="w-full rounded-2xl bg-blue-600 px-5 py-4 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 active:scale-[0.99]">Sample JWT</button>
+            <button id="downloadBtn" type="button" class="w-full rounded-2xl border border-neutral-300 bg-white px-5 py-3 text-sm font-semibold text-neutral-800 shadow-sm transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-800">Download Decoded JSON</button>
+            <button id="clearBtn" type="button" class="w-full rounded-2xl px-5 py-3 text-sm font-semibold text-neutral-600 transition hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800">Clear</button>
+            <div class="rounded-2xl bg-neutral-100 p-5 text-sm text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300">
+              <h3 class="font-semibold text-neutral-950 dark:text-white">Signature verification</h3>
+              <p class="mt-3 leading-6">This decoder does not verify signatures. Real verification requires the signing secret for HMAC tokens or the public key for RSA/ECDSA tokens. Never paste private secrets into browser tools.</p>
+            </div>
+            <div class="rounded-2xl bg-neutral-100 p-5 text-sm text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300">
+              <h3 class="font-semibold text-neutral-950 dark:text-white">Supported checks</h3>
+              <ul class="mt-3 list-disc space-y-2 pl-5"><li>JWT structure</li><li>Base64URL decoding</li><li>Header and payload JSON</li><li>Expiration and timestamp claims</li></ul>
+            </div>
+          </aside>
+        </div>
+      </article>
+    </section>
+
+    <section id="learn" class="border-t border-neutral-200 bg-white py-16 dark:border-neutral-800 dark:bg-neutral-950">
+      <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[260px_1fr] lg:px-8">
+        <aside class="lg:sticky lg:top-24 lg:self-start" aria-labelledby="toc-title">
+          <div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-5 dark:border-neutral-800 dark:bg-neutral-900">
+            <h2 id="toc-title" class="text-sm font-semibold uppercase tracking-[0.16em] text-neutral-500 dark:text-neutral-400">Contents</h2>
+            <ol class="mt-4 space-y-2 text-sm">
+              <li><a class="text-neutral-700 hover:text-blue-600 dark:text-neutral-300" href="#what-is-jwt">What is JWT?</a></li>
+              <li><a class="text-neutral-700 hover:text-blue-600 dark:text-neutral-300" href="#jwt-structure">JWT Structure</a></li>
+              <li><a class="text-neutral-700 hover:text-blue-600 dark:text-neutral-300" href="#auth">Authentication</a></li>
+              <li><a class="text-neutral-700 hover:text-blue-600 dark:text-neutral-300" href="#examples">Examples</a></li>
+              <li><a class="text-neutral-700 hover:text-blue-600 dark:text-neutral-300" href="#faq">FAQ</a></li>
+            </ol>
+          </div>
+        </aside>
+
+        <article class="max-w-none">
+          <section id="what-is-jwt" class="scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">What is JWT?</h2>
+            <p class="mt-4 text-neutral-700 dark:text-neutral-300">JWT stands for JSON Web Token. It is a compact token format used to transmit claims between systems. JWTs are common in API authentication because they can carry identity, issuer, audience, role, and time-based claims in a URL-safe string.</p>
+          </section>
+
+          <section id="jwt-structure" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">JWT Structure</h2>
+            <p class="mt-4 text-neutral-700 dark:text-neutral-300">A standard JWT has three Base64URL-encoded segments separated by dots: header, payload, and signature.</p>
+            <pre class="mt-5 overflow-x-auto rounded-2xl bg-neutral-100 p-5 text-sm dark:bg-neutral-900"><code>header.payload.signature</code></pre>
+            <h3 class="mt-8 text-xl font-semibold">Header</h3>
+            <p class="mt-3 text-neutral-700 dark:text-neutral-300">The header usually contains the token type and algorithm, such as <code class="rounded bg-neutral-100 px-1 dark:bg-neutral-900">typ</code> and <code class="rounded bg-neutral-100 px-1 dark:bg-neutral-900">alg</code>.</p>
+            <h3 class="mt-8 text-xl font-semibold">Payload</h3>
+            <p class="mt-3 text-neutral-700 dark:text-neutral-300">The payload contains claims. Common claims include subject, issuer, audience, issued-at time, expiration time, and permissions.</p>
+            <h3 class="mt-8 text-xl font-semibold">Signature</h3>
+            <p class="mt-3 text-neutral-700 dark:text-neutral-300">The signature lets a server verify that the token was issued by a trusted party and was not modified. Verification requires the signing secret or public key, so a visual decoder should not claim a token is trusted.</p>
+          </section>
+
+          <section id="auth" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">How JWT Authentication Works</h2>
+            <p class="mt-4 text-neutral-700 dark:text-neutral-300">After a successful login, a server can issue a JWT. The client sends the token with future requests, often in an Authorization header. The server verifies the signature and checks claims such as expiration, issuer, and audience before granting access.</p>
+          </section>
+
+          <section id="jwt-vs-session" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">JWT vs Session Authentication</h2>
+            <p class="mt-4 text-neutral-700 dark:text-neutral-300">Session authentication stores state on the server and gives the browser a session identifier. JWT authentication can be stateless because claims are inside the token. JWTs are useful for APIs and distributed systems, but they require careful expiration, storage, and revocation strategy.</p>
+          </section>
+
+          <section id="security-best-practices" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">JWT Security Best Practices</h2>
+            <ul class="mt-4 list-disc space-y-2 pl-5 text-neutral-700 dark:text-neutral-300">
+              <li>Use short expiration times for access tokens.</li>
+              <li>Verify signature, issuer, audience, expiration, and not-before claims on the server.</li>
+              <li>Use strong algorithms and reject unexpected algorithms.</li>
+              <li>Never store secrets or private data in a normal signed JWT payload.</li>
+              <li>Use HTTPS for all token transport.</li>
+            </ul>
+          </section>
+
+          <section id="mistakes-storage" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">Common JWT Mistakes and How to Store JWT Safely</h2>
+            <p class="mt-4 text-neutral-700 dark:text-neutral-300">Common mistakes include trusting decoded payloads without verification, accepting expired tokens, storing sensitive data in claims, using long-lived tokens, and keeping JWTs in places exposed to cross-site scripting. HttpOnly, Secure, SameSite cookies are often safer for browser apps, while native apps may use secure platform storage.</p>
+          </section>
+
+          <section id="examples" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">JWT Examples</h2>
+            <div class="mt-6 grid gap-4 md:grid-cols-2">
+              <div class="rounded-2xl bg-neutral-100 p-5 dark:bg-neutral-900"><h3 class="font-semibold">JWT in JavaScript</h3><pre class="mt-3 overflow-x-auto text-sm"><code>const payload = JSON.parse(atob(token.split(".")[1]));</code></pre></div>
+              <div class="rounded-2xl bg-neutral-100 p-5 dark:bg-neutral-900"><h3 class="font-semibold">JWT in Node.js</h3><pre class="mt-3 overflow-x-auto text-sm"><code>jwt.verify(token, publicKey, options);</code></pre></div>
+              <div class="rounded-2xl bg-neutral-100 p-5 dark:bg-neutral-900"><h3 class="font-semibold">JWT in Python</h3><pre class="mt-3 overflow-x-auto text-sm"><code>jwt.decode(token, key, algorithms=["RS256"])</code></pre></div>
+              <div class="rounded-2xl bg-neutral-100 p-5 dark:bg-neutral-900"><h3 class="font-semibold">JWT in Django</h3><pre class="mt-3 overflow-x-auto text-sm"><code>from rest_framework_simplejwt.tokens import RefreshToken</code></pre></div>
+              <div class="rounded-2xl bg-neutral-100 p-5 dark:bg-neutral-900"><h3 class="font-semibold">JWT in Laravel</h3><pre class="mt-3 overflow-x-auto text-sm"><code>$token = auth()->attempt($credentials);</code></pre></div>
+              <div class="rounded-2xl bg-neutral-100 p-5 dark:bg-neutral-900"><h3 class="font-semibold">JWT in ASP.NET</h3><pre class="mt-3 overflow-x-auto text-sm"><code>new JwtSecurityTokenHandler().ValidateToken(...)</code></pre></div>
+              <div class="rounded-2xl bg-neutral-100 p-5 dark:bg-neutral-900 md:col-span-2"><h3 class="font-semibold">JWT in Spring Boot</h3><pre class="mt-3 overflow-x-auto text-sm"><code>Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);</code></pre></div>
+            </div>
+          </section>
+
+          <section id="common-errors" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">Common Errors</h2>
+            <ul class="mt-4 list-disc space-y-2 pl-5 text-neutral-700 dark:text-neutral-300">
+              <li>Token does not have three dot-separated parts.</li>
+              <li>Header or payload is not valid Base64URL.</li>
+              <li>Decoded header or payload is not valid JSON.</li>
+              <li>Token is expired or missing required claims.</li>
+              <li>Server expects a different issuer, audience, or algorithm.</li>
+            </ul>
+          </section>
+
+          <section id="faq" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">Frequently Asked Questions</h2>
+            <div class="mt-6 space-y-3">
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">What is a JWT?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">A JWT is a compact JSON Web Token used to share claims between systems.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Does this decoder verify signatures?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">No. Verification requires the signing secret or public key.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Is JWT data encrypted?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">Usually no. Standard JWT payloads are encoded, not encrypted.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Can anyone decode a JWT?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">Yes. Anyone with the token can decode its header and payload.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">What is exp?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">exp is the expiration claim as a Unix timestamp in seconds.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">What is iat?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">iat means issued at.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">What is nbf?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">nbf means not before.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Can expired JWTs be decoded?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">Yes, but they should not be accepted for authentication.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Should JWTs contain passwords?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">No. Never store passwords or secrets in JWT claims.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Where should JWTs be stored?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">Use secure storage appropriate to the app. HttpOnly cookies are often safer in browsers.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">What is Base64URL?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">It is a URL-safe Base64 encoding used by JWT.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">What is a malformed JWT?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">A malformed JWT has invalid structure, invalid encoding, or invalid JSON.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Can JWTs be revoked?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">Yes, but revocation usually requires server-side tracking or short token lifetimes.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">What does alg none mean?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">It means no signing algorithm. Servers should reject it unless explicitly designed for that case.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Does this tool store tokens?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">No. Decoding happens in the browser and the tool does not store tokens.</p></details>
+            </div>
+          </section>
+
+          <section id="conclusion" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">Conclusion</h2>
+            <p class="mt-4 text-neutral-700 dark:text-neutral-300">JWTs are powerful for modern authentication and API authorization, but they must be verified and stored carefully. A decoder helps inspect claims and timestamps, while real trust must always come from server-side signature verification and strict claim validation.</p>
+          </section>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-neutral-200 bg-neutral-50 py-10 dark:border-neutral-800 dark:bg-neutral-950">
+    <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 text-sm text-neutral-600 dark:text-neutral-400 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+      <p>&copy; <span id="year"></span> KEHEM IT. All rights reserved.</p>
+      <p>Client-side JWT tools for developers.</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="fixed left-1/2 top-5 z-50 hidden -translate-x-1/2 rounded-2xl bg-neutral-950 px-5 py-3 text-sm font-semibold text-white shadow-soft dark:bg-white dark:text-neutral-950" role="status" aria-live="polite"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded',()=>{const input=document.getElementById('jwtInput'),headerOutput=document.getElementById('headerOutput'),payloadOutput=document.getElementById('payloadOutput'),signatureOutput=document.getElementById('signatureOutput'),statusBox=document.getElementById('statusBox'),tokenLength=document.getElementById('tokenLength'),tokenStatus=document.getElementById('tokenStatus'),expShort=document.getElementById('expShort'),countdown=document.getElementById('countdown'),iatValue=document.getElementById('iatValue'),expValue=document.getElementById('expValue'),nbfValue=document.getElementById('nbfValue'),toast=document.getElementById('toast'),loadingBar=document.getElementById('loadingBar');let decodedState=null,countdownTimer=null;function showToast(message){toast.textContent=message;toast.classList.remove('hidden');toast.classList.add('fade-in');clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>{toast.classList.add('hidden');toast.classList.remove('fade-in')},2200)}function setLoading(active){loadingBar.classList.toggle('hidden',!active)}function setStatus(type,message){const styles={idle:'border-neutral-200 bg-neutral-50 text-neutral-700 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-300',valid:'border-green-200 bg-green-50 text-green-800 dark:border-green-900/70 dark:bg-green-950/40 dark:text-green-200',warn:'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-900/70 dark:bg-amber-950/40 dark:text-amber-200',error:'border-red-200 bg-red-50 text-red-800 dark:border-red-900/70 dark:bg-red-950/40 dark:text-red-200'};statusBox.className='mt-6 rounded-2xl border p-4 text-sm '+styles[type];statusBox.textContent=message}function base64UrlDecode(segment){const normalized=segment.replace(/-/g,'+').replace(/_/g,'/'),padded=normalized.padEnd(normalized.length+(4-normalized.length%4)%4,'='),binary=atob(padded),bytes=Uint8Array.from(binary,char=>char.charCodeAt(0));return new TextDecoder().decode(bytes)}function pretty(value){return JSON.stringify(value,null,2)}function parseJwt(token){const parts=token.split('.');if(parts.length!==3)throw new Error('JWT must contain exactly three dot-separated parts.');if(parts.some(part=>part.length===0))throw new Error('JWT contains an empty segment.');return{header:JSON.parse(base64UrlDecode(parts[0])),payload:JSON.parse(base64UrlDecode(parts[1])),signature:parts[2],parts}}function formatDate(value){if(typeof value!=='number')return '-';const date=new Date(value*1000);if(Number.isNaN(date.getTime()))return '-';return date.toLocaleString(undefined,{year:'numeric',month:'short',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',timeZoneName:'short'})}function formatDuration(seconds){if(seconds<=0)return'Expired';const days=Math.floor(seconds/86400),hours=Math.floor((seconds%86400)/3600),minutes=Math.floor((seconds%3600)/60),secs=Math.floor(seconds%60);if(days>0)return`${days}d ${hours}h ${minutes}m`;if(hours>0)return`${hours}h ${minutes}m ${secs}s`;if(minutes>0)return`${minutes}m ${secs}s`;return`${secs}s`}function updateCountdown(){if(!decodedState||typeof decodedState.payload.exp!=='number'){countdown.textContent='-';return}const remaining=Math.floor(decodedState.payload.exp-Date.now()/1000);countdown.textContent=formatDuration(remaining);if(remaining<=0){tokenStatus.textContent='Expired';expShort.textContent='Expired';setStatus('error','Token is expired. Decoding still works, but applications should reject this token.')}}function resetOutputs(){decodedState=null;headerOutput.textContent='{}';payloadOutput.textContent='{}';signatureOutput.textContent='-';tokenLength.textContent=String(input.value.length);tokenStatus.textContent=input.value.trim()?'Invalid':'Empty';expShort.textContent='-';countdown.textContent='-';iatValue.textContent='-';expValue.textContent='-';nbfValue.textContent='-';input.classList.remove('bad-token');clearInterval(countdownTimer)}function inspectToken(){const token=input.value.trim();tokenLength.textContent=String(token.length);clearInterval(countdownTimer);input.classList.remove('bad-token');if(!token){resetOutputs();setStatus('idle','Paste a JWT to begin.');return}setLoading(true);requestAnimationFrame(()=>{try{const decoded=parseJwt(token);decodedState=decoded;headerOutput.textContent=pretty(decoded.header);payloadOutput.textContent=pretty(decoded.payload);signatureOutput.textContent=decoded.signature||'-';iatValue.textContent=formatDate(decoded.payload.iat);expValue.textContent=typeof decoded.payload.exp==='number'?formatDate(decoded.payload.exp):'Missing exp claim';nbfValue.textContent=typeof decoded.payload.nbf==='number'?formatDate(decoded.payload.nbf):'-';if(typeof decoded.payload.exp!=='number'){tokenStatus.textContent='No exp';expShort.textContent='Missing';countdown.textContent='-';setStatus('warn','JWT structure is valid, but the payload is missing an exp claim.')}else if(decoded.payload.exp<=Date.now()/1000){tokenStatus.textContent='Expired';expShort.textContent='Expired';updateCountdown();setStatus('error','Token is expired. Decoding still works, but applications should reject this token.')}else{tokenStatus.textContent='Valid';expShort.textContent='Active';updateCountdown();countdownTimer=setInterval(updateCountdown,1000);setStatus('valid','JWT decoded successfully. Signature is displayed but not verified.')}}catch(error){resetOutputs();input.classList.add('bad-token');tokenStatus.textContent='Malformed';setStatus('error','Malformed JWT: '+error.message)}setLoading(false)})}async function copyText(text,button){if(!text||text==='{}'||text==='-'){showToast('Nothing to copy');return}try{await navigator.clipboard.writeText(text)}catch{const temp=document.createElement('textarea');temp.value=text;temp.setAttribute('readonly','');temp.style.position='fixed';temp.style.opacity='0';document.body.appendChild(temp);temp.select();document.execCommand('copy');temp.remove()}button.classList.add('copy-pop');setTimeout(()=>button.classList.remove('copy-pop'),350);showToast('Copied to clipboard')}function downloadDecoded(){if(!decodedState){showToast('Nothing to download');return}const data={header:decodedState.header,payload:decodedState.payload,signature:decodedState.signature,verified:false,note:'Signature verification requires the signing secret or public key.'},blob=new Blob([pretty(data)+'\n'],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='decoded-jwt.json';link.click();URL.revokeObjectURL(url);showToast('Decoded JSON downloaded')}function base64UrlEncodeJson(value){const json=JSON.stringify(value),bytes=new TextEncoder().encode(json);let binary='';bytes.forEach(byte=>binary+=String.fromCharCode(byte));return btoa(binary).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}function loadSample(){const now=Math.floor(Date.now()/1000),header={alg:'HS256',typ:'JWT'},payload={iss:'KEHEM IT',sub:'user_123',aud:'example-api',iat:now,nbf:now,exp:now+3600,role:'developer'};input.value=`${base64UrlEncodeJson(header)}.${base64UrlEncodeJson(payload)}.sample-signature-not-verified`;inspectToken();showToast('Sample JWT loaded')}function clearAll(){input.value='';resetOutputs();setStatus('idle','Paste a JWT to begin.');showToast('Cleared')}input.addEventListener('input',inspectToken);document.getElementById('copyHeaderBtn').addEventListener('click',event=>copyText(headerOutput.textContent,event.currentTarget));document.getElementById('copyPayloadBtn').addEventListener('click',event=>copyText(payloadOutput.textContent,event.currentTarget));document.getElementById('downloadBtn').addEventListener('click',downloadDecoded);document.getElementById('sampleBtn').addEventListener('click',loadSample);document.getElementById('clearBtn').addEventListener('click',clearAll);document.getElementById('year').textContent=new Date().getFullYear();resetOutputs()});
+  </script>
+</body>
+</html>

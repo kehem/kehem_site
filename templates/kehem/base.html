@@ -1,0 +1,950 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEHEM IT - Custom Software & Web Development</title>
+    <meta name="description"
+        content="KEHEM IT offers bespoke software and web development using Django, Vue, Nuxt, and custom HTML/CSS/JS. Contact us for elegant digital solutions.">
+    <meta name="keywords"
+        content="custom software development, web development, Django, Vue, Nuxt, HTML, CSS, JavaScript, KEHEM IT, Scandinavian design">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="KEHEM IT">
+    <link rel="canonical" href="https://kehem.com/">
+    <!-- Open Graph Tags for Social Media -->
+    <meta property="og:title" content="KEHEM IT - Custom Software & Web Development">
+    <meta property="og:description"
+        content="Crafting elegant digital solutions with Django, Vue, Nuxt, and custom HTML/CSS/JS. Transform your vision with KEHEM IT.">
+    <meta property="og:image" content="{% static " kehem.webp" %}">
+    <meta property="og:url" content="https://kehem.com/">
+    <meta property="og:type" content="website">
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KEHEM IT - Custom Software & Web Development">
+    <meta name="twitter:description"
+        content="Crafting elegant digital solutions with Django, Vue, Nuxt, and custom HTML/CSS/JS. Transform your vision with KEHEM IT.">
+    <meta name="twitter:image" content="{% static " kehem.webp" %}">
+    <!-- Favicon -->
+    <link rel="icon" href="{% static " kehem.ico" %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts CDN for Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "KEHEM IT",
+        "url": "https://kehem.com/",
+        "logo": "{% static "kehem.webp" %}",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+1-123-456-7890",
+            "contactType": "Customer Service",
+            "email": "support@kehem.com"
+        },
+        "sameAs": [
+            "https://www.linkedin.com/company/kehem-it",
+            "https://twitter.com/kehemit"
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://kehem.com/",
+        "name": "KEHEM IT",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://kehem.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    <style>
+        /* ══════════════════════════════════════════════════════════════ */
+        /* ANIMATIONS                                                     */
+        /* ══════════════════════════════════════════════════════════════ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(22px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+
+        /* ══════════════════════════════════════════════════════════════ */
+        /* UTILITY CLASSES                                                */
+        /* ══════════════════════════════════════════════════════════════ */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .font-roboto {
+            font-family: 'Roboto', Helvetica, Arial, sans-serif;
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(45deg, #1B7C83, #2a939b, #5cb8bf, #2a939b);
+            background-size: 200% 200%;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        /* Brand color overrides */
+        .text-brand { color: #1B7C83; }
+        .bg-brand { background-color: #1B7C83; }
+        .hover\:text-brand:hover { color: #1B7C83; }
+        .hover\:bg-brand:hover { background-color: #15676d; }
+        .focus\:ring-brand { --tw-ring-color: #1B7C83; }
+
+        /* Hover & transition effects */
+        .hover-scale {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Fade-in and stagger delays */
+        .fade-in { opacity: 0; animation: fadeInUp 0.65s ease-out forwards; }
+        .delay-1 { animation-delay: 0.08s; }
+        .delay-2 { animation-delay: 0.16s; }
+        .delay-3 { animation-delay: 0.24s; }
+        .delay-4 { animation-delay: 0.32s; }
+        .delay-5 { animation-delay: 0.40s; }
+        .delay-6 { animation-delay: 0.48s; }
+
+        /* Teal rule divider */
+        .teal-rule {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #1B7C83, transparent);
+            opacity: 0.2;
+        }
+
+        /* Marquee animation */
+        .marquee-track {
+            animation: marquee 24s linear infinite;
+        }
+
+        /* Pulse indicator dot */
+        .pulse-dot {
+            animation: pulse-dot 1.8s ease infinite;
+        }
+
+        /* ══════════════════════════════════════════════════════════════ */
+        /* NAVIGATION & HEADER                                            */
+        /* ══════════════════════════════════════════════════════════════ */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 3px;
+            background-color: #1B7C83;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 1rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                z-index: 10;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+        }
+
+        /* Logo and text styles */
+        .logo-img {
+            height: 32px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1B7C83;
+        }
+
+        @media (min-width: 640px) {
+            .logo-img { height: 40px; }
+            .logo-text { font-size: 1.875rem; }
+        }
+
+        .footer-logo {
+            height: 28px;
+            width: auto;
+        }
+
+        .footer-logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        @media (min-width: 640px) {
+            .footer-logo { height: 36px; }
+            .footer-logo-text { font-size: 1.5rem; }
+        }
+
+        /* ══════════════════════════════════════════════════════════════ */
+        /* CAROUSEL                                                       */
+        /* ══════════════════════════════════════════════════════════════ */
+        .carousel-container {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            flex: 0 0 100%;
+            padding: 0 0.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .carousel-item { flex: 0 0 50%; }
+        }
+
+        @media (min-width: 1024px) {
+            .carousel-item { flex: 0 0 33.33%; }
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            color: #1B7C83;
+            padding: 0.5rem;
+            border: none;
+            cursor: pointer;
+            z-index: 20;
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .carousel-button:hover {
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .carousel-button.left { left: 0.5rem; }
+        .carousel-button.right { right: 0.5rem; }
+
+        @media (min-width: 1024px) {
+            .carousel-button {
+                width: 2.5rem;
+                height: 2.5rem;
+                font-size: 1.25rem;
+            }
+            .carousel-button.left { left: -3rem; }
+            .carousel-button.right { right: -3rem; }
+        }
+
+        /* ══════════════════════════════════════════════════════════════ */
+        /* CARD COMPONENTS                                                */
+        /* ══════════════════════════════════════════════════════════════ */
+        .card-lift {
+            position: relative;
+            transition: transform 0.35s cubic-bezier(.16, 1, .3, 1),
+                box-shadow 0.35s cubic-bezier(.16, 1, .3, 1);
+        }
+
+        .card-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 48px rgba(27, 124, 131, 0.15), 0 8px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-lift::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 0;
+            background: #1B7C83;
+            transition: width 0.4s cubic-bezier(.16, 1, .3, 1);
+            border-radius: 0 0 1rem 1rem;
+        }
+
+        .card-lift:hover::after {
+            width: 100%;
+        }
+
+        .card-img {
+            transition: transform 0.55s cubic-bezier(.16, 1, .3, 1);
+            transform: scale(1);
+        }
+
+        .card-lift:hover .card-img {
+            transform: scale(1.06);
+        }
+
+        .card-reveal {
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.3s ease 0.05s, transform 0.3s ease 0.05s;
+        }
+
+        .card-lift:hover .card-reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ══════════════════════════════════════════════════════════════ */
+        /* SERVICE CARDS                                                  */
+        /* ══════════════════════════════════════════════════════════════ */
+        .service-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(.16,1,.3,1),
+                        box-shadow 0.4s cubic-bezier(.16,1,.3,1),
+                        background 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 28px 56px rgba(27,124,131,0.13), 0 8px 20px rgba(0,0,0,0.07);
+            background: #fff;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            height: 3px; width: 0;
+            background: #1B7C83;
+            transition: width 0.45s cubic-bezier(.16,1,.3,1);
+            border-radius: 0 0 1rem 1rem;
+        }
+
+        .service-card:hover::before {
+            width: 100%;
+        }
+
+        .icon-wrap {
+            transition: background 0.35s ease, transform 0.35s ease;
+        }
+
+        .service-card:hover .icon-wrap {
+            background: #1B7C83 !important;
+            transform: scale(1.1) rotate(-4deg);
+        }
+
+        .service-card:hover .icon-wrap svg {
+            stroke: #fff;
+        }
+
+        .card-detail {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.4s ease, opacity 0.35s ease 0.05s;
+        }
+
+        .service-card:hover .card-detail {
+            max-height: 120px;
+            opacity: 1;
+        }
+
+        .bg-num {
+            position: absolute;
+            font-weight: 800;
+            line-height: 1;
+            pointer-events: none;
+            user-select: none;
+            transition: color 0.4s ease;
+        }
+
+        .service-card .bg-num {
+            top: -14px; right: 16px;
+            font-size: 96px;
+            color: rgba(27,124,131,0.05);
+        }
+
+        .service-card:hover .bg-num {
+            color: rgba(27,124,131,0.10);
+        }
+
+        .team-card .bg-num {
+            top: -10px; right: 14px;
+            font-size: 80px;
+            color: rgba(27,124,131,0.06);
+            z-index: 0;
+        }
+
+        .team-card:hover .bg-num {
+            color: rgba(27,124,131,0.10);
+        }
+
+        /* ══════════════════════════════════════════════════════════════ */
+        /* TAG & PILL STYLES                                              */
+        /* ══════════════════════════════════════════════════════════════ */
+        .tag-pill {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 100px;
+            background: rgba(27, 124, 131, 0.1);
+            color: #1B7C83;
+            border: 1px solid rgba(27, 124, 131, 0.25);
+            display: inline-block;
+        }
+
+        .stack-tag {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 100px;
+            background: rgba(27,124,131,0.08);
+            color: #1B7C83;
+            border: 1px solid rgba(27,124,131,0.2);
+            display: inline-block;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .service-card:hover .stack-tag {
+            background: rgba(27,124,131,0.14);
+        }
+
+        .role-tag {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 100px;
+            background: rgba(27,124,131,0.09);
+            color: #1B7C83;
+            border: 1px solid rgba(27,124,131,0.22);
+            display: inline-block;
+        }
+
+        .card-num {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #d1d5db;
+        }
+
+        .dot-sep::before {
+            content: '·';
+            margin: 0 6px;
+            color: #d1d5db;
+        }
+
+        /* ══════════════════════════════════════════════════════════════ */
+        /* QUOTE CARDS                                                    */
+        /* ══════════════════════════════════════════════════════════════ */
+        .quote-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(.16,1,.3,1),
+                        box-shadow 0.4s cubic-bezier(.16,1,.3,1);
+        }
+
+        .quote-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 48px rgba(27,124,131,0.12), 0 6px 16px rgba(0,0,0,0.06);
+        }
+
+        .quote-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            height: 3px; width: 0;
+            background: #1B7C83;
+            transition: width 0.45s cubic-bezier(.16,1,.3,1);
+            border-radius: 0 0 1rem 1rem;
+        }
+
+        .quote-card:hover::after {
+            width: 100%;
+        }
+
+        .big-quote {
+            font-size: 120px;
+            line-height: 0.7;
+            font-weight: 800;
+            color: rgba(27,124,131,0.07);
+            pointer-events: none;
+            user-select: none;
+            font-family: Georgia, serif;
+            transition: color 0.4s ease;
+        }
+
+        .quote-card:hover .big-quote {
+            color: rgba(27,124,131,0.13);
+        }
+
+        .stars {
+            color: #1B7C83;
+            letter-spacing: 2px;
+        }
+
+        /* ══════════════════════════════════════════════════════════════ */
+        /* VIDEO CARDS                                                    */
+        /* ══════════════════════════════════════════════════════════════ */
+        .video-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(.16,1,.3,1),
+                        box-shadow 0.4s cubic-bezier(.16,1,.3,1);
+        }
+
+        .video-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 48px rgba(27,124,131,0.14), 0 6px 16px rgba(0,0,0,0.08);
+        }
+
+        .video-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            height: 3px; width: 0;
+            background: #1B7C83;
+            transition: width 0.45s cubic-bezier(.16,1,.3,1);
+            border-radius: 0 0 1rem 1rem;
+        }
+
+        .video-card:hover::after {
+            width: 100%;
+        }
+
+        /* ══════════════════════════════════════════════════════════════ */
+        /* AVATAR & RINGS                                                 */
+        /* ══════════════════════════════════════════════════════════════ */
+        .avatar-ring {
+            box-shadow: 0 0 0 3px rgba(27,124,131,0.25);
+            transition: box-shadow 0.35s ease;
+        }
+
+        .quote-card:hover .avatar-ring,
+        .video-card:hover .avatar-ring {
+            box-shadow: 0 0 0 4px rgba(27,124,131,0.5);
+        }
+
+        /* ══════════════════════════════════════════════════════════════ */
+        /* TEAM CARDS                                                     */
+        /* ══════════════════════════════════════════════════════════════ */
+        .team-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(.16,1,.3,1),
+                        box-shadow 0.4s cubic-bezier(.16,1,.3,1);
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 28px 56px rgba(27,124,131,0.15), 0 8px 20px rgba(0,0,0,0.07);
+        }
+
+        .team-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            height: 3px; width: 0;
+            background: #1B7C83;
+            transition: width 0.45s cubic-bezier(.16,1,.3,1);
+            border-radius: 0 0 1rem 1rem;
+        }
+
+        .team-card:hover::after {
+            width: 100%;
+        }
+
+        .team-img {
+            transition: transform 0.55s cubic-bezier(.16,1,.3,1), filter 0.4s ease, brightness 0.4s ease;
+            transform: scale(1);
+            filter: grayscale(0%) brightness(1);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .team-card:hover .team-img {
+            transform: scale(1.07);
+            filter: grayscale(0%) brightness(1.05);
+        }
+
+        .team-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(27,124,131,0.88) 0%, rgba(27,124,131,0.0) 55%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+
+        .team-card:hover .team-overlay {
+            opacity: 1;
+        }
+
+        .overlay-content {
+            transform: translateY(10px);
+            opacity: 0;
+            transition: transform 0.4s ease 0.05s, opacity 0.4s ease 0.05s;
+            width: 100%;
+        }
+
+        .team-card:hover .overlay-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* ══════════════════════════════════════════════════════════════ */
+        /* LINK ANIMATIONS                                                */
+        /* ══════════════════════════════════════════════════════════════ */
+        .link-line {
+            position: relative;
+        }
+
+        .link-line::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            height: 1px;
+            width: 0;
+            background: #1B7C83;
+            transition: width 0.3s ease;
+        }
+
+        .link-line:hover::after {
+            width: 100%;
+        }
+
+        /* ══════════════════════════════════════════════════════════════ */
+        /* FORM ELEMENTS                                                  */
+        /* ══════════════════════════════════════════════════════════════ */
+        .form-input {
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: #1B7C83;
+            box-shadow: 0 0 0 3px rgba(27,124,131,0.12);
+            background: #fff;
+        }
+
+        .form-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-label {
+            position: absolute;
+            top: 14px; left: 16px;
+            font-size: 13px;
+            color: #9ca3af;
+            pointer-events: none;
+            transition: all 0.25s ease;
+            background: transparent;
+            padding: 0 4px;
+            font-weight: 500;
+        }
+
+        .form-input:focus + .input-label,
+        .form-input:not(:placeholder-shown) + .input-label {
+            top: -9px;
+            left: 12px;
+            font-size: 10px;
+            color: #1B7C83;
+            background: #fff;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .form-textarea {
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            outline: none;
+            resize: none;
+        }
+
+        .form-textarea:focus {
+            border-color: #1B7C83;
+            box-shadow: 0 0 0 3px rgba(27,124,131,0.12);
+            background: #fff;
+        }
+
+        .form-textarea:focus + .input-label,
+        .form-textarea:not(:placeholder-shown) + .input-label {
+            top: -9px;
+            left: 12px;
+            font-size: 10px;
+            color: #1B7C83;
+            background: #fff;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* ══════════════════════════════════════════════════════════════ */
+        /* BUTTONS                                                        */
+        /* ══════════════════════════════════════════════════════════════ */
+        .submit-btn {
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s ease, transform 0.3s cubic-bezier(.16,1,.3,1), box-shadow 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #15676d !important;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(27,124,131,0.35);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .submit-btn:hover::before {
+            left: 150%;
+        }
+
+        /* ══════════════════════════════════════════════════════════════ */
+        /* INFO CARDS                                                     */
+        /* ══════════════════════════════════════════════════════════════ */
+        .info-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.35s cubic-bezier(.16,1,.3,1), box-shadow 0.35s ease;
+        }
+
+        .info-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            height: 3px; width: 0;
+            background: #1B7C83;
+            transition: width 0.4s cubic-bezier(.16,1,.3,1);
+            border-radius: 0 0 1rem 1rem;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(27,124,131,0.12);
+        }
+
+        .info-card:hover::after {
+            width: 100%;
+        }
+
+        /* ══════════════════════════════════════════════════════════════ */
+        /* SERVICE TAGS/FILTERS                                           */
+        /* ══════════════════════════════════════════════════════════════ */
+        .service-tag {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 100px;
+            background: rgba(27,124,131,0.08);
+            color: #1B7C83;
+            border: 1px solid rgba(27,124,131,0.2);
+            cursor: pointer;
+            transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+            user-select: none;
+        }
+
+        .service-tag:hover,
+        .service-tag.active {
+            background: #1B7C83;
+            color: #fff;
+            border-color: #1B7C83;
+            transform: translateY(-2px);
+        }
+    </style>
+
+
+</head>
+
+<body class="font-roboto bg-gray-100 text-gray-900 antialiased">
+    <!-- Navbar -->
+    <nav class="fixed w-full bg-white/95 backdrop-blur-lg z-20 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#home" class="flex items-center space-x-2">
+                <img src="{% static "kehem.webp" %}" alt="KEHEM IT Logo" class="logo-img">
+                <span class="logo-text">KEHEM IT</span>
+            </a>
+            <div class="hamburger md:hidden">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links md:flex md:space-x-6 lg:space-x-10">
+                <a href="{% url "index" %}#home"
+                    class="text-gray-700 hover:text-brand transition-colors font-medium text-[15px] sm:text-base block py-2 md:py-0">Home</a>
+                <a href="{% url "index" %}#services"
+                    class="text-gray-700 hover:text-brand transition-colors font-medium text-[15px] sm:text-base block py-2 md:py-0">Services</a>
+                <a href="{% url "index" %}#projects"
+                    class="text-gray-700 hover:text-brand transition-colors font-medium text-[15px] sm:text-base block py-2 md:py-0">Projects</a>
+                <a href="{% url "index" %}#testimonials"
+                    class="text-gray-700 hover:text-brand transition-colors font-medium text-[15px] sm:text-base block py-2 md:py-0">Testimonials</a>
+                <a href="{% url "index" %}#team"
+                    class="text-gray-700 hover:text-brand transition-colors font-medium text-[15px] sm:text-base block py-2 md:py-0">Team</a>
+                <a href="{% url "index" %}#about"
+                    class="text-gray-700 hover:text-brand transition-colors font-medium text-[15px] sm:text-base block py-2 md:py-0">About</a>
+                <a href="{% url "blog" %}"
+                    class="text-gray-700 hover:text-brand transition-colors font-medium text-[15px] sm:text-base block py-2 md:py-0">Blog</a>
+                <a href="{% url "index" %}#contact"
+                    class="text-gray-700 hover:text-brand transition-colors font-medium text-[15px] sm:text-base block py-2 md:py-0">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+
+
+    {% block content %}
+
+
+
+    {% endblock content %}
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12 text-center sm:text-left">
+                <div class="animate-fadeInUp">
+                    <a href="#home" class="block mb-4 flex items-center justify-center sm:justify-start space-x-2">
+                        <img src="{% static "kehem.webp" %}" alt="KEHEM IT Logo" class="footer-logo">
+                        <span class="footer-logo-text">KEHEM IT</span>
+                    </a>
+                    <p class="text-gray-400 leading-relaxed text-sm sm:text-base max-w-xs mx-auto sm:mx-0">
+                        Bespoke software and web development with a passion for simplicity and excellence.
+                    </p>
+                    <a href="//www.dmca.com/Protection/Status.aspx?ID=7326390a-956b-4f8f-9373-a3155ce4454a"
+                        title="DMCA.com Protection Status" class="dmca-badge"> <img
+                            src="https://images.dmca.com/Badges/dmca-badge-w150-2x1-03.png?ID=7326390a-956b-4f8f-9373-a3155ce4454a"
+                            alt="DMCA.com Protection Status" /></a>
+                    <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
+                    <a href="https://techbehemoths.com/company/kehem-it" target="_blank" class="mt-4 inline-block">
+                        <img src="{% static "kehem/images/TB.svg" %}" alt="TechBehemoths Logo"
+                            class="h-8 sm:h-10 w-auto hover:opacity-80 transition-opacity">
+                    </a>
+                </div>
+                <div class="animate-fadeInUp">
+                    <h3 class="text-xl sm:text-2xl font-bold text-white">Quick Links</h3>
+                    <ul
+                        class="mt-4 space-y-2 sm:space-y-3 text-gray-400 text-sm sm:text-base flex flex-col items-center sm:items-start">
+                        <li><a href="#home" class="hover:text-brand transition-colors">Home</a></li>
+                        <li><a href="#services" class="hover:text-brand transition-colors">Services</a></li>
+                        <li><a href="#projects" class="hover:text-brand transition-colors">Projects</a></li>
+                        <li><a href="#testimonials" class="hover:text-brand transition-colors">Testimonials</a></li>
+                        <li><a href="#team" class="hover:text-brand transition-colors">Team</a></li>
+                        <li><a href="#about" class="hover:text-brand transition-colors">About</a></li>
+                        <li><a href="#contact" class="hover:text-brand transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="animate-fadeInUp">
+                    <h3 class="text-xl sm:text-2xl font-bold text-white">Contact Us</h3>
+                    <div class="mt-4 text-gray-400 text-sm sm:text-base flex flex-col items-center sm:items-start">
+                        <p>Email: <a href="mailto:support@kehem.com"
+                                class="hover:text-brand transition-colors">support@kehem.com</a></p>
+                        <p class="mt-2">Phone: <a href="tel:+8801307711384"
+                                class="hover:text-brand transition-colors">+880 130 77 11 384</a></p>
+                    </div>
+                </div>
+            </div>
+            <p class="mt-8 sm:mt-12 text-center text-gray-400 text-sm sm:text-base animate-fadeInUp">© 2026 KEHEM IT.
+                All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Reminder: Create sitemap.xml and robots.txt in the root directory for crawling efficiency -->
+</body>
+
+</html>

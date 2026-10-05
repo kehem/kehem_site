@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoSchema - PostgreSQL Schema Generator</title>
+    <!-- Tailwind CSS -->
+    <link href="/static/kehem.ico" rel="icon"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <style>
+        /* Custom styles */
+        body {
+            background: linear-gradient(135deg, #1E3A8A, #06B6D4);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .editor {
+            background: #1F2937;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .output {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body class="text-gray-100">
+    <div class="container">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-white">AutoSchema</h1>
+            <p class="text-lg text-gray-300 mt-2">Generate PostgreSQL schemas from JSON effortlessly</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+            <!-- JSON Input Section -->
+            <section class="editor">
+                <h2 class=" flex gap-2 text-xl font-semibold text-cyan-400 mb-4">Input JSON <a href="https://github.com/kehem/AutoSchema" title="github link"><img src="https://github.com/fluidicon.png" style="height:20px;"></a></h2>
+                <textarea id="jsonInput" class="w-full h-64 p-4 bg-gray-800 text-gray-200 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="Paste your JSON schema here..."></textarea>
+                <button id="generateBtn" class="mt-4 w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300">Generate Schema</button>
+            </section>
+
+            <!-- SQL Output Section -->
+            <section class="editor">
+                <h2 class="text-xl font-semibold text-cyan-400 mb-4">Generated SQL</h2>
+                <pre id="sqlOutput" class="output h-64  overflow-auto p-4 bg-gray-800 text-gray-200 border border-gray-700 rounded-lg language-sql"></pre>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center mt-8 text-gray-400">
+            <p>Built with ❤️ | <a href="https://kehem.com" class="text-cyan-400 hover:underline">Kehem</a></p>
+        </footer>
+    </div>
+    <script>
+        
+    </script>
+    <script>
+        const csrftoken = "{{ csrf_token }}";
+        document.getElementById('generateBtn').addEventListener('click', async () => {
+            const jsonInput = document.getElementById('jsonInput').value;
+            const sqlOutput = document.getElementById('sqlOutput');
+
+            try {
+                const response = await fetch('//kehem.com/generate/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrftoken, // Add CSRF token here
+                    },
+                    body: jsonInput,
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    sqlOutput.textContent = result.sql;
+                } else {
+                    sqlOutput.textContent = `Error: ${result.error}`;
+                }
+            } catch (error) {
+                sqlOutput.textContent = `Fetch Error: ${error.message}`;
+            }
+
+            // Re-highlight syntax after updating content
+            Prism.highlightElement(sqlOutput);
+        });
+
+        // Pre-fill with example JSON (optional)
+        const exampleJson = `{
+    "database": "postgresql",
+    "schema": "public",
+    "types": {
+        "status": ["active", "inactive", "pending"]
+    },
+    "table": {
+        "website_info": {
+            "columns": {
+                "Name": "Char(50,notnull)",
+                "Email": "Char(50,unique)",
+                "Status": "status DEFAULT 'active'",
+                "LogoFile": "File",
+                "BannerImage": "Image"
+            },
+            "constraints": {
+                "primary_key": ["id"]
+            }
+        }
+    }
+}`;
+        document.getElementById('jsonInput').value = exampleJson;
+        Prism.highlightAll();
+    </script>
+</body>
+</html>

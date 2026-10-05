@@ -1,0 +1,141 @@
+{% load static %}
+{% comment %}
+  templates/blog/search.html  --  referenced by views.BlogSearchView
+  Context provided: posts, page_obj, paginator, is_paginated, query
+  Search result pages are always noindex, follow - they are infinite near-duplicates and
+  should never enter the index, but links out of them should still count.
+{% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>{% if query %}Search: {{ query }}{% else %}Search{% endif %} — Studio Notes | KEHEM IT</title>
+  <link href="{% static 'kehem.ico' %}" rel="icon" type="image/x-icon" />
+  <meta content="Search the KEHEM IT studio notes on websites, SaaS products, custom software, design and engineering." name="description" />
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" /></noscript>
+  <link href="{% static 'kehem/new/css/blog_view.css' %}" rel="stylesheet" />
+  <meta content="noindex, follow" name="robots" />
+  <style>
+    a { text-decoration: none; }
+    .tag-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; padding: 8px 0 40px; }
+    .tag-card { display: block; border: 1px solid rgba(0,0,0,.09); border-radius: 16px; padding: 22px 24px; background: #fff; transition: transform .18s ease, box-shadow .18s ease; }
+    .tag-card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(0,0,0,.07); }
+    .tag-card h2 { font-size: 1.12rem; line-height: 1.35; margin: 0 0 10px; }
+    .tag-card p { margin: 0 0 14px; color: #555; font-size: .95rem; line-height: 1.6; }
+    .tag-card .tag-meta { font-size: .82rem; color: #888; display: flex; gap: 14px; flex-wrap: wrap; }
+    .tag-search-form { display: flex; gap: 10px; max-width: 520px; margin: 0 0 28px; }
+    .tag-search-form input { flex: 1; padding: 13px 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,.15); font-size: 1rem; font-family: inherit; }
+    .tag-search-form button { padding: 13px 22px; border-radius: 12px; border: 0; background: #111; color: #fff; font-size: 1rem; cursor: pointer; font-family: inherit; }
+    .tag-pager { display: flex; gap: 8px; align-items: center; justify-content: center; padding: 10px 0 56px; flex-wrap: wrap; }
+    .tag-pager a, .tag-pager span { padding: 9px 15px; border-radius: 10px; border: 1px solid rgba(0,0,0,.12); font-size: .9rem; }
+    .tag-pager .current { background: #111; color: #fff; border-color: #111; }
+  </style>
+</head>
+
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <nav class="apple-nav" id="navbar">
+    <div class="nav-wrap"><a class="nav-logo" href="/"><img loading="lazy" decoding="async" alt="KEHEM Logo" src="{% static 'kehem.webp' %}" class="brand-logo-img" /><span>KEHEM IT</span></a>
+      <div class="nav-menu" id="navLinks"><a href="/">Home</a> <a href="/services">Services</a> <a href="/projects">Projects</a> <a href="/blog">Blog</a>
+        <div class="nav-dropdown"><button class="dropdown-btn">Company<svg fill="none" viewBox="0 0 24 24">
+              <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+            </svg></button>
+          <div class="dropdown-menu"><a href="/about">About Us</a> <a href="/team">Our Team</a> <a href="/process">Our Process</a> <a href="/testimonials">Client Reviews</a></div>
+        </div><a href="/pricing">Pricing</a> <a class="nav-btn" href="/contact">Hire Team</a>
+      </div><button class="nav-toggle" aria-label="Open navigation" aria-expanded="false"><span></span> <span></span></button>
+    </div>
+  </nav>
+
+  <header class="article-hero">
+    <div class="hero-grid-bg"></div>
+    <div class="container">
+      <div class="article-hero-inner"><a class="article-back" href="/blog">&larr; Back to Studio Notes</a><span class="section-label fade-up">Search</span>
+        <h1 class="article-title fade-up fade-up-delay-1">{% if query %}Results for “{{ query }}”{% else %}Search Studio Notes{% endif %}</h1>
+        <p class="article-sub fade-up fade-up-delay-2">{% if posts %}{{ paginator.count }} article{{ paginator.count|pluralize }} matched.{% elif query %}No articles matched that — try a broader term, or browse the topics below.{% else %}Search across every studio note on websites, SaaS, custom software and engineering.{% endif %}</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-shell">
+    <div class="container">
+      <form class="tag-search-form" method="get" action="{% url 'blog_search' %}">
+        <input type="search" name="q" value="{{ query|default:'' }}" placeholder="e.g. pricing, Django, onboarding" aria-label="Search studio notes" />
+        <button type="submit">Search</button>
+      </form>
+
+      {% if posts %}
+      <div class="tag-grid">
+        {% for p in posts %}
+        <a class="tag-card" href="{{ p.get_absolute_url }}">
+          <h2>{{ p.title }}</h2>
+          {% if p.excerpt %}<p>{{ p.excerpt|truncatechars:165 }}</p>{% endif %}
+          <div class="tag-meta">
+            <span>{{ p.published_at|date:"F j, Y" }}</span>
+            {% if p.read_time %}<span>{{ p.read_time }} min read</span>{% endif %}
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      {% if page_obj.has_other_pages %}
+      <nav class="tag-pager" aria-label="Pagination">
+        {% if page_obj.has_previous %}<a href="?q={{ query|urlencode }}&amp;page={{ page_obj.previous_page_number }}" rel="prev">&larr; Previous</a>{% endif %}
+        {% for num in paginator.page_range %}
+          {% if num == page_obj.number %}<span class="current">{{ num }}</span>
+          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}<a href="?q={{ query|urlencode }}&amp;page={{ num }}">{{ num }}</a>{% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}<a href="?q={{ query|urlencode }}&amp;page={{ page_obj.next_page_number }}" rel="next">Next &rarr;</a>{% endif %}
+      </nav>
+      {% endif %}
+      {% else %}
+      <p><a href="/blog">Browse all Studio Notes &rarr;</a></p>
+      {% endif %}
+    </div>
+  </main>
+
+  <footer class="footer-apple">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand"><a class="footer-logo" href="/">
+            <div class="footer-logo-mark"><img loading="lazy" decoding="async" alt="kehem logo" src="{% static 'kehem.webp' %}" class="brand-logo-img" /></div><span>KEHEM IT</span>
+          </a>
+          <p class="footer-desc">Trusted websites, SaaS products, and business software for founders and companies that want the KEHEM feel with sharper strategy, cleaner design, and stronger engineering.</p>
+          <div class="footer-status"><span class="status-dot"></span> Accepting New Projects</div>
+        </div>
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4>Studio</h4><a href="/about">About Us</a> <a href="/team">Our Team</a> <a href="/process">Process</a> <a href="/contact">Contact</a>
+          </div>
+          <div class="footer-col">
+            <h4>Work</h4><a href="/services">Services</a> <a href="/pricing">Pricing</a> <a href="/projects">Projects</a> <a href="/testimonials">Reviews</a>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4><a href="mailto:support@kehem.com">support@kehem.com</a>
+            <p>Available via email &amp; scheduled calls</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-line"></div>
+      <div class="footer-bottom"><span class="footer-copy">&copy; 2026 KEHEM IT. All rights reserved.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/cookie">Cookies</a></div>
+        <div class="footer-socials"><a aria-label="Facebook" class="social-btn" href="https://facebook.com/KEHEMIT"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+            </svg></a> <a aria-label="Twitter" class="social-btn" href="https://x.com/KEHEMIT"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18">
+              <path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0012 8v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+            </svg></a> <a aria-label="LinkedIn" class="social-btn" href="https://linkedin.com/company/kehem/"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18">
+              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"></path>
+              <circle cx="4" cy="4" r="2"></circle>
+              <path d="M2 9h4v12H2z"></path>
+            </svg></a></div>
+      </div>
+    </div>
+  </footer>
+  <div class="toast" id="toast"></div>
+  <script defer src="{% static 'kehem/new/js/main.js' %}"></script>
+</body>
+
+</html>

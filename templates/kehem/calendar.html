@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List with Dynamic Calendar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .dark-mode {
+            background-color: #1a202c;
+            color: #edf2f7;
+        }
+
+        .active-date {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .selected-date {
+            background-color: #3182ce;
+            color: white;
+            font-weight: bold;
+            border-radius: 50%;
+        }
+
+        .active-date-display {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .active-date-day {
+            font-size: 3rem;
+        }
+
+        .active-date-month-day {
+            font-size: 1.25rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+
+    <div class="max-w-7xl mx-auto p-6 flex space-x-8">
+        <!-- Task Section -->
+        <div class="w-1/2">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold text-gray-800 dark:text-white">To-Do List</h1>
+                <button id="darkModeToggle" class="text-gray-800 dark:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2m4.94 1.06l-1.41 1.41M19 12h-2m-1.06 4.94l-1.41-1.41M12 19v2m-4.94-1.06l1.41-1.41M5 12H3m1.06-4.94l1.41 1.41M12 5a7 7 0 100 14 7 7 0 000-14z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Active Date Display -->
+            <div class="mb-6 active-date-display">
+                <div id="activeDateDay" class="active-date-day text-blue-500"></div>
+                <div id="activeDateMonthDay" class="active-date-month-day text-gray-700 dark:text-white"></div>
+            </div>
+
+            <!-- Task Input Area -->
+            <div class="mb-6">
+                <input id="newTask" type="text" placeholder="What’s your task today?" class="w-full p-4 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors" />
+            </div>
+
+            <!-- Task List -->
+            <ul id="taskList" class="space-y-4"></ul>
+        </div>
+
+        <!-- Calendar Section -->
+        <div class="w-1/2 p-4 bg-white dark:bg-gray-700 rounded-lg shadow-lg">
+            <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4">Calendar</h2>
+            
+            <!-- Calendar Header -->
+            <div class="flex justify-between items-center mb-4">
+                <button id="prevMonth" class="text-xl text-gray-800 dark:text-white">&#171;</button>
+                <h3 id="monthYear" class="text-xl font-semibold text-gray-800 dark:text-white"></h3>
+                <button id="nextMonth" class="text-xl text-gray-800 dark:text-white">&#187;</button>
+            </div>
+
+            <!-- Calendar Grid -->
+            <div id="calendar" class="grid grid-cols-7 gap-2 text-center text-gray-800 dark:text-white">
+                <!-- Days of the week -->
+                <div class="font-semibold">Sun</div>
+                <div class="font-semibold">Mon</div>
+                <div class="font-semibold">Tue</div>
+                <div class="font-semibold">Wed</div>
+                <div class="font-semibold">Thu</div>
+                <div class="font-semibold">Fri</div>
+                <div class="font-semibold">Sat</div>
+            </div>
+            <div id="daysGrid" class="grid grid-cols-7 gap-2"></div>
+        </div>
+
+    </div>
+
+    <script>
+        const newTaskInput = document.getElementById('newTask');
+        const taskList = document.getElementById('taskList');
+        const monthYear = document.getElementById('monthYear');
+        const daysGrid = document.getElementById('daysGrid');
+        const prevMonthButton = document.getElementById('prevMonth');
+        const nextMonthButton = document.getElementById('nextMonth');
+        const activeDateDayElement = document.getElementById('activeDateDay');
+        const activeDateMonthDayElement = document.getElementById('activeDateMonthDay');
+        let selectedDate = null;
+        let currentDate = new Date();
+        let previousSelectedCell = null; // To store previously selected date cell
+
+        // Format a date to dd-mm-yyyy
+        function formatDate(date) {
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}-${month}-${year}`;
+        }
+
+        // Get day of the week and formatted date
+        function getDayAndMonthDay(date) {
+            const dayOfWeek = date.toLocaleString('default', { weekday: 'long' });
+            const monthDay = `${date.toLocaleString('default', { month: 'long' })} ${date.getDate()}`;
+            return { dayOfWeek, monthDay };
+        }
+
+        // Fetch tasks for a specific date
+        async function getTasksForDate(date) {
+            try {
+                const response = await fetch(`/task/${date}/`);
+                if (response.ok) {
+                    const tasks = await response.json();
+                    return tasks;
+                }
+            } catch (error) {
+                console.error('Error fetching tasks:', error);
+            }
+            return [];
+        }
+
+        // Add or update a task
+        async function addTaskToBackend(taskName, taskDate, isCompleted) {
+            const taskData = {
+                name: taskName,
+                date: taskDate,
+                completed: isCompleted,
+            };
+
+            try {
+                const response = await fetch('{% url "add_task" %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams(taskData),
+                });
+
+                if (response.ok) {
+                    const addedTask = await response.json();
+                    return addedTask;
+                }
+            } catch (error) {
+                console.error('Error adding task:', error);
+            }
+            return null;
+        }
+
+        // Update task completion status
+        async function updateTaskCompletion(taskId, isCompleted) {
+            try {
+                const response = await fetch('{% url "add_update" %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        taskId: taskId,
+                        completed: isCompleted,
+                    }),
+                });
+
+                if (response.ok) {
+                    updateTaskList(selectedDate); // Re-render the task list
+                }
+            } catch (error) {
+                console.error('Error updating task completion:', error);
+            }
+        }
+
+        // Delete task
+        async function deleteTask(taskId) {
+            try {
+                const response = await fetch('{% url "add_delete" %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({ taskId: taskId }),
+                });
+
+                if (response.ok) {
+                    updateTaskList(selectedDate); // Re-render the task list
+                }
+            } catch (error) {
+                console.error('Error deleting task:', error);
+            }
+        }
+
+        // Add task to the list in the UI
+        function updateTaskList(date) {
+            taskList.innerHTML = '';
+            getTasksForDate(date).then(tasks => {
+                tasks.forEach(task => {
+                    const taskItem = document.createElement('li');
+                    taskItem.classList.add('flex', 'items-center', 'space-x-3', 'bg-white', 'dark:bg-gray-700', 'p-4', 'rounded-lg', 'shadow-md', 'hover:bg-gray-100', 'dark:hover:bg-gray-600');
+                    
+                    // Check if the task contains @ followed by any text
+                    const atPattern = /@(\S+)/; // Match the @ symbol followed by any non-whitespace characters
+                    const taskName = task.name;
+                    const match = taskName.match(atPattern);
+
+                    // Prepare task content: if @something exists, it will be bold and larger
+                    let taskContent = taskName;
+                    let title = '';
+                    if (match !== null) {
+                        title = match[1]; // Extract text after @
+                        taskContent = taskName.replace(`@${title}`, ''); // Remove the @title part from the task name
+                    }
+
+                    taskItem.innerHTML = `
+                        <input type="checkbox" class="h-5 w-5 text-blue-500 focus:ring-blue-500 dark:ring-offset-gray-800" ${task.completed ? 'checked' : ''} data-task-id="${task.id}" />
+                        <span class="flex-1 text-gray-800 dark:text-gray-100">
+                            ${title ? `<span class="font-bold text-lg text-green-500">${title}</span>` : ''}
+                            ${taskContent}
+                        </span>
+                        <button class="text-gray-500 dark:text-gray-400 hover:text-red-500" data-task-id="${task.id}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    `;
+                    taskList.appendChild(taskItem);
+                });
+
+                // Add event listeners for the checkboxes
+                const checkboxes = taskList.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        const taskId = this.dataset.taskId;
+                        const isCompleted = this.checked;
+                        updateTaskCompletion(taskId, isCompleted);
+                    });
+                });
+
+                // Add event listeners for the delete buttons
+                const deleteButtons = taskList.querySelectorAll('button');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const taskId = this.dataset.taskId;
+                        deleteTask(taskId);
+                    });
+                });
+            });
+        }
+
+        // Handle task input
+        newTaskInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter' && newTaskInput.value.trim() !== '') {
+                const taskName = newTaskInput.value.trim();
+
+                if (selectedDate) {
+                    const taskDate = selectedDate;
+                    const isCompleted = false;
+
+                    addTaskToBackend(taskName, taskDate, isCompleted).then(() => {
+                        updateTaskList(selectedDate);
+                        newTaskInput.value = '';
+                    });
+                }
+            }
+        });
+
+        // Calendar navigation
+        function updateCalendar() {
+            const currentMonth = currentDate.getMonth();
+            const currentYear = currentDate.getFullYear();
+            monthYear.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${currentYear}`;
+            const firstDay = new Date(currentYear, currentMonth, 1);
+            const lastDay = new Date(currentYear, currentMonth + 1, 0);
+            const numDaysInMonth = lastDay.getDate();
+            daysGrid.innerHTML = '';
+            for (let i = 0; i < firstDay.getDay(); i++) {
+                const emptyCell = document.createElement('div');
+                daysGrid.appendChild(emptyCell);
+            }
+            for (let day = 1; day <= numDaysInMonth; day++) {
+                const dayCell = document.createElement('div');
+                dayCell.textContent = day;
+                dayCell.classList.add('p-4', 'rounded-lg', 'text-center', 'cursor-pointer', 'hover:bg-gray-200', 'dark:hover:bg-gray-600', 'text-white');
+                dayCell.addEventListener('click', () => {
+                    if (previousSelectedCell) {
+                        previousSelectedCell.classList.remove('selected-date');
+                    }
+
+                    dayCell.classList.add('selected-date');
+                    selectedDate = formatDate(new Date(currentYear, currentMonth, day));
+
+                    const { dayOfWeek, monthDay } = getDayAndMonthDay(new Date(currentYear, currentMonth, day));
+                    activeDateDayElement.textContent = dayOfWeek;
+                    activeDateMonthDayElement.textContent = monthDay;
+
+                    updateTaskList(selectedDate);
+                    previousSelectedCell = dayCell;
+                });
+                daysGrid.appendChild(dayCell);
+            }
+        }
+
+        prevMonthButton.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            updateCalendar();
+        });
+
+        nextMonthButton.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            updateCalendar();
+        });
+
+        // Set today's date by default
+        selectedDate = formatDate(currentDate);
+        const { dayOfWeek, monthDay } = getDayAndMonthDay(currentDate);
+        activeDateDayElement.textContent = dayOfWeek;
+        activeDateMonthDayElement.textContent = monthDay;
+        updateTaskList(selectedDate);
+
+        // Initialize calendar
+        updateCalendar();
+    </script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JSON Formatter & Validator | KEHEM IT</title>
+  <meta name="description" content="Format, validate, pretty print, minify, copy, upload, and download JSON instantly in your browser with KEHEM IT's free JSON Formatter & Validator.">
+  <meta name="keywords" content="JSON formatter, JSON validator, JSON beautifier, JSON minifier, pretty print JSON, validate JSON, online JSON tool, KEHEM IT">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="KEHEM IT">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JSON Formatter & Validator | KEHEM IT">
+  <meta property="og:description" content="A fast, accessible, client-side JSON formatter, validator, minifier, copier, uploader, and downloader.">
+  <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+  <meta property="og:site_name" content="KEHEM IT">
+  <meta property="og:image" content="https://kehem.com/static/kehem.54168f2599d9.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JSON Formatter & Validator | KEHEM IT">
+  <meta name="twitter:description" content="Format, validate, minify, copy, upload, and download JSON instantly in your browser.">
+  <meta name="twitter:image" content="https://kehem.com/static/kehem.54168f2599d9.webp">
+  <script>
+    tailwind={config:{darkMode:'class',theme:{extend:{fontFamily:{sans:['Inter','ui-sans-serif','system-ui','Segoe UI','Arial','sans-serif'],mono:['ui-monospace','SFMono-Regular','Menlo','Consolas','monospace']},boxShadow:{soft:'0 24px 70px -36px rgba(15,23,42,.38)'}}}}};
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :focus-visible{outline:3px solid #2563eb;outline-offset:3px}.fade-in{animation:fadeIn .22s ease}.ripple{position:relative;overflow:hidden}.ripple span.ripple-dot{position:absolute;border-radius:9999px;background:rgba(255,255,255,.45);transform:scale(0);animation:ripple .55s linear;pointer-events:none}.loader{animation:pulseLine 1s ease-in-out infinite}.error-line{background:rgba(220,38,38,.12);color:#991b1b}.dark .error-line{color:#fecaca}@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}@keyframes ripple{to{transform:scale(4);opacity:0}}@keyframes pulseLine{0%,100%{opacity:.35;transform:scaleX(.35)}50%{opacity:1;transform:scaleX(1)}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"KEHEM IT","url":"https://kehemit.com","logo":"https://kehemit.com/logo.png"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JSON Formatter & Validator","url":"{{ request.scheme }}://{{ request.get_host }}{{ request.path }}","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"A browser-based JSON formatter, validator, minifier, uploader, copier, and downloader by KEHEM IT.","creator":{"@type":"Organization","name":"KEHEM IT","url":"https://kehemit.com"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://kehemit.com"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://kehemit.com/tools"},{"@type":"ListItem","position":3,"name":"JSON Formatter & Validator","item":"{{ request.scheme }}://{{ request.get_host }}{{ request.path }}"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a JSON formatter?","acceptedAnswer":{"@type":"Answer","text":"A JSON formatter converts compact or messy JSON into a readable, indented structure."}},{"@type":"Question","name":"What is a JSON validator?","acceptedAnswer":{"@type":"Answer","text":"A JSON validator checks whether JSON follows correct syntax rules."}},{"@type":"Question","name":"Does this tool send JSON to a server?","acceptedAnswer":{"@type":"Answer","text":"No. The tool runs in your browser and processes JSON client-side."}},{"@type":"Question","name":"Can I minify JSON?","acceptedAnswer":{"@type":"Answer","text":"Yes. Minify removes unnecessary spaces and line breaks from valid JSON."}},{"@type":"Question","name":"Can I upload a JSON file?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can upload a local JSON file and format or validate it in the browser."}},{"@type":"Question","name":"What causes JSON syntax errors?","acceptedAnswer":{"@type":"Answer","text":"Common causes include trailing commas, single quotes, missing quotes around keys, and unescaped characters."}},{"@type":"Question","name":"Is JSON the same as JavaScript?","acceptedAnswer":{"@type":"Answer","text":"No. JSON is a data format inspired by JavaScript object notation, but it has stricter syntax."}},{"@type":"Question","name":"Can JSON contain comments?","acceptedAnswer":{"@type":"Answer","text":"Standard JSON does not support comments."}},{"@type":"Question","name":"Can JSON contain functions?","acceptedAnswer":{"@type":"Answer","text":"No. JSON supports objects, arrays, strings, numbers, booleans, and null."}},{"@type":"Question","name":"What is pretty printed JSON?","acceptedAnswer":{"@type":"Answer","text":"Pretty printed JSON is formatted with indentation and line breaks for readability."}},{"@type":"Question","name":"What is minified JSON?","acceptedAnswer":{"@type":"Answer","text":"Minified JSON removes extra whitespace to reduce file size."}},{"@type":"Question","name":"Is JSON secure?","acceptedAnswer":{"@type":"Answer","text":"JSON is a data format. Security depends on how it is parsed, stored, validated, and displayed."}},{"@type":"Question","name":"Can JSON be used in databases?","acceptedAnswer":{"@type":"Answer","text":"Yes. Many databases support JSON columns or JSON-like document storage."}},{"@type":"Question","name":"What keyboard shortcuts are supported?","acceptedAnswer":{"@type":"Answer","text":"Ctrl Enter formats JSON, Ctrl Shift M minifies JSON, and Ctrl Shift C copies JSON."}},{"@type":"Question","name":"Does JSON support dates?","acceptedAnswer":{"@type":"Answer","text":"JSON has no native date type. Dates are usually stored as strings."}}]}</script>
+</head>
+<body class="bg-neutral-50 text-neutral-950 antialiased transition-colors duration-300 dark:bg-neutral-950 dark:text-neutral-100">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-2xl focus:bg-blue-600 focus:px-4 focus:py-3 focus:text-white">Skip to content</a>
+
+  <main id="main">
+    <header class="mx-auto max-w-7xl px-4 pb-10 pt-12 sm:px-6 sm:pt-16 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="mb-5 text-sm font-semibold uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400">KEHEM IT</p>
+        <h1 class="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">JSON Formatter & Validator</h1>
+        <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-neutral-600 dark:text-neutral-300">Format, validate, minify, copy, upload, and download JSON instantly in your browser.</p>
+        <div class="mt-7 flex flex-wrap items-center justify-center gap-3">
+          <a href="#tool" class="rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700">Open Tool</a>
+          <a href="#learn" class="rounded-2xl border border-neutral-300 bg-white px-5 py-3 text-sm font-semibold text-neutral-800 shadow-sm transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100 dark:hover:bg-neutral-800">Read Guide</a>
+        </div>
+      </div>
+    </header>
+
+    <section id="tool" class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8" aria-labelledby="tool-title">
+      <article class="rounded-2xl border border-neutral-200 bg-white p-4 shadow-soft dark:border-neutral-800 dark:bg-neutral-900 sm:p-6 lg:p-8">
+        <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <h2 id="tool-title" class="text-2xl font-semibold tracking-tight">Format and validate JSON</h2>
+            <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300">Shortcuts: Ctrl + Enter format, Ctrl + Shift + M minify, Ctrl + Shift + C copy.</p>
+          </div>
+          <div class="grid grid-cols-3 gap-3 text-sm">
+            <div class="rounded-2xl bg-neutral-100 p-4 dark:bg-neutral-800"><p class="text-neutral-500 dark:text-neutral-400">Characters</p><p id="charCount" class="mt-1 text-xl font-semibold">0</p></div>
+            <div class="rounded-2xl bg-neutral-100 p-4 dark:bg-neutral-800"><p class="text-neutral-500 dark:text-neutral-400">Lines</p><p id="lineCount" class="mt-1 text-xl font-semibold">1</p></div>
+            <div class="rounded-2xl bg-neutral-100 p-4 dark:bg-neutral-800"><p class="text-neutral-500 dark:text-neutral-400">Size</p><p id="jsonSize" class="mt-1 text-xl font-semibold">0 B</p></div>
+          </div>
+        </div>
+
+        <div id="statusBox" class="mt-6 rounded-2xl border border-neutral-200 bg-neutral-50 p-4 text-sm text-neutral-700 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-300" role="status" aria-live="polite">Paste JSON to begin.</div>
+        <div id="loadingBar" class="mt-4 hidden h-1 origin-left rounded-full bg-blue-600 loader"></div>
+
+        <div class="mt-6 grid gap-6 lg:grid-cols-[1fr_280px]">
+          <div>
+            <label for="jsonInput" class="mb-3 block text-sm font-semibold">JSON input</label>
+            <div id="editorWrap" class="overflow-hidden rounded-2xl border border-neutral-300 bg-neutral-50 shadow-sm transition dark:border-neutral-700 dark:bg-neutral-950">
+              <textarea id="jsonInput" spellcheck="false" class="h-[520px] w-full resize-y bg-transparent p-5 font-mono text-sm leading-7 text-neutral-900 outline-none dark:text-neutral-100" aria-describedby="statusBox" aria-label="JSON input editor" placeholder='{"name":"KEHEM IT","tool":"JSON Formatter","valid":true}'></textarea>
+            </div>
+            <div id="errorPreview" class="mt-4 hidden rounded-2xl border border-red-200 bg-red-50 p-4 font-mono text-sm text-red-800 dark:border-red-900/70 dark:bg-red-950/40 dark:text-red-200" aria-live="assertive"></div>
+          </div>
+
+          <aside class="space-y-3" aria-label="JSON actions">
+            <button id="formatBtn" type="button" class="ripple w-full rounded-2xl bg-blue-600 px-5 py-4 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 active:scale-[0.99]">Format JSON</button>
+            <button id="validateBtn" type="button" class="ripple w-full rounded-2xl border border-neutral-300 bg-white px-5 py-3 text-sm font-semibold text-neutral-800 shadow-sm transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-800">Validate</button>
+            <button id="minifyBtn" type="button" class="ripple w-full rounded-2xl border border-neutral-300 bg-white px-5 py-3 text-sm font-semibold text-neutral-800 shadow-sm transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-800">Minify</button>
+            <button id="copyBtn" type="button" class="ripple w-full rounded-2xl border border-neutral-300 bg-white px-5 py-3 text-sm font-semibold text-neutral-800 shadow-sm transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-800">Copy JSON</button>
+            <button id="downloadBtn" type="button" class="ripple w-full rounded-2xl border border-neutral-300 bg-white px-5 py-3 text-sm font-semibold text-neutral-800 shadow-sm transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-800">Download JSON</button>
+            <label for="fileInput" class="block w-full cursor-pointer rounded-2xl border border-neutral-300 bg-white px-5 py-3 text-center text-sm font-semibold text-neutral-800 shadow-sm transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-800">Upload JSON</label>
+            <input id="fileInput" type="file" accept=".json,application/json,text/json" class="sr-only">
+            <button id="sampleBtn" type="button" class="ripple w-full rounded-2xl border border-neutral-300 bg-white px-5 py-3 text-sm font-semibold text-neutral-800 shadow-sm transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-800">Sample JSON</button>
+            <button id="clearBtn" type="button" class="ripple w-full rounded-2xl px-5 py-3 text-sm font-semibold text-neutral-600 transition hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800">Clear</button>
+            <div class="rounded-2xl bg-neutral-100 p-4 text-sm text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
+              <h3 class="font-semibold text-neutral-900 dark:text-white">Auto tools</h3>
+              <label class="mt-3 flex items-center justify-between gap-3"><span>Auto validate</span><input id="autoValidate" type="checkbox" checked class="h-5 w-5 accent-blue-600"></label>
+              <label class="mt-3 flex items-center justify-between gap-3"><span>Auto format on paste</span><input id="autoFormat" type="checkbox" class="h-5 w-5 accent-blue-600"></label>
+            </div>
+          </aside>
+        </div>
+      </article>
+    </section>
+
+    <section id="learn" class="border-t border-neutral-200 bg-white py-16 dark:border-neutral-800 dark:bg-neutral-950">
+      <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[260px_1fr] lg:px-8">
+        <aside class="lg:sticky lg:top-8 lg:self-start" aria-labelledby="toc-title">
+          <div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-5 dark:border-neutral-800 dark:bg-neutral-900">
+            <h2 id="toc-title" class="text-sm font-semibold uppercase tracking-[0.16em] text-neutral-500 dark:text-neutral-400">Contents</h2>
+            <ol class="mt-4 space-y-2 text-sm">
+              <li><a class="text-neutral-700 hover:text-blue-600 dark:text-neutral-300" href="#what-is-json">What is JSON?</a></li>
+              <li><a class="text-neutral-700 hover:text-blue-600 dark:text-neutral-300" href="#json-syntax">JSON Syntax</a></li>
+              <li><a class="text-neutral-700 hover:text-blue-600 dark:text-neutral-300" href="#examples">Examples</a></li>
+              <li><a class="text-neutral-700 hover:text-blue-600 dark:text-neutral-300" href="#faq">FAQ</a></li>
+              <li><a class="text-neutral-700 hover:text-blue-600 dark:text-neutral-300" href="#conclusion">Conclusion</a></li>
+            </ol>
+          </div>
+        </aside>
+
+        <article class="max-w-none">
+          <section id="what-is-json" class="scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">What is JSON?</h2>
+            <p class="mt-4 text-neutral-700 dark:text-neutral-300">JSON, short for JavaScript Object Notation, is a lightweight data format used to exchange information between applications, APIs, browsers, servers, mobile apps, and databases. It is readable for humans and simple for machines to parse.</p>
+          </section>
+
+          <section id="json-syntax" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">JSON Syntax</h2>
+            <p class="mt-4 text-neutral-700 dark:text-neutral-300">JSON uses key-value pairs, arrays, strings, numbers, booleans, objects, and null. Keys must be wrapped in double quotes, and values must follow strict JSON rules.</p>
+            <pre class="mt-5 overflow-x-auto rounded-2xl bg-neutral-100 p-5 text-sm dark:bg-neutral-900"><code>{
+  "company": "KEHEM IT",
+  "active": true,
+  "services": ["web", "seo", "software"]
+}</code></pre>
+          </section>
+
+          <section id="json-rules" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">JSON Rules</h2>
+            <ul class="mt-4 list-disc space-y-2 pl-5 text-neutral-700 dark:text-neutral-300">
+              <li>Object keys and strings must use double quotes.</li>
+              <li>Trailing commas and comments are not allowed in standard JSON.</li>
+              <li>Values can be strings, numbers, booleans, arrays, objects, or null.</li>
+            </ul>
+          </section>
+
+          <section id="objects-arrays" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">JSON Objects, Arrays, and Nested JSON</h2>
+            <p class="mt-4 text-neutral-700 dark:text-neutral-300">A JSON object stores named values inside curly braces. A JSON array stores ordered values inside square brackets. Nested JSON combines objects and arrays to represent richer structures such as users, orders, settings, and API responses.</p>
+          </section>
+
+          <section id="pretty-minified" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">Pretty vs Minified JSON</h2>
+            <p class="mt-4 text-neutral-700 dark:text-neutral-300">Pretty JSON is easier to read because it includes indentation and line breaks. Minified JSON removes extra whitespace to reduce size for transmission or storage.</p>
+          </section>
+
+          <section id="common-errors" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">Common JSON Errors</h2>
+            <ul class="mt-4 list-disc space-y-2 pl-5 text-neutral-700 dark:text-neutral-300">
+              <li>Using single quotes instead of double quotes.</li>
+              <li>Adding trailing commas after the final property.</li>
+              <li>Forgetting commas between properties.</li>
+              <li>Using unescaped line breaks inside strings.</li>
+              <li>Including comments in strict JSON.</li>
+            </ul>
+          </section>
+
+          <section id="best-practices" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">JSON Best Practices</h2>
+            <p class="mt-4 text-neutral-700 dark:text-neutral-300">Keep keys consistent, use predictable nesting, avoid overly large payloads, validate external input, document API fields, and prefer stable naming conventions such as camelCase or snake_case depending on your stack.</p>
+          </section>
+
+          <section id="security" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">Security Considerations</h2>
+            <p class="mt-4 text-neutral-700 dark:text-neutral-300">Treat JSON from users or external APIs as untrusted. Validate structure, escape output before rendering into HTML, avoid evaluating JSON as code, and limit payload size to reduce abuse risk.</p>
+          </section>
+
+          <section id="browser-support" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">Browser Support</h2>
+            <p class="mt-4 text-neutral-700 dark:text-neutral-300">Modern browsers support JSON parsing and serialization through <code class="rounded bg-neutral-100 px-1 dark:bg-neutral-900">JSON.parse()</code> and <code class="rounded bg-neutral-100 px-1 dark:bg-neutral-900">JSON.stringify()</code>. This tool uses those native APIs for fast client-side processing.</p>
+          </section>
+
+          <section id="examples" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">Real World Examples</h2>
+            <div class="mt-6 grid gap-4 md:grid-cols-2">
+              <div class="rounded-2xl bg-neutral-100 p-5 dark:bg-neutral-900"><h3 class="font-semibold">JavaScript Example</h3><pre class="mt-3 overflow-x-auto text-sm"><code>const data = JSON.parse(text);
+console.log(data.name);</code></pre></div>
+              <div class="rounded-2xl bg-neutral-100 p-5 dark:bg-neutral-900"><h3 class="font-semibold">Python Example</h3><pre class="mt-3 overflow-x-auto text-sm"><code>import json
+data = json.loads(text)</code></pre></div>
+              <div class="rounded-2xl bg-neutral-100 p-5 dark:bg-neutral-900"><h3 class="font-semibold">Django Example</h3><pre class="mt-3 overflow-x-auto text-sm"><code>return JsonResponse({"ok": True})</code></pre></div>
+              <div class="rounded-2xl bg-neutral-100 p-5 dark:bg-neutral-900"><h3 class="font-semibold">Node.js Example</h3><pre class="mt-3 overflow-x-auto text-sm"><code>res.json({ status: "ok" });</code></pre></div>
+              <div class="rounded-2xl bg-neutral-100 p-5 dark:bg-neutral-900"><h3 class="font-semibold">PHP Example</h3><pre class="mt-3 overflow-x-auto text-sm"><code>$data = json_decode($json, true);</code></pre></div>
+              <div class="rounded-2xl bg-neutral-100 p-5 dark:bg-neutral-900"><h3 class="font-semibold">Java Example</h3><pre class="mt-3 overflow-x-auto text-sm"><code>ObjectMapper mapper = new ObjectMapper();</code></pre></div>
+              <div class="rounded-2xl bg-neutral-100 p-5 dark:bg-neutral-900"><h3 class="font-semibold">Go Example</h3><pre class="mt-3 overflow-x-auto text-sm"><code>json.Unmarshal(body, &data)</code></pre></div>
+              <div class="rounded-2xl bg-neutral-100 p-5 dark:bg-neutral-900"><h3 class="font-semibold">Rust Example</h3><pre class="mt-3 overflow-x-auto text-sm"><code>serde_json::from_str(json)</code></pre></div>
+              <div class="rounded-2xl bg-neutral-100 p-5 dark:bg-neutral-900 md:col-span-2"><h3 class="font-semibold">SQL Storage Example</h3><pre class="mt-3 overflow-x-auto text-sm"><code>CREATE TABLE events (
+  id SERIAL PRIMARY KEY,
+  payload JSONB NOT NULL
+);</code></pre></div>
+            </div>
+          </section>
+
+          <section id="performance" class="mt-12 scroll-mt-28"><h2 class="text-3xl font-semibold tracking-tight">Performance Tips</h2><p class="mt-4 text-neutral-700 dark:text-neutral-300">Keep JSON payloads small, paginate large API responses, avoid unnecessary nesting, compress responses over the network, and parse data only when needed.</p></section>
+          <section id="when-not" class="mt-12 scroll-mt-28"><h2 class="text-3xl font-semibold tracking-tight">When NOT to use JSON</h2><p class="mt-4 text-neutral-700 dark:text-neutral-300">JSON may not be ideal for very large binary data, highly relational data, streaming analytics, or formats that need comments, schemas, or compact binary encoding.</p></section>
+
+          <section id="faq" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">Frequently Asked Questions</h2>
+            <div class="mt-6 space-y-3">
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">What is a JSON formatter?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">It makes JSON readable with indentation and line breaks.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">What is a JSON validator?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">It checks whether JSON syntax is valid.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Does this tool upload data?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">No. Processing happens in your browser.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Can JSON have comments?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">No, comments are not valid in standard JSON.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Can JSON use single quotes?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">No, strings and keys must use double quotes.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">What does minify mean?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">Minify removes unnecessary whitespace.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Can I download formatted JSON?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">Yes, use the Download JSON button.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Can I upload a file?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">Yes, upload a .json file from your device.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Is JSON case-sensitive?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">Yes, keys and string values are case-sensitive.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Can JSON store dates?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">Dates are usually stored as strings.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">What is valid JSON?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">Valid JSON follows syntax rules and can be parsed by JSON.parse.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Can JSON contain undefined?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">No, undefined is not a JSON value.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">What is JSON used for?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">JSON is used for APIs, configuration, logs, app state, and data exchange.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Is JSON better than XML?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">JSON is usually lighter and easier for web APIs, while XML has different strengths.</p></details>
+              <details class="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800"><summary class="cursor-pointer font-semibold">Can I use shortcuts?</summary><p class="mt-3 text-neutral-700 dark:text-neutral-300">Yes. Ctrl Enter formats, Ctrl Shift M minifies, and Ctrl Shift C copies.</p></details>
+            </div>
+          </section>
+
+          <section id="conclusion" class="mt-12 scroll-mt-28">
+            <h2 class="text-3xl font-semibold tracking-tight">Conclusion</h2>
+            <p class="mt-4 text-neutral-700 dark:text-neutral-300">JSON is one of the most important formats in modern software. A reliable formatter and validator helps developers debug APIs, clean configuration files, reduce payload size, and prevent syntax mistakes before deployment.</p>
+          </section>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-neutral-200 bg-neutral-50 py-10 dark:border-neutral-800 dark:bg-neutral-950">
+    <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 text-sm text-neutral-600 dark:text-neutral-400 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+      <p>&copy; <span id="year"></span> KEHEM IT. All rights reserved.</p>
+      <p>Fast client-side JSON tools for developers.</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="fixed left-1/2 top-5 z-50 hidden -translate-x-1/2 rounded-2xl bg-neutral-950 px-5 py-3 text-sm font-semibold text-white shadow-soft dark:bg-white dark:text-neutral-950" role="status" aria-live="polite"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded',()=>{const input=document.getElementById('jsonInput'),statusBox=document.getElementById('statusBox'),editorWrap=document.getElementById('editorWrap'),errorPreview=document.getElementById('errorPreview'),charCount=document.getElementById('charCount'),lineCount=document.getElementById('lineCount'),jsonSize=document.getElementById('jsonSize'),toast=document.getElementById('toast'),loadingBar=document.getElementById('loadingBar'),autoValidate=document.getElementById('autoValidate'),autoFormat=document.getElementById('autoFormat'),buttons=document.querySelectorAll('button.ripple');const sample={company:'KEHEM IT',tool:'JSON Formatter & Validator',active:true,features:['format','validate','minify','copy','download','upload'],meta:{version:1,clientSide:true}};function byteSize(text){return new Blob([text]).size}function formatBytes(bytes){if(bytes<1024)return bytes+' B';if(bytes<1048576)return(bytes/1024).toFixed(1)+' KB';return(bytes/1048576).toFixed(2)+' MB'}function showToast(message){toast.textContent=message;toast.classList.remove('hidden');toast.classList.add('fade-in');clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>{toast.classList.add('hidden');toast.classList.remove('fade-in')},2200)}function setLoading(active){loadingBar.classList.toggle('hidden',!active)}function updateStats(){const value=input.value;charCount.textContent=String(value.length);lineCount.textContent=String(value?value.split(/\r\n|\r|\n/).length:1);jsonSize.textContent=formatBytes(byteSize(value))}function setStatus(type,message){const map={idle:'border-neutral-200 bg-neutral-50 text-neutral-700 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-300',valid:'border-green-200 bg-green-50 text-green-800 dark:border-green-900/70 dark:bg-green-950/40 dark:text-green-200',error:'border-red-200 bg-red-50 text-red-800 dark:border-red-900/70 dark:bg-red-950/40 dark:text-red-200'};statusBox.className='mt-6 rounded-2xl border p-4 text-sm '+map[type];statusBox.textContent=message}function parseJson(){const text=input.value.trim();if(!text)return{ok:false,empty:true,error:new Error('Paste JSON to begin.')};try{return{ok:true,data:JSON.parse(text)}}catch(error){return{ok:false,error}}}function getErrorPosition(message){const match=message.match(/position\s+(\d+)/i);if(!match)return null;const position=Number(match[1]),before=input.value.slice(0,position),lines=before.split(/\r\n|\r|\n/);return{position,line:lines.length,column:lines[lines.length-1].length+1}}function escapeHtml(text){return text.replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]))}function renderError(error){const pos=getErrorPosition(error.message);editorWrap.classList.add('border-red-400','dark:border-red-700');errorPreview.classList.remove('hidden');if(pos){const lines=input.value.split(/\r\n|\r|\n/),start=Math.max(0,pos.line-2),end=Math.min(lines.length,pos.line+1);errorPreview.innerHTML='<p class="mb-3 font-sans font-semibold">Syntax error at line '+pos.line+', column '+pos.column+'</p>'+lines.slice(start,end).map((line,index)=>{const lineNo=start+index+1,cls=lineNo===pos.line?'error-line rounded px-2 py-1':'px-2 py-1';return'<div class="'+cls+'"><span class="select-none opacity-60">'+lineNo+'</span> '+escapeHtml(line||' ')+'</div>'}).join('')}else{errorPreview.textContent=error.message}setStatus('error','Invalid JSON: '+error.message)}function clearError(){editorWrap.classList.remove('border-red-400','dark:border-red-700');errorPreview.classList.add('hidden');errorPreview.textContent=''}function validateJson(silent=false){clearError();const result=parseJson();if(result.empty){setStatus('idle','Paste JSON to begin.');return false}if(result.ok){setStatus('valid','Valid JSON. Ready to format, minify, copy, or download.');if(!silent)showToast('JSON is valid');return true}renderError(result.error);if(!silent)showToast('JSON has a syntax error');return false}function formatJson(){setLoading(true);requestAnimationFrame(()=>{const result=parseJson();if(result.ok){input.value=JSON.stringify(result.data,null,2);clearError();updateStats();setStatus('valid','JSON formatted successfully.');showToast('JSON formatted')}else renderError(result.error);setLoading(false)})}function minifyJson(){setLoading(true);requestAnimationFrame(()=>{const result=parseJson();if(result.ok){input.value=JSON.stringify(result.data);clearError();updateStats();setStatus('valid','JSON minified successfully.');showToast('JSON minified')}else renderError(result.error);setLoading(false)})}async function copyJson(){const value=input.value.trim();if(!value){showToast('Nothing to copy');return}try{await navigator.clipboard.writeText(value)}catch{input.select();document.execCommand('copy')}showToast('Copied to clipboard')}function downloadJson(){const value=input.value.trim();if(!value){showToast('Nothing to download');return}if(!validateJson(true)){showToast('Fix JSON before download');return}const blob=new Blob([value+'\n'],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='formatted-json.json';link.click();URL.revokeObjectURL(url);showToast('JSON downloaded')}function clearInput(){input.value='';clearError();updateStats();setStatus('idle','Paste JSON to begin.');showToast('Cleared')}function loadSample(){input.value=JSON.stringify(sample,null,2);updateStats();validateJson(true);showToast('Sample JSON loaded')}function debounce(fn,delay){let timer;return(...args)=>{clearTimeout(timer);timer=setTimeout(()=>fn(...args),delay)}}function addRipple(event){const button=event.currentTarget,dot=document.createElement('span'),rect=button.getBoundingClientRect(),size=Math.max(rect.width,rect.height);dot.className='ripple-dot';dot.style.width=dot.style.height=size+'px';dot.style.left=event.clientX-rect.left-size/2+'px';dot.style.top=event.clientY-rect.top-size/2+'px';button.appendChild(dot);setTimeout(()=>dot.remove(),600)}const debouncedValidate=debounce(()=>{if(autoValidate.checked)validateJson(true)},350);document.getElementById('formatBtn').addEventListener('click',formatJson);document.getElementById('validateBtn').addEventListener('click',()=>validateJson(false));document.getElementById('minifyBtn').addEventListener('click',minifyJson);document.getElementById('copyBtn').addEventListener('click',copyJson);document.getElementById('downloadBtn').addEventListener('click',downloadJson);document.getElementById('sampleBtn').addEventListener('click',loadSample);document.getElementById('clearBtn').addEventListener('click',clearInput);document.getElementById('fileInput').addEventListener('change',event=>{const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{input.value=String(reader.result||'');updateStats();validateJson(true);showToast('File uploaded')};reader.readAsText(file);event.target.value=''});input.addEventListener('input',()=>{updateStats();debouncedValidate()});input.addEventListener('paste',()=>{setTimeout(()=>{updateStats();if(autoFormat.checked)formatJson();else debouncedValidate()},0)});document.addEventListener('keydown',event=>{const key=event.key.toLowerCase();if(event.ctrlKey&&event.key==='Enter'){event.preventDefault();formatJson()}if(event.ctrlKey&&event.shiftKey&&key==='m'){event.preventDefault();minifyJson()}if(event.ctrlKey&&event.shiftKey&&key==='c'){event.preventDefault();copyJson()}});buttons.forEach(button=>button.addEventListener('click',addRipple));document.getElementById('year').textContent=new Date().getFullYear();updateStats()});
+  </script>
+</body>
+</html>

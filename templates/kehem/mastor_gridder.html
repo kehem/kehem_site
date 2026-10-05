@@ -1,0 +1,2009 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mastors Gridder v1.0.0 - Complete Documentation</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Complete documentation for Mastors Gridder - A powerful, flexible CSS grid system for modern web development with responsive utilities and customizable breakpoints.">
+    <meta name="keywords"
+        content="CSS Grid, Responsive Grid System, Mastors Gridder, Web Development, Frontend Framework, CSS Framework">
+    <meta name="author" content="KEHEM-IT">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Mastors Gridder v1.0.0 - Complete Documentation">
+    <meta property="og:description"
+        content="Complete documentation for Mastors Gridder - A powerful, flexible CSS grid system for modern web development with responsive utilities and customizable breakpoints.">
+    <meta property="og:image" content="assets/banner.png">
+    <meta property="og:url" content="">
+    <meta property="og:site_name" content="Mastors Gridder">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mastors Gridder v1.0.0 - Complete Documentation">
+    <meta name="twitter:description"
+        content="Complete documentation for Mastors Gridder - A powerful, flexible CSS grid system for modern web development with responsive utilities and customizable breakpoints.">
+    <meta name="twitter:image" content="assets/banner.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/gridder-logo.png">
+    <link rel="apple-touch-icon" href="assets/gridder-logo.png">
+    <link rel="shortcut icon" href="assets/gridder-logo.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Prism.js for Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-scss.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+
+    <!-- Mastors-Gridder CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/KEHEM-IT/Mastors-Gridder@main/mastors-gridder.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            bg: '#0f172a',
+                            card: '#1e293b',
+                            border: '#334155'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-gradient {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .demo-item {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .demo-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .resizable-demo {
+            position: relative;
+            border: 2px solid #334155;
+            border-radius: 0.75rem;
+            overflow-x: auto;
+            resize: horizontal;
+            min-width: 200px;
+            max-width: 100%;
+            padding: 1rem;
+            background: #1e293b;
+        }
+
+        .resize-handle {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 20px;
+            background: linear-gradient(90deg, transparent 0%, rgba(59, 130, 246, 0.2) 100%);
+            cursor: ew-resize;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3b82f6;
+        }
+
+        .code-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .code-tab {
+            padding: 0.5rem 1rem;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 0.5rem 0.5rem 0 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #94a3b8;
+        }
+
+        .code-tab.active {
+            background: #0f172a;
+            border-bottom-color: #0f172a;
+            color: #3b82f6;
+        }
+
+        .code-content {
+            display: none;
+        }
+
+        .code-content.active {
+            display: block;
+        }
+
+        pre[class*="language-"] {
+            margin: 0;
+            border-radius: 0.5rem;
+            background: #0f172a !important;
+        }
+
+        .feature-icon {
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+            color: #3b82f6;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+            transform-origin: left;
+            z-index: 9999;
+        }
+    </style>
+</head>
+
+<body class="text-gray-100">
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- Header -->
+    <header class="bg-slate-900/95 backdrop-blur-sm border-b border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 mt-2 pb-2 pt-2">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <img src="assets/gridder-logo.png" alt="Mastors Gridder" class="h-12">
+                    <div>
+                        <h1 class="text-2xl md:text-xl font-bold gradient-text">Mastors Gridder</h1>
+                        <p class="text-sm text-gray-400">v1.0.0 - Latest Release</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <a href="https://github.com/KEHEM-IT/Mastors-Gridder"
+                        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors flex items-center gap-2">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="https://cdn.jsdelivr.net/gh/KEHEM-IT/Mastors-Gridder@main/mastors-gridder.css"
+                        class="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors flex items-center gap-2 md:block hidden">
+                        <i class="fas fa-download"></i> CDN
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="w-full flex bg-slate-800/50 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 overflow-x-auto">
+            <div class="flex gap-2 overflow-x-auto py-3">
+                <a href="#overview" class="nav-link text-gray-300 whitespace-nowrap"><i
+                        class="fas fa-home mr-2"></i>Overview</a>
+                <a href="#installation" class="nav-link text-gray-300 whitespace-nowrap"><i
+                        class="fas fa-download mr-2"></i>Installation</a>
+                <a href="#scss" class="nav-link text-gray-300 whitespace-nowrap"><i
+                        class="fab fa-sass mr-2"></i>SCSS</a>
+                <a href="#css" class="nav-link text-gray-300 whitespace-nowrap"><i
+                        class="fab fa-css3-alt mr-2"></i>CSS</a>
+                <a href="#examples" class="nav-link text-gray-300 whitespace-nowrap"><i
+                        class="fas fa-code mr-2"></i>Examples</a>
+                <a href="#changelog" class="nav-link text-gray-300 whitespace-nowrap">
+                    <i class="fas fa-list mr-2"></i>Changelog
+                </a>
+                <a href="#faq" class="nav-link text-gray-300 whitespace-nowrap">
+                    <i class="fas fa-question-circle mr-2"></i>FAQ
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 gradient-text">Modern SASS Grid Mixin Utility Library & CSS
+                CDN</h2>
+            <p class="text-l md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                A comprehensive collection of SCSS mixins and CSS utility classes for building responsive grid layouts
+                with ease.
+                From simple galleries to complex Holy Grail layouts.
+            </p>
+            <div class="flex justify-center gap-6 flex-wrap">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-blue-400">25+</div>
+                    <div class="text-gray-400">SCSS Mixins</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-purple-400">100+</div>
+                    <div class="text-gray-400">CSS Classes</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-green-400">~15KB</div>
+                    <div class="text-gray-400">File Size</div>
+                </div>
+            </div>
+
+            <div class="flex justify-center pt-8 md:pt-12 gap-4">
+                <!-- GitHub -->
+                <a href="https://github.com/KEHEM-IT/Mastors-Gridder" class="w-auto md:w-[10rem] px-4 py-2 bg-gray-800 hover:bg-gray-700
+                          rounded-lg transition-colors
+                          flex items-center justify-center gap-2">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+
+                <!-- NPM -->
+                <a href="https://www.npmjs.com/package/mastors-gridder" class="w-auto md:w-[10rem] px-4 py-2 bg-red-600 hover:bg-red-700
+                          rounded-lg transition-colors
+                          flex items-center justify-center gap-2">
+                    <i class="fab fa-npm"></i>
+                    <span>NPM</span>
+                </a>
+
+                <!-- CDN -->
+                <a href="https://cdn.jsdelivr.net/gh/KEHEM-IT/Mastors-Gridder@main/mastors-gridder.css" class="w-auto md:w-[10rem] px-4 py-2 bg-purple-600 hover:bg-purple-700
+                          rounded-lg transition-colors
+                          flex items-center justify-center gap-2">
+                    <i class="fas fa-globe"></i>
+                    <span>CDN</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Overview -->
+    <section id="overview" class="py-16 px-4 bg-slate-800/30">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 gradient-text">
+                <i class="fas fa-th mr-3"></i>Overview
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <div class="card-gradient p-6 rounded-xl">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Responsive First</h3>
+                    <p class="text-gray-400">Built with auto-fit, auto-fill, and responsive patterns for all screen
+                        sizes.</p>
+                </div>
+
+                <div class="card-gradient p-6 rounded-xl">
+                    <div class="feature-icon mb-4">
+                        <i class="fab fa-sass"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Dual Implementation</h3>
+                    <p class="text-gray-400">Choose between powerful SCSS mixins or ready-to-use CSS utility classes.
+                    </p>
+                </div>
+
+                <div class="card-gradient p-6 rounded-xl">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Layout Patterns</h3>
+                    <p class="text-gray-400">Pre-built patterns like Holy Grail, Sidebar, Masonry, and more.</p>
+                </div>
+
+                <div class="card-gradient p-6 rounded-xl">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-feather"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Lightweight</h3>
+                    <p class="text-gray-400">Optimized for performance with minimal CSS footprint.</p>
+                </div>
+
+                <div class="card-gradient p-6 rounded-xl">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Flexible</h3>
+                    <p class="text-gray-400">Customizable mixins with parameters for any grid layout need.</p>
+                </div>
+
+                <div class="card-gradient p-6 rounded-xl">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Production Ready</h3>
+                    <p class="text-gray-400">Battle-tested utilities for modern web applications.</p>
+                </div>
+            </div>
+
+            <div class="card-gradient p-8 rounded-xl">
+                <h3 class="text-2xl font-bold mb-4">Perfect For:</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-check-circle text-green-400"></i>
+                        <span>Responsive image galleries</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-check-circle text-green-400"></i>
+                        <span>Dashboard layouts</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-check-circle text-green-400"></i>
+                        <span>Product grids</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-check-circle text-green-400"></i>
+                        <span>Card-based interfaces</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-check-circle text-green-400"></i>
+                        <span>Blog post layouts</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-check-circle text-green-400"></i>
+                        <span>Complex page structures</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation -->
+    <section id="installation" class="py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 gradient-text">
+                <i class="fas fa-download mr-3"></i>Installation
+            </h2>
+
+            <div class="space-y-8">
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-3">
+                        <i class="fas fa-link text-blue-400"></i>
+                        Via CDN (Recommended)
+                    </h3>
+                    <p class="text-gray-400 mb-4">Add this link in your HTML <code
+                            class="bg-slate-900 px-2 py-1 rounded">&lt;head&gt;</code>:</p>
+                    <div class="bg-slate-900 p-4 rounded-lg">
+                        <pre><code class="language-html">&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/KEHEM-IT/Mastors-Gridder@main/mastors-gridder.css"&gt;</code></pre>
+                    </div>
+                </div>
+
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-3">
+                        <i class="fab fa-npm text-red-400"></i>
+                        Via NPM
+                    </h3>
+                    <p class="text-gray-400 mb-4">Install via npm (coming soon):</p>
+                    <div class="bg-slate-900 p-4 rounded-lg">
+                        <pre><code class="language-bash">npm install mastors-gridder</code></pre>
+                    </div>
+                </div>
+
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-3">
+                        <i class="fab fa-sass text-pink-400"></i>
+                        For SCSS Projects
+                    </h3>
+                    <p class="text-gray-400 mb-4">Import the SCSS file in your project:</p>
+                    <div class="bg-slate-900 p-4 rounded-lg">
+                        <pre><code class="language-scss">@use 'mastors-gridder/mastors-gridder' as *;
+
+// Usage
+.gallery {
+  @include grid-auto(300px, 2rem);
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="bg-blue-900/20 border-l-4 border-blue-400 p-6 rounded-lg">
+                    <div class="flex gap-4">
+                        <i class="fas fa-info-circle text-blue-400 text-2xl"></i>
+                        <div>
+                            <h4 class="font-bold mb-2">Installation Complete!</h4>
+                            <p class="text-gray-300">You can now use grid mixins in SCSS or utility classes in HTML.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCSS Mixins -->
+    <section id="scss" class="py-16 px-4 bg-slate-800/30">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 gradient-text">
+                <i class="fab fa-sass mr-3"></i>SCSS Mixins
+            </h2>
+
+            <div class="space-y-8">
+                <!-- grid-auto -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">grid-auto() <span class="text-base text-gray-400 font-normal">-
+                            Auto-Fit Responsive Grid</span></h3>
+                    <p class="text-gray-400 mb-6">Creates a responsive grid that automatically fits columns based on
+                        available space.</p>
+
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-3">Parameters:</h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$min</code> - Minimum column width
+                                (default: 250px)</li>
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$gap</code> - Gap between items (default:
+                                1rem)</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="switchTab(event, 'grid-auto-scss')">SCSS</button>
+                        <button class="code-tab" onclick="switchTab(event, 'grid-auto-css')">CSS Output</button>
+                    </div>
+
+                    <div id="grid-auto-scss" class="code-content active">
+                        <pre><code class="language-scss">.gallery {
+  @include grid-auto(300px, 2rem);
+}
+
+// Smaller items
+.thumbnail-grid {
+  @include grid-auto(150px, 1rem);
+}</code></pre>
+                    </div>
+
+                    <div id="grid-auto-css" class="code-content">
+                        <pre><code class="language-css">.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}</code></pre>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold mb-3">Live Demo (Drag to resize):</h4>
+                        <div class="resizable-demo" style="width: 100%;">
+                            <div
+                                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                                <div class="demo-item">Item 1</div>
+                                <div class="demo-item">Item 2</div>
+                                <div class="demo-item">Item 3</div>
+                                <div class="demo-item">Item 4</div>
+                                <div class="demo-item">Item 5</div>
+                                <div class="demo-item">Item 6</div>
+                            </div>
+                            <div class="resize-handle">
+                                <i class="fas fa-grip-lines-vertical"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- grid-fill -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">grid-fill() <span class="text-base text-gray-400 font-normal">-
+                            Auto-Fill Responsive Grid</span></h3>
+                    <p class="text-gray-400 mb-6">Creates a responsive grid that fills with empty columns when space is
+                        available.</p>
+
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-3">Parameters:</h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$min</code> - Minimum column width
+                                (default: 250px)</li>
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$gap</code> - Gap between items (default:
+                                1rem)</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="switchTab(event, 'grid-fill-scss')">SCSS</button>
+                        <button class="code-tab" onclick="switchTab(event, 'grid-fill-css')">CSS Output</button>
+                    </div>
+
+                    <div id="grid-fill-scss" class="code-content active">
+                        <pre><code class="language-scss">.products {
+  @include grid-fill(280px, 1.5rem);
+}</code></pre>
+                    </div>
+
+                    <div id="grid-fill-css" class="code-content">
+                        <pre><code class="language-css">.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- grid-cols -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">grid-cols() <span class="text-base text-gray-400 font-normal">-
+                            Fixed Column Grid</span></h3>
+                    <p class="text-gray-400 mb-6">Creates a grid with a specific number of equal-width columns.</p>
+
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-3">Parameters:</h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$cols</code> - Number of columns (default:
+                                12)</li>
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$gap</code> - Gap between items (default:
+                                1rem)</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="switchTab(event, 'grid-cols-scss')">SCSS</button>
+                        <button class="code-tab" onclick="switchTab(event, 'grid-cols-css')">CSS Output</button>
+                    </div>
+
+                    <div id="grid-cols-scss" class="code-content active">
+                        <pre><code class="language-scss">.dashboard {
+  @include grid-cols(4, 1.5rem);
+}
+
+.three-column {
+  @include grid-cols(3, 2rem);
+}</code></pre>
+                    </div>
+
+                    <div id="grid-cols-css" class="code-content">
+                        <pre><code class="language-css">.dashboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.three-column {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}</code></pre>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold mb-3">Live Demo:</h4>
+                        <div class="resizable-demo" style="width: 100%;">
+                            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+                                <div class="demo-item">Col 1</div>
+                                <div class="demo-item">Col 2</div>
+                                <div class="demo-item">Col 3</div>
+                                <div class="demo-item">Col 4</div>
+                            </div>
+                            <div class="resize-handle">
+                                <i class="fas fa-grip-lines-vertical"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- grid-center -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">grid-center() <span
+                            class="text-base text-gray-400 font-normal">- Centered Grid Content</span></h3>
+                    <p class="text-gray-400 mb-6">Centers content both horizontally and vertically within a grid cell.
+                    </p>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="switchTab(event, 'grid-center-scss')">SCSS</button>
+                        <button class="code-tab" onclick="switchTab(event, 'grid-center-css')">CSS Output</button>
+                    </div>
+
+                    <div id="grid-center-scss" class="code-content active">
+                        <pre><code class="language-scss">.hero {
+  @include grid-center;
+  min-height: 400px;
+}</code></pre>
+                    </div>
+
+                    <div id="grid-center-css" class="code-content">
+                        <pre><code class="language-css">.hero {
+  display: grid;
+  place-items: center;
+  min-height: 400px;
+}</code></pre>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold mb-3">Live Demo:</h4>
+                        <div
+                            style="display: grid; place-items: center; min-height: 200px; background: #1e293b; border-radius: 0.75rem;">
+                            <div class="demo-item">Perfectly Centered</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- grid-span -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">grid-span() <span class="text-base text-gray-400 font-normal">-
+                            Grid Item Span</span></h3>
+                    <p class="text-gray-400 mb-6">Makes a grid item span across multiple columns and/or rows.</p>
+
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-3">Parameters:</h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$col-span</code> - Number of columns to
+                                span (default: 1)</li>
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$row-span</code> - Number of rows to span
+                                (default: 1)</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="switchTab(event, 'grid-span-scss')">SCSS</button>
+                        <button class="code-tab" onclick="switchTab(event, 'grid-span-css')">CSS Output</button>
+                    </div>
+
+                    <div id="grid-span-scss" class="code-content active">
+                        <pre><code class="language-scss">.featured {
+  @include grid-span(2, 1); // Span 2 columns
+}
+
+.hero-banner {
+  @include grid-span(3, 2); // Span 3 columns and 2 rows
+}</code></pre>
+                    </div>
+
+                    <div id="grid-span-css" class="code-content">
+                        <pre><code class="language-css">.featured {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+.hero-banner {
+  grid-column: span 3;
+  grid-row: span 2;
+}</code></pre>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold mb-3">Live Demo:</h4>
+                        <div class="overflow-x-auto"
+                            style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+                            <div class="demo-item" style="grid-column: span 2;">Spans 2 Columns</div>
+                            <div class="demo-item">Normal</div>
+                            <div class="demo-item">Normal</div>
+                            <div class="demo-item">Normal</div>
+                            <div class="demo-item">Normal</div>
+                            <div class="demo-item">Normal</div>
+                            <div class="demo-item">Normal</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- grid-sidebar -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">grid-sidebar() <span
+                            class="text-base text-gray-400 font-normal">- Sidebar Layout</span></h3>
+                    <p class="text-gray-400 mb-6">Creates a sidebar + main content layout.</p>
+
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-3">Parameters:</h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$sidebar-width</code> - Width of sidebar
+                                (default: 300px)</li>
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$gap</code> - Gap between sidebar and
+                                content (default: 1rem)</li>
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$position</code> - left or right (default:
+                                left)</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="switchTab(event, 'grid-sidebar-scss')">SCSS</button>
+                        <button class="code-tab" onclick="switchTab(event, 'grid-sidebar-css')">CSS Output</button>
+                    </div>
+
+                    <div id="grid-sidebar-scss" class="code-content active">
+                        <pre><code class="language-scss">.layout {
+  @include grid-sidebar(250px, 2rem, left);
+}
+
+.layout-right {
+  @include grid-sidebar(300px, 1.5rem, right);
+}</code></pre>
+                    </div>
+
+                    <div id="grid-sidebar-css" class="code-content">
+                        <pre><code class="language-css">.layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 2rem;
+}
+
+.layout-right {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 1.5rem;
+}</code></pre>
+                    </div>
+
+                    <div class="mt-6 overflow-x-auto">
+                        <h4 class="text-lg font-semibold mb-3">Live Demo (Drag to resize):</h4>
+                        <div class="resizable-demo" style="width: 100%;">
+                            <div style="display: grid; grid-template-columns: 200px 1fr; gap: 1rem; min-height: 200px;">
+                                <div class="demo-item">Sidebar</div>
+                                <div class="demo-item">Main Content</div>
+                            </div>
+                            <div class="resize-handle">
+                                <i class="fas fa-grip-lines-vertical"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- grid-holy-grail -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">grid-holy-grail() <span
+                            class="text-base text-gray-400 font-normal">- Holy Grail Layout</span></h3>
+                    <p class="text-gray-400 mb-6">Classic header/sidebar/content/footer layout pattern.</p>
+
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-3">Parameters:</h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$sidebar-width</code> - Width of sidebars
+                                (default: 250px)</li>
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$gap</code> - Gap between areas (default:
+                                1rem)</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="switchTab(event, 'grid-holy-scss')">SCSS</button>
+                        <button class="code-tab" onclick="switchTab(event, 'grid-holy-css')">CSS Output</button>
+                    </div>
+
+                    <div id="grid-holy-scss" class="code-content active">
+                        <pre><code class="language-scss">.page {
+  @include grid-holy-grail(200px, 1rem);
+}</code></pre>
+                    </div>
+
+                    <div id="grid-holy-css" class="code-content">
+                        <pre><code class="language-css">.page {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header header header"
+    "sidebar-left content sidebar-right"
+    "footer footer footer";
+  gap: 1rem;
+  min-height: 100vh;
+}</code></pre>
+                    </div>
+
+                    <div class="mt-6 overflow-x-auto">
+                        <h4 class="text-lg font-semibold mb-3">Live Demo:</h4>
+                        <div
+                            style="display: grid; grid-template-columns: 100px 1fr 100px; grid-template-rows: auto 1fr auto; grid-template-areas: 'header header header' 'sidebar-left content sidebar-right' 'footer footer footer'; gap: 0.5rem; min-height: 300px;">
+                            <div class="demo-item" style="grid-area: header;">Header</div>
+                            <div class="demo-item" style="grid-area: sidebar-left;">Left Sidebar</div>
+                            <div class="demo-item" style="grid-area: content;">Main Content</div>
+                            <div class="demo-item" style="grid-area: sidebar-right;">Right Sidebar</div>
+                            <div class="demo-item" style="grid-area: footer;">Footer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- grid-cards -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">grid-cards() <span class="text-base text-gray-400 font-normal">-
+                            Card Grid</span></h3>
+                    <p class="text-gray-400 mb-6">Responsive card grid with min/max sizes for optimal card layouts.</p>
+
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-3">Parameters:</h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$min</code> - Minimum card width (default:
+                                280px)</li>
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$max</code> - Maximum card width (default:
+                                1fr)</li>
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$gap</code> - Gap between cards (default:
+                                1.5rem)</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="switchTab(event, 'grid-cards-scss')">SCSS</button>
+                        <button class="code-tab" onclick="switchTab(event, 'grid-cards-css')">CSS Output</button>
+                    </div>
+
+                    <div id="grid-cards-scss" class="code-content active">
+                        <pre><code class="language-scss">.products {
+  @include grid-cards(300px, 1fr, 2rem);
+}</code></pre>
+                    </div>
+
+                    <div id="grid-cards-css" class="code-content">
+                        <pre><code class="language-css">.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 2rem;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- grid-masonry -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">grid-masonry() <span
+                            class="text-base text-gray-400 font-normal">- Masonry Layout</span></h3>
+                    <p class="text-gray-400 mb-6">Creates a masonry-style grid layout effect.</p>
+
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold mb-3">Parameters:</h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$cols</code> - Number of columns (default:
+                                3)</li>
+                            <li><code class="bg-slate-900 px-2 py-1 rounded">$gap</code> - Gap between items (default:
+                                1rem)</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="switchTab(event, 'grid-masonry-scss')">SCSS</button>
+                        <button class="code-tab" onclick="switchTab(event, 'grid-masonry-css')">CSS Output</button>
+                    </div>
+
+                    <div id="grid-masonry-scss" class="code-content active">
+                        <pre><code class="language-scss">.pinterest {
+  @include grid-masonry(4, 1rem);
+}</code></pre>
+                    </div>
+
+                    <div id="grid-masonry-css" class="code-content">
+                        <pre><code class="language-css">.pinterest {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 10px;
+  gap: 1rem;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Quick Reference -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-6">Quick Reference</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-gray-300">
+                            <thead class="bg-slate-900">
+                                <tr>
+                                    <th class="px-4 py-3">Mixin</th>
+                                    <th class="px-4 py-3">Purpose</th>
+                                    <th class="px-4 py-3">Example</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-700">
+                                <tr>
+                                    <td class="px-4 py-3"><code
+                                            class="bg-slate-900 px-2 py-1 rounded">grid-auto()</code></td>
+                                    <td class="px-4 py-3">Auto-fit responsive</td>
+                                    <td class="px-4 py-3"><code class="text-xs">@include grid-auto(300px)</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3"><code
+                                            class="bg-slate-900 px-2 py-1 rounded">grid-fill()</code></td>
+                                    <td class="px-4 py-3">Auto-fill responsive</td>
+                                    <td class="px-4 py-3"><code class="text-xs">@include grid-fill(250px)</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3"><code
+                                            class="bg-slate-900 px-2 py-1 rounded">grid-cols()</code></td>
+                                    <td class="px-4 py-3">Fixed columns</td>
+                                    <td class="px-4 py-3"><code class="text-xs">@include grid-cols(4)</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3"><code
+                                            class="bg-slate-900 px-2 py-1 rounded">grid-center()</code></td>
+                                    <td class="px-4 py-3">Center content</td>
+                                    <td class="px-4 py-3"><code class="text-xs">@include grid-center</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3"><code
+                                            class="bg-slate-900 px-2 py-1 rounded">grid-span()</code></td>
+                                    <td class="px-4 py-3">Span columns/rows</td>
+                                    <td class="px-4 py-3"><code class="text-xs">@include grid-span(2, 1)</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3"><code
+                                            class="bg-slate-900 px-2 py-1 rounded">grid-sidebar()</code></td>
+                                    <td class="px-4 py-3">Sidebar layout</td>
+                                    <td class="px-4 py-3"><code class="text-xs">@include grid-sidebar(300px)</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3"><code
+                                            class="bg-slate-900 px-2 py-1 rounded">grid-holy-grail()</code></td>
+                                    <td class="px-4 py-3">Holy Grail layout</td>
+                                    <td class="px-4 py-3"><code class="text-xs">@include grid-holy-grail(250px)</code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3"><code
+                                            class="bg-slate-900 px-2 py-1 rounded">grid-cards()</code></td>
+                                    <td class="px-4 py-3">Card grid</td>
+                                    <td class="px-4 py-3"><code class="text-xs">@include grid-cards(280px)</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CSS Classes -->
+    <section id="css" class="py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 gradient-text">
+                <i class="fab fa-css3-alt mr-3"></i>CSS Utility Classes
+            </h2>
+
+            <p class="text-xl text-gray-300 mb-8">Ready-to-use utility classes for rapid responsive development without
+                SCSS compilation.</p>
+
+            <div class="space-y-8">
+                <!-- Auto-Fit Grids -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">Auto-Fit Responsive Grids</h3>
+                    <p class="text-gray-400 mb-6">Automatically fits columns based on available space.</p>
+
+                    <div class="overflow-x-auto mb-6">
+                        <table class="w-full text-left text-gray-300">
+                            <thead class="bg-slate-900">
+                                <tr>
+                                    <th class="px-4 py-3">Class</th>
+                                    <th class="px-4 py-3">Min Width</th>
+                                    <th class="px-4 py-3">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-700">
+                                <tr>
+                                    <td class="px-4 py-3"><code
+                                            class="bg-slate-900 px-2 py-1 rounded">.grid-auto-sm</code></td>
+                                    <td class="px-4 py-3">150px</td>
+                                    <td class="px-4 py-3">Small items</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3"><code class="bg-slate-900 px-2 py-1 rounded">.grid-auto</code>
+                                    </td>
+                                    <td class="px-4 py-3">250px</td>
+                                    <td class="px-4 py-3">Default size</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3"><code
+                                            class="bg-slate-900 px-2 py-1 rounded">.grid-auto-md</code></td>
+                                    <td class="px-4 py-3">250px</td>
+                                    <td class="px-4 py-3">Medium items</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3"><code
+                                            class="bg-slate-900 px-2 py-1 rounded">.grid-auto-lg</code></td>
+                                    <td class="px-4 py-3">350px</td>
+                                    <td class="px-4 py-3">Large items</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="switchTab(event, 'auto-html')">HTML</button>
+                        <button class="code-tab" onclick="switchTab(event, 'auto-css-output')">CSS</button>
+                    </div>
+
+                    <div id="auto-html" class="code-content active">
+                        <pre><code class="language-html">&lt;div class="grid-auto gap-lg"&gt;
+  &lt;div&gt;Item 1&lt;/div&gt;
+  &lt;div&gt;Item 2&lt;/div&gt;
+  &lt;div&gt;Item 3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+
+                    <div id="auto-css-output" class="code-content">
+                        <pre><code class="language-css">.grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}</code></pre>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold mb-3">Live Demo:</h4>
+                        <div class="resizable-demo" style="width: 100%;">
+                            <div class="grid-auto-sm gap-sm">
+                                <div class="demo-item">1</div>
+                                <div class="demo-item">2</div>
+                                <div class="demo-item">3</div>
+                                <div class="demo-item">4</div>
+                                <div class="demo-item">5</div>
+                                <div class="demo-item">6</div>
+                            </div>
+                            <div class="resize-handle">
+                                <i class="fas fa-grip-lines-vertical"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fixed Column Grids -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">Fixed Column Grids</h3>
+                    <p class="text-gray-400 mb-6">Create grids with a specific number of equal-width columns.</p>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-slate-900 p-4 rounded-lg text-center">
+                            <code class="text-blue-400">.grid-cols-1</code>
+                        </div>
+                        <div class="bg-slate-900 p-4 rounded-lg text-center">
+                            <code class="text-blue-400">.grid-cols-2</code>
+                        </div>
+                        <div class="bg-slate-900 p-4 rounded-lg text-center">
+                            <code class="text-blue-400">.grid-cols-3</code>
+                        </div>
+                        <div class="bg-slate-900 p-4 rounded-lg text-center">
+                            <code class="text-blue-400">.grid-cols-4</code>
+                        </div>
+                        <div class="bg-slate-900 p-4 rounded-lg text-center">
+                            <code class="text-blue-400">.grid-cols-5</code>
+                        </div>
+                        <div class="bg-slate-900 p-4 rounded-lg text-center">
+                            <code class="text-blue-400">.grid-cols-6</code>
+                        </div>
+                        <div class="bg-slate-900 p-4 rounded-lg text-center">
+                            <code class="text-blue-400">.grid-cols-8</code>
+                        </div>
+                        <div class="bg-slate-900 p-4 rounded-lg text-center">
+                            <code class="text-blue-400">.grid-cols-12</code>
+                        </div>
+                    </div>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="switchTab(event, 'cols-html')">HTML</button>
+                        <button class="code-tab" onclick="switchTab(event, 'cols-css-output')">CSS</button>
+                    </div>
+
+                    <div id="cols-html" class="code-content active">
+                        <pre><code class="language-html">&lt;div class="grid-cols-3 gap-md"&gt;
+  &lt;div&gt;Column 1&lt;/div&gt;
+  &lt;div&gt;Column 2&lt;/div&gt;
+  &lt;div&gt;Column 3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+
+                    <div id="cols-css-output" class="code-content">
+                        <pre><code class="language-css">.grid-cols-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}</code></pre>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold mb-3">Live Demo:</h4>
+                        <div class="grid-cols-3 gap-md mb-4">
+                            <div class="demo-item">Col 1</div>
+                            <div class="demo-item">Col 2</div>
+                            <div class="demo-item">Col 3</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid Gaps -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">Grid Gaps</h3>
+                    <p class="text-gray-400 mb-6">Control spacing between grid items.</p>
+
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-slate-900 p-4 rounded-lg">
+                            <code class="text-blue-400">.gap-0</code>
+                            <div class="text-sm text-gray-400">0</div>
+                        </div>
+                        <div class="bg-slate-900 p-4 rounded-lg">
+                            <code class="text-blue-400">.gap-xs</code>
+                            <div class="text-sm text-gray-400">0.5rem</div>
+                        </div>
+                        <div class="bg-slate-900 p-4 rounded-lg">
+                            <code class="text-blue-400">.gap-sm</code>
+                            <div class="text-sm text-gray-400">1rem</div>
+                        </div>
+                        <div class="bg-slate-900 p-4 rounded-lg">
+                            <code class="text-blue-400">.gap-md</code>
+                            <div class="text-sm text-gray-400">1.5rem</div>
+                        </div>
+                        <div class="bg-slate-900 p-4 rounded-lg">
+                            <code class="text-blue-400">.gap-lg</code>
+                            <div class="text-sm text-gray-400">2rem</div>
+                        </div>
+                        <div class="bg-slate-900 p-4 rounded-lg">
+                            <code class="text-blue-400">.gap-xl</code>
+                            <div class="text-sm text-gray-400">3rem</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-900/20 border-l-4 border-blue-400 p-4 rounded-lg">
+                        <p class="text-gray-300">Also available: <code
+                                class="bg-slate-900 px-2 py-1 rounded">.gap-x-*</code> and <code
+                                class="bg-slate-900 px-2 py-1 rounded">.gap-y-*</code> for horizontal and vertical gaps.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Grid Spans -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">Grid Item Spans</h3>
+                    <p class="text-gray-400 mb-6">Make items span across multiple columns or rows.</p>
+
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <h4 class="font-semibold mb-3 text-blue-400">Column Spans</h4>
+                            <div class="space-y-2">
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.col-span-1</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.col-span-2</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.col-span-3</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.col-span-4</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.col-span-5</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.col-span-6</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.col-span-full</code>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-3 text-purple-400">Row Spans</h4>
+                            <div class="space-y-2">
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.row-span-1</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.row-span-2</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.row-span-3</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.row-span-4</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.row-span-full</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="switchTab(event, 'span-html')">HTML</button>
+                        <button class="code-tab" onclick="switchTab(event, 'span-css-output')">CSS</button>
+                    </div>
+
+                    <div id="span-html" class="code-content active">
+                        <pre><code class="language-html">&lt;div class="grid-cols-4 gap-md"&gt;
+  &lt;div class="col-span-2"&gt;Spans 2 columns&lt;/div&gt;
+  &lt;div&gt;Normal&lt;/div&gt;
+  &lt;div&gt;Normal&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+
+                    <div id="span-css-output" class="code-content">
+                        <pre><code class="language-css">.col-span-2 {
+  grid-column: span 2;
+}
+
+.col-span-full {
+  grid-column: 1 / -1;
+}</code></pre>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold mb-3">Live Demo:</h4>
+                        <div class="grid-cols-4 gap-sm">
+                            <div class="demo-item col-span-2">Spans 2</div>
+                            <div class="demo-item">1</div>
+                            <div class="demo-item">1</div>
+                            <div class="demo-item col-span-full">Full Width</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Layout Patterns -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">Pre-built Layout Patterns</h3>
+                    <p class="text-gray-400 mb-6">Common layout patterns ready to use.</p>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3 text-blue-400">Sidebar Layouts</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-slate-900 p-4 rounded-lg">
+                                    <code class="text-blue-400">.grid-sidebar</code>
+                                    <div class="text-sm text-gray-400 mt-1">Left sidebar (300px)</div>
+                                </div>
+                                <div class="bg-slate-900 p-4 rounded-lg">
+                                    <code class="text-blue-400">.grid-sidebar-sm</code>
+                                    <div class="text-sm text-gray-400 mt-1">Small sidebar (200px)</div>
+                                </div>
+                                <!-- Continue from Layout Patterns -->
+                                <div class="bg-slate-900 p-4 rounded-lg">
+                                    <code class="text-blue-400">.grid-sidebar-right</code>
+                                    <div class="text-sm text-gray-400 mt-1">Right sidebar (300px)</div>
+                                </div>
+                                <div class="bg-slate-900 p-4 rounded-lg">
+                                    <code class="text-blue-400">.grid-sidebar-sm-right</code>
+                                    <div class="text-sm text-gray-400 mt-1">Small right sidebar (200px)</div>
+                                </div>
+                            </div>
+
+                            <div class="mt-6">
+                                <h5 class="font-semibold mb-3">Live Demo:</h5>
+                                <div class="resizable-demo" style="width: 100%;">
+                                    <div class="grid-sidebar gap-md" style="min-height: 200px;">
+                                        <div class="demo-item">Sidebar</div>
+                                        <div class="demo-item">Main Content Area</div>
+                                    </div>
+                                    <div class="resize-handle">
+                                        <i class="fas fa-grip-lines-vertical"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3 text-purple-400">Holy Grail Layout</h4>
+                            <div class="bg-slate-900 p-4 rounded-lg mb-4">
+                                <code class="text-purple-400">.grid-holy-grail</code>
+                                <div class="text-sm text-gray-400 mt-1">Classic header/sidebar/content/footer pattern
+                                </div>
+                            </div>
+
+                            <div class="code-tabs">
+                                <button class="code-tab active" onclick="switchTab(event, 'holy-html')">HTML</button>
+                                <button class="code-tab" onclick="switchTab(event, 'holy-css-output')">CSS</button>
+                            </div>
+
+                            <div id="holy-html" class="code-content active">
+                                <pre><code class="language-html">&lt;div class="grid-holy-grail"&gt;
+                                  &lt;header class="grid-area-header"&gt;Header&lt;/header&gt;
+                                  &lt;aside class="grid-area-sidebar-left"&gt;Left Sidebar&lt;/aside&gt;
+                                  &lt;main class="grid-area-content"&gt;Main Content&lt;/main&gt;
+                                  &lt;aside class="grid-area-sidebar-right"&gt;Right Sidebar&lt;/aside&gt;
+                                  &lt;footer class="grid-area-footer"&gt;Footer&lt;/footer&gt;
+                                &lt;/div&gt;</code></pre>
+                            </div>
+
+                            <div id="holy-css-output" class="code-content">
+                                <pre><code class="language-css">.grid-holy-grail {
+                                  display: grid;
+                                  grid-template-columns: 250px 1fr 250px;
+                                  grid-template-rows: auto 1fr auto;
+                                  grid-template-areas:
+                                    "header header header"
+                                    "sidebar-left content sidebar-right"
+                                    "footer footer footer";
+                                  gap: 1rem;
+                                  min-height: 100vh;
+                                }</code></pre>
+                            </div>
+
+                            <div class="mt-6 overflow-x-auto">
+                                <h5 class="font-semibold mb-3">Live Demo:</h5>
+                                <div class="grid-holy-grail gap-sm" style="min-height: 300px;">
+                                    <div class="demo-item grid-area-header">Header</div>
+                                    <div class="demo-item grid-area-sidebar-left">Left</div>
+                                    <div class="demo-item grid-area-content">Content</div>
+                                    <div class="demo-item grid-area-sidebar-right">Right</div>
+                                    <div class="demo-item grid-area-footer">Footer</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3 text-green-400">Card Grids</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-slate-900 p-4 rounded-lg">
+                                    <code class="text-green-400">.grid-cards</code>
+                                    <div class="text-sm text-gray-400 mt-1">Default cards (280px min)</div>
+                                </div>
+                                <div class="bg-slate-900 p-4 rounded-lg">
+                                    <code class="text-green-400">.grid-cards-sm</code>
+                                    <div class="text-sm text-gray-400 mt-1">Small cards (200px min)</div>
+                                </div>
+                                <div class="bg-slate-900 p-4 rounded-lg">
+                                    <code class="text-green-400">.grid-cards-lg</code>
+                                    <div class="text-sm text-gray-400 mt-1">Large cards (350px min)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3 text-orange-400">Center Content</h4>
+                            <div class="bg-slate-900 p-4 rounded-lg mb-4">
+                                <code class="text-orange-400">.grid-center</code>
+                                <div class="text-sm text-gray-400 mt-1">Perfect centering for any content</div>
+                            </div>
+
+                            <div class="mt-6">
+                                <h5 class="font-semibold mb-3">Live Demo:</h5>
+                                <div class="grid-center"
+                                    style="min-height: 200px; background: #1e293b; border-radius: 0.75rem;">
+                                    <div class="demo-item">Perfectly Centered</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alignment Classes -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">Grid Alignment Classes</h3>
+                    <p class="text-gray-400 mb-6">Control the alignment of grid items and content.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3 text-blue-400">Justify Items</h4>
+                            <div class="space-y-2">
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.justify-items-start</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.justify-items-center</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.justify-items-end</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.justify-items-stretch</code>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3 text-purple-400">Align Items</h4>
+                            <div class="space-y-2">
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.align-items-start</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.align-items-center</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.align-items-end</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.align-items-stretch</code>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3 text-green-400">Place Items</h4>
+                            <div class="space-y-2">
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.place-items-center</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.place-items-start</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.place-items-end</code>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3 text-orange-400">Place Content</h4>
+                            <div class="space-y-2">
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.place-content-center</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.place-content-start</code>
+                                <code class="bg-slate-900 px-3 py-2 rounded block">.place-content-end</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Examples Section -->
+    <section id="examples" class="py-16 px-4 bg-slate-800/30">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 gradient-text">
+                <i class="fas fa-code mr-3"></i>Real-World Examples
+            </h2>
+
+            <div class="space-y-8">
+                <!-- Image Gallery -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">Responsive Image Gallery</h3>
+                    <p class="text-gray-400 mb-6">A fully responsive gallery that adapts to any screen size.</p>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="switchTab(event, 'gallery-html')">HTML</button>
+                        <button class="code-tab" onclick="switchTab(event, 'gallery-scss')">SCSS</button>
+                        <button class="code-tab" onclick="switchTab(event, 'gallery-css')">CSS</button>
+                    </div>
+
+                    <div id="gallery-html" class="code-content active">
+                        <pre><code class="language-html">&lt;div class="gallery"&gt;
+                                  &lt;img src="image1.jpg" alt="Image 1"&gt;
+                                  &lt;img src="image2.jpg" alt="Image 2"&gt;
+                                  &lt;img src="image3.jpg" alt="Image 3"&gt;
+                                  &lt;img src="image4.jpg" alt="Image 4"&gt;
+                                  &lt;img src="image5.jpg" alt="Image 5"&gt;
+                                  &lt;img src="image6.jpg" alt="Image 6"&gt;
+                                &lt;/div&gt;</code></pre>
+                    </div>
+
+                    <div id="gallery-scss" class="code-content">
+                        <pre><code class="language-scss">.gallery {
+                                  @include grid-auto(280px, 1.5rem);
+                                  
+                                  img {
+                                    width: 100%;
+                                    height: 250px;
+                                    object-fit: cover;
+                                    border-radius: 0.5rem;
+                                  }
+                                }</code></pre>
+                    </div>
+
+                    <div id="gallery-css" class="code-content">
+                        <pre><code class="language-css">.gallery {
+                                  display: grid;
+                                  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                                  gap: 1.5rem;
+                                }
+                                
+                                .gallery img {
+                                  width: 100%;
+                                  height: 250px;
+                                  object-fit: cover;
+                                  border-radius: 0.5rem;
+                                }</code></pre>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold mb-3">Live Demo (Drag to resize):</h4>
+                        <div class="resizable-demo" style="width: 100%;">
+                            <div class="grid-auto gap-md">
+                                <div class="demo-item" style="height: 150px;">Image 1</div>
+                                <div class="demo-item" style="height: 150px;">Image 2</div>
+                                <div class="demo-item" style="height: 150px;">Image 3</div>
+                                <div class="demo-item" style="height: 150px;">Image 4</div>
+                                <div class="demo-item" style="height: 150px;">Image 5</div>
+                                <div class="demo-item" style="height: 150px;">Image 6</div>
+                            </div>
+                            <div class="resize-handle">
+                                <i class="fas fa-grip-lines-vertical"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Grid -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">E-commerce Product Grid</h3>
+                    <p class="text-gray-400 mb-6">Product cards with featured items spanning multiple columns.</p>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="switchTab(event, 'product-html')">HTML</button>
+                        <button class="code-tab" onclick="switchTab(event, 'product-scss')">SCSS</button>
+                        <button class="code-tab" onclick="switchTab(event, 'product-css')">CSS</button>
+                    </div>
+
+                    <div id="product-html" class="code-content active">
+                        <pre><code class="language-html">&lt;div class="products"&gt;
+                                  &lt;div class="product featured"&gt;Featured Product&lt;/div&gt;
+                                  &lt;div class="product"&gt;Product 2&lt;/div&gt;
+                                  &lt;div class="product"&gt;Product 3&lt;/div&gt;
+                                  &lt;div class="product"&gt;Product 4&lt;/div&gt;
+                                  &lt;div class="product"&gt;Product 5&lt;/div&gt;
+                                &lt;/div&gt;</code></pre>
+                    </div>
+
+                    <div id="product-scss" class="code-content">
+                        <pre><code class="language-scss">.products {
+                                  @include grid-auto(300px, 2rem);
+                                  
+                                  .featured {
+                                    @include grid-span(2, 1);
+                                  }
+                                }</code></pre>
+                    </div>
+
+                    <div id="product-css" class="code-content">
+                        <pre><code class="language-css">.products {
+                                  display: grid;
+                                  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                                  gap: 2rem;
+                                }
+                                
+                                .products .featured {
+                                  grid-column: span 2;
+                                  grid-row: span 1;
+                                }</code></pre>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold mb-3">Live Demo (Drag to resize):</h4>
+                        <div class="resizable-demo" style="width: 100%;">
+                            <div class="grid-auto gap-lg">
+                                <div class="demo-item col-span-2" style="height: 180px;">Featured Product</div>
+                                <div class="demo-item" style="height: 180px;">Product 2</div>
+                                <div class="demo-item" style="height: 180px;">Product 3</div>
+                                <div class="demo-item" style="height: 180px;">Product 4</div>
+                                <div class="demo-item" style="height: 180px;">Product 5</div>
+                            </div>
+                            <div class="resize-handle">
+                                <i class="fas fa-grip-lines-vertical"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Layout -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">Dashboard Layout</h3>
+                    <p class="text-gray-400 mb-6">Complex dashboard with sidebar navigation and widget grid.</p>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="switchTab(event, 'dashboard-html')">HTML</button>
+                        <button class="code-tab" onclick="switchTab(event, 'dashboard-scss')">SCSS</button>
+                        <button class="code-tab" onclick="switchTab(event, 'dashboard-css')">CSS</button>
+                    </div>
+
+                    <div id="dashboard-html" class="code-content active">
+                        <pre><code class="language-html">&lt;div class="dashboard"&gt;
+                                  &lt;aside class="sidebar"&gt;Navigation&lt;/aside&gt;
+                                  &lt;main class="main"&gt;
+                                    &lt;div class="widgets"&gt;
+                                      &lt;div class="widget large"&gt;Analytics&lt;/div&gt;
+                                      &lt;div class="widget"&gt;Users&lt;/div&gt;
+                                      &lt;div class="widget"&gt;Revenue&lt;/div&gt;
+                                      &lt;div class="widget"&gt;Orders&lt;/div&gt;
+                                    &lt;/div&gt;
+                                  &lt;/main&gt;
+                                &lt;/div&gt;</code></pre>
+                    </div>
+
+                    <div id="dashboard-scss" class="code-content">
+                        <pre><code class="language-scss">.dashboard {
+                                  @include grid-sidebar(250px, 2rem, left);
+                                  min-height: 100vh;
+                                }
+                                
+                                .widgets {
+                                  @include grid-cols(3, 1.5rem);
+                                  
+                                  .large {
+                                    @include grid-span(2, 1);
+                                  }
+                                }</code></pre>
+                    </div>
+
+                    <div id="dashboard-css" class="code-content">
+                        <pre><code class="language-css">.dashboard {
+                                  display: grid;
+                                  grid-template-columns: 250px 1fr;
+                                  gap: 2rem;
+                                  min-height: 100vh;
+                                }
+                                
+                                .widgets {
+                                  display: grid;
+                                  grid-template-columns: repeat(3, 1fr);
+                                  gap: 1.5rem;
+                                }
+                                
+                                .widgets .large {
+                                  grid-column: span 2;
+                                  grid-row: span 1;
+                                }</code></pre>
+                    </div>
+
+                    <div class="mt-6 overflow-x-auto ">
+                        <h4 class="text-lg font-semibold mb-3">Live Demo:</h4>
+                        <div class="grid-sidebar gap-lg" style="min-height: 400px;">
+                            <div class="demo-item">Sidebar Navigation</div>
+                            <div>
+                                <div class="grid-cols-3 gap-md">
+                                    <div class="demo-item col-span-2" style="height: 120px;">Analytics</div>
+                                    <div class="demo-item" style="height: 120px;">Users</div>
+                                    <div class="demo-item" style="height: 120px;">Revenue</div>
+                                    <div class="demo-item" style="height: 120px;">Orders</div>
+                                    <div class="demo-item" style="height: 120px;">Stats</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Layout -->
+                <div class="card-gradient p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">Blog Post Grid</h3>
+                    <p class="text-gray-400 mb-6">Magazine-style blog layout with featured posts.</p>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="switchTab(event, 'blog-html')">HTML</button>
+                        <button class="code-tab" onclick="switchTab(event, 'blog-scss')">SCSS</button>
+                        <button class="code-tab" onclick="switchTab(event, 'blog-css')">CSS</button>
+                    </div>
+
+                    <div id="blog-html" class="code-content active">
+                        <pre><code class="language-html">&lt;div class="blog-grid"&gt;
+                                  &lt;article class="post featured"&gt;Featured Article&lt;/article&gt;
+                                  &lt;article class="post"&gt;Post 2&lt;/article&gt;
+                                  &lt;article class="post"&gt;Post 3&lt;/article&gt;
+                                  &lt;article class="post"&gt;Post 4&lt;/article&gt;
+                                  &lt;article class="post"&gt;Post 5&lt;/article&gt;
+                                &lt;/div&gt;</code></pre>
+                    </div>
+
+                    <div id="blog-scss" class="code-content">
+                        <pre><code class="language-scss">.blog-grid {
+                                  @include grid-cols(3, 2rem);
+                                  
+                                  .featured {
+                                    @include grid-span(3, 1);
+                                  }
+                                }</code></pre>
+                    </div>
+
+                    <div id="blog-css" class="code-content">
+                        <pre><code class="language-css">.blog-grid {
+                                  display: grid;
+                                  grid-template-columns: repeat(3, 1fr);
+                                  gap: 2rem;
+                                }
+                                
+                                .blog-grid .featured {
+                                  grid-column: span 3;
+                                  grid-row: span 1;
+                                }</code></pre>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold mb-3">Live Demo (Drag to resize):</h4>
+                        <div class="resizable-demo" style="width: 100%;">
+                            <div class="grid-cols-3 gap-lg">
+                                <div class="demo-item col-span-full" style="height: 200px;">Featured Article</div>
+                                <div class="demo-item" style="height: 150px;">Post 2</div>
+                                <div class="demo-item" style="height: 150px;">Post 3</div>
+                                <div class="demo-item" style="height: 150px;">Post 4</div>
+                            </div>
+                            <div class="resize-handle">
+                                <i class="fas fa-grip-lines-vertical"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="changelog" class="max-w-7xl mx-auto px-4 py-20">
+        <div class="mb-12 text-center">
+            <h2 class="text-4xl font-bold gradient-text mb-4">Changelog</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">
+                Track updates, improvements, and new features introduced in Mastors Gridder.
+            </p>
+        </div>
+
+        <div class="card-gradient rounded-xl p-8">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-semibold">v1.0.0 — Initial Stable Release</h3>
+                <span class="text-sm px-3 py-1 rounded-full bg-blue-600/20 text-blue-400">
+                    Latest
+                </span>
+            </div>
+
+            <ul class="space-y-4 text-gray-300">
+                <li class="flex gap-3">
+                    <i class="fas fa-check-circle text-green-400 mt-1"></i>
+                    <span><strong>25+ production-ready SCSS mixins</strong> designed for real-world layouts</span>
+                </li>
+                <li class="flex gap-3">
+                    <i class="fas fa-check-circle text-green-400 mt-1"></i>
+                    <span><strong>Complete responsive grid system</strong> using modern CSS Grid</span>
+                </li>
+                <li class="flex gap-3">
+                    <i class="fas fa-check-circle text-green-400 mt-1"></i>
+                    <span><strong>Fixed and fluid grid layouts</strong> with breakpoint control</span>
+                </li>
+                <li class="flex gap-3">
+                    <i class="fas fa-check-circle text-green-400 mt-1"></i>
+                    <span><strong>Common layout patterns</strong> — sidebar, holy grail, full-bleed</span>
+                </li>
+                <li class="flex gap-3">
+                    <i class="fas fa-check-circle text-green-400 mt-1"></i>
+                    <span><strong>Grid item positioning and spanning</strong> utilities</span>
+                </li>
+                <li class="flex gap-3">
+                    <i class="fas fa-check-circle text-green-400 mt-1"></i>
+                    <span><strong>Comprehensive alignment utilities</strong> for rows and columns</span>
+                </li>
+                <li class="flex gap-3">
+                    <i class="fas fa-check-circle text-green-400 mt-1"></i>
+                    <span><strong>Advanced features</strong>: subgrid, dense packing, masonry-style grids</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section id="faq" class="max-w-7xl mx-auto px-4 py-20">
+        <div class="mb-12 text-center">
+            <h2 class="text-4xl font-bold gradient-text mb-4">Frequently Asked Questions</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">
+                Common questions about using Mastors Gridder in real projects.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <!-- FAQ Item -->
+            <div class="card-gradient rounded-xl p-6">
+                <h4 class="text-lg font-semibold mb-2 flex items-center gap-2">
+                    <i class="fas fa-cubes text-blue-400"></i>
+                    What is Mastors Gridder?
+                </h4>
+                <p class="text-gray-400">
+                    Mastors Gridder is a modern CSS & SCSS grid utility that helps you build
+                    responsive, flexible, and production-ready layouts using CSS Grid.
+                </p>
+            </div>
+
+            <div class="card-gradient rounded-xl p-6">
+                <h4 class="text-lg font-semibold mb-2 flex items-center gap-2">
+                    <i class="fab fa-sass text-pink-400"></i>
+                    Do I need SCSS to use Gridder?
+                </h4>
+                <p class="text-gray-400">
+                    No. You can use the precompiled CSS via CDN.
+                    SCSS is optional but recommended if you want customization and mixins.
+                </p>
+            </div>
+
+            <div class="card-gradient rounded-xl p-6">
+                <h4 class="text-lg font-semibold mb-2 flex items-center gap-2">
+                    <i class="fas fa-mobile-alt text-purple-400"></i>
+                    Is it mobile-first?
+                </h4>
+                <p class="text-gray-400">
+                    Yes. Mastors Gridder follows a mobile-first approach and scales naturally
+                    across breakpoints.
+                </p>
+            </div>
+
+            <div class="card-gradient rounded-xl p-6">
+                <h4 class="text-lg font-semibold mb-2 flex items-center gap-2">
+                    <i class="fas fa-layer-group text-indigo-400"></i>
+                    Does it support complex layouts?
+                </h4>
+                <p class="text-gray-400">
+                    Absolutely. It supports subgrid, dense packing, masonry-style layouts,
+                    and classic patterns like holy grail and sidebars.
+                </p>
+            </div>
+
+            <div class="card-gradient rounded-xl p-6">
+                <h4 class="text-lg font-semibold mb-2 flex items-center gap-2">
+                    <i class="fas fa-feather-alt text-green-400"></i>
+                    Is Mastors Gridder lightweight?
+                </h4>
+                <p class="text-gray-400">
+                    Yes. It’s designed to be minimal, utility-focused, and free from unnecessary bloat.
+                </p>
+            </div>
+
+            <div class="card-gradient rounded-xl p-6">
+                <h4 class="text-lg font-semibold mb-2 flex items-center gap-2">
+                    <i class="fab fa-github text-gray-300"></i>
+                    Is it open-source?
+                </h4>
+                <p class="text-gray-400">
+                    Yes. Mastors Gridder is fully open-source and maintained on GitHub.
+                    Contributions and feedback are welcome.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Browser Support -->
+    <section class="py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 gradient-text">
+                <i class="fas fa-globe mr-3"></i>Browser Support
+            </h2>
+
+            <div class="card-gradient p-8 rounded-xl">
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-6 mb-8">
+                    <div class="text-center">
+                        <i class="fab fa-chrome text-5xl text-yellow-400 mb-3"></i>
+                        <div class="font-semibold">Chrome</div>
+                        <div class="text-sm text-gray-400">Last 2 versions</div>
+                    </div>
+                    <div class="text-center">
+                        <i class="fab fa-firefox text-5xl text-orange-400 mb-3"></i>
+                        <div class="font-semibold">Firefox</div>
+                        <div class="text-sm text-gray-400">Last 2 versions</div>
+                    </div>
+                    <div class="text-center">
+                        <i class="fab fa-safari text-5xl text-blue-400 mb-3"></i>
+                        <div class="font-semibold">Safari</div>
+                        <div class="text-sm text-gray-400">Last 2 versions</div>
+                    </div>
+                    <div class="text-center">
+                        <i class="fab fa-edge text-5xl text-blue-500 mb-3"></i>
+                        <div class="font-semibold">Edge</div>
+                        <div class="text-sm text-gray-400">Last 2 versions</div>
+                    </div>
+                    <div class="text-center">
+                        <i class="fab fa-opera text-5xl text-red-400 mb-3"></i>
+                        <div class="font-semibold">Opera</div>
+                        <div class="text-sm text-gray-400">Last 2 versions</div>
+                    </div>
+                </div>
+
+                <div class="bg-green-900/20 border-l-4 border-green-400 p-6 rounded-lg">
+                    <div class="flex gap-4">
+                        <i class="fas fa-check-circle text-green-400 text-2xl"></i>
+                        <div>
+                            <h4 class="font-bold mb-2">Full CSS Grid Support Required</h4>
+                            <p class="text-gray-300">Mastors Gridder uses modern CSS Grid features. All major browsers
+                                released after 2017 are fully supported.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-700 py-12 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 gradient-text">Mastors Gridder</h3>
+                    <p class="text-gray-400 mb-4">A modern CSS Grid utility library for building responsive layouts with
+                        ease.</p>
+                    <div class="flex gap-4">
+                        <a href="https://github.com/KEHEM-IT/Mastors-Gridder"
+                            class="text-gray-400 hover:text-blue-400 transition-colors">
+                            <i class="fab fa-github text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#overview" class="text-gray-400 hover:text-blue-400 transition-colors">Overview</a>
+                        </li>
+                        <li><a href="#installation"
+                                class="text-gray-400 hover:text-blue-400 transition-colors">Installation</a></li>
+                        <li><a href="#scss" class="text-gray-400 hover:text-blue-400 transition-colors">SCSS Mixins</a>
+                        </li>
+                        <li><a href="#css" class="text-gray-400 hover:text-blue-400 transition-colors">CSS Classes</a>
+                        </li>
+                        <li><a href="#examples" class="text-gray-400 hover:text-blue-400 transition-colors">Examples</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="https://cdn.jsdelivr.net/gh/KEHEM-IT/Mastors-Gridder@main/mastors-gridder.css"
+                                class="text-gray-400 hover:text-blue-400 transition-colors">CDN Link</a></li>
+                        <li><a href="https://github.com/KEHEM-IT/Mastors-Gridder"
+                                class="text-gray-400 hover:text-blue-400 transition-colors">GitHub Repository</a></li>
+                        <li><a href="https://kehem-it.github.io/Mastors-Fluider/"
+                                class="text-gray-400 hover:text-blue-400 transition-colors">Mastors Fluider</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-700 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Mastors Gridder. Created by <a href="https://github.com/KEHEM-IT"
+                        class="text-blue-400 hover:underline">KEHEM-IT</a></p>
+                <p class="mt-2 text-sm">Version 1.0.0 - MIT License</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Scroll Indicator
+        window.addEventListener('scroll', () => {
+            const indicator = document.getElementById('scrollIndicator');
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            indicator.style.transform = `scaleX(${scrolled / 100})`;
+        });
+
+        // Update active nav link
+        function updateActiveNav(activeLink) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('text-blue-400', 'bg-blue-500/10');
+            });
+
+            activeLink.classList.add('text-blue-400', 'bg-blue-500/10');
+        }
+
+        // Center nav link in scrollable nav bar
+        function centerNavLink(link) {
+            const navContainer = link.parentElement;
+            const linkRect = link.getBoundingClientRect();
+            const containerRect = navContainer.getBoundingClientRect();
+
+            const offset =
+                linkRect.left -
+                containerRect.left -
+                containerRect.width / 2 +
+                linkRect.width / 2;
+
+            navContainer.scrollBy({
+                left: offset,
+                behavior: 'smooth'
+            });
+        }
+
+        // Smooth scroll with center positioning
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = window.innerHeight / 2 - target.offsetHeight / 2;
+                    const targetPosition = target.offsetTop - offset;
+
+                    window.scrollTo({
+                        top: Math.max(0, targetPosition),
+                        behavior: 'smooth'
+                    });
+
+                    updateActiveNav(this);
+                    centerNavLink(this);
+                }
+            });
+        });
+
+        function switchTab(event, targetId) {
+            const clickedTab = event.currentTarget;
+
+            // Find the nearest parent that contains this tab set
+            const tabWrapper = clickedTab.closest('.code-tabs').parentElement;
+
+            // Remove active class from all tabs in this section
+            tabWrapper.querySelectorAll('.code-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Remove active class from all content panels in this section
+            tabWrapper.querySelectorAll('.code-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Activate clicked tab
+            clickedTab.classList.add('active');
+
+            // Activate related content
+            const targetContent = tabWrapper.querySelector(`#${targetId}`);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+        }
+
+    </script>
+</body>
+
+</html>

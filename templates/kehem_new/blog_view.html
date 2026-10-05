@@ -1,0 +1,263 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>{{ post.meta_title }} - KEHEM IT</title>
+  <link href="{% static 'kehem.ico' %}" rel="icon" type="image/x-icon" />
+  <meta content="{{ post.meta_description }}" name="description" />
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://www.clarity.ms" rel="preconnect" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" /></noscript>
+  <link href="{% static 'kehem/new/css/blog_view.css' %}" rel="stylesheet" />
+  <meta content="{% if post.no_index %}noindex, nofollow{% else %}index, follow{% endif %}" name="robots" />
+  <link href="{{ request.scheme }}://{{ request.get_host }}{{ post.get_absolute_url }}" rel="canonical" />
+  <meta content="article" property="og:type" />
+  <meta content="{{ request.scheme }}://{{ request.get_host }}{{ post.get_absolute_url }}" property="og:url" />
+  <meta content="{{ post.og_title }}" property="og:title" />
+  <meta content="{{ post.og_description }}" property="og:description" />
+  {% if post.og_image %}<meta content="{{ request.scheme }}://{{ request.get_host }}{{ post.og_image.url }}" property="og:image" />{% elif post.cover_image %}<meta content="{{ request.scheme }}://{{ request.get_host }}{{ post.cover_image.url }}" property="og:image" />{% else %}<meta content="https://kehem.com/static/kehem-og.png" property="og:image" />{% endif %}
+  <meta content="1200" property="og:image:width" />
+  <meta content="630" property="og:image:height" />
+  <meta content="KEHEM IT — Studio Notes" property="og:image:alt" />
+  <meta content="KEHEM IT" property="og:site_name" />
+  <meta content="summary_large_image" name="twitter:card" /><meta content="{{ request.scheme }}://{{ request.get_host }}{{ post.get_absolute_url }}" name="twitter:url" />
+  <meta content="{{ post.og_title }}" name="twitter:title" />
+  <meta content="{{ post.og_description }}" name="twitter:description" />
+  <meta content="{% if post.og_image %}https://kehem.com{{ post.og_image.url }}{% elif post.cover_image %}https://kehem.com{{ post.cover_image.url }}{% else %}https://kehem.com/static/kehem-og.png{% endif %}" name="twitter:image" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{ post.title|escapejs }}",
+    "description": "{{ post.meta_description|escapejs }}",
+    "author": {
+      "@type": "Organization",
+      "name": "{{ post.author.name|default:'KEHEM Team'|escapejs }}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "KEHEM IT",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://kehem.com/static/kehem.54168f2599d9.webp"
+      }
+    },
+    "datePublished": "{{ post.published_at|date:'c' }}",
+    "dateModified": "{{ post.updated_at|date:'c' }}",
+    "mainEntityOfPage": "{{ request.scheme }}://{{ request.get_host }}{{ post.get_absolute_url|escapejs }}",
+    "image": ["{% if post.og_image %}https://kehem.com{{ post.og_image.url }}{% elif post.cover_image %}https://kehem.com{{ post.cover_image.url }}{% else %}https://kehem.com/static/kehem-og.png{% endif %}"]
+  }
+  </script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "boqzqvg0xn");
+</script>
+<style>
+  a{
+    text-decoration: none;
+  }
+</style>
+</head>
+
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <nav class="apple-nav" id="navbar">
+    <div class="nav-wrap"><a class="nav-logo" href="/"><img loading="lazy" decoding="async" alt="KEHEM Logo" src="{% static 'kehem.webp' %}" class="brand-logo-img" /><span>KEHEM IT</span></a>
+      <div class="nav-menu" id="navLinks"><a href="/">Home</a> <a href="/services">Services</a> <a href="/projects">Projects</a> <a href="/blog">Blog</a>
+        <div class="nav-dropdown"><button class="dropdown-btn">Company<svg fill="none" viewBox="0 0 24 24">
+              <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+            </svg></button>
+          <div class="dropdown-menu"><a href="/about">About Us</a> <a href="/team">Our Team</a> <a href="/process">Our Process</a> <a href="/testimonials">Client Reviews</a></div>
+        </div><a href="/pricing">Pricing</a> <a class="nav-btn" href="/contact">Hire Team</a>
+      </div><button class="nav-toggle" aria-label="Open navigation" aria-expanded="false"><span></span> <span></span></button>
+    </div>
+  </nav>
+
+  <header class="article-hero">
+    <div class="hero-grid-bg"></div>
+    <div class="container">
+      <div class="article-hero-inner"><a class="article-back" href="/blog">&larr; Back to Studio Notes</a><span class="section-label fade-up">{{ post.category.name|default:"Studio Notes" }}</span>
+        <h1 class="article-title fade-up fade-up-delay-1">{{ post.title }}</h1>
+        <p class="article-sub fade-up fade-up-delay-2">{{ post.excerpt }}</p>
+        <div class="article-meta-row fade-up fade-up-delay-3"><span>By {{ post.author.name|default:"KEHEM Team" }}</span><span>{{ post.published_at|date:"F j, Y" }}</span><span>{{ post.read_time }} min read</span>{% if post.tags.first %}<span>{{ post.tags.first.name }}</span>{% endif %}</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-shell">
+    <div class="container">
+      <div class="article-layout">
+        <article class="article-card">
+          {% if post.cover_image %}<div class="article-visual" style="background-image:url('{{ post.cover_image.url }}');background-size:cover;background-position:center;min-height:360px">
+          </div>{% else %}<div class="article-visual">
+            <div class="article-code-window">
+              <div><strong>KEHEM</strong> / Studio Notes</div>
+              <div>&nbsp;&nbsp;{{ post.category.name|default:"Ideas, design, and engineering" }}</div>
+            </div>
+          </div>{% endif %}
+          <div class="article-content">
+            <div id="articleMarkdown">{{ post.content_html|safe }}</div>
+            {% comment %}
+            <p class="lead">Most API problems do not arrive as dramatic architecture failures. They arrive as small compromises: one serializer doing too much, one endpoint leaking business rules, one queryset that was fine with ten rows and miserable with ten thousand.</p>
+
+            <p>At KEHEM, we try to make backend decisions boring in the best possible way. A good Django REST API should be understandable in review, predictable in production, and easy for the next developer to extend without becoming a detective.</p>
+
+            <h2 id="serializer-boundaries">1. Sharp serializer boundaries</h2>
+            <p>Serializers are excellent at validation and representation. They become painful when they quietly absorb product policy, permission logic, notification behavior, and reporting concerns.</p>
+            <ul>
+              <li>Use separate serializers for list, detail, create, and update when the shape or rules differ.</li>
+              <li>Move orchestration into service functions when the endpoint has meaningful business workflow.</li>
+              <li>Keep computed fields cheap, explicit, and visible in review.</li>
+            </ul>
+
+            <div class="article-note">A serializer should answer: â€œWhat shape is valid here?â€ It should not become the hidden control room for the whole product.</div>
+
+            <h2 id="permissions">2. Permissions first</h2>
+            <p>Permission checks should be boring, direct, and early. We prefer an explicit permission layer before object access, then queryset-level scoping as a second line of defense.</p>
+            <pre><code>class ProjectViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated, BelongsToActiveWorkspace]
+
+    def get_queryset(self):
+        return Project.objects.filter(
+            workspace__members=self.request.user
+        ).select_related("owner")</code></pre>
+            <p>This keeps the API honest even when new actions are added later. The goal is not cleverness; it is reducing the number of places a future mistake can hide.</p>
+
+            <h2 id="querysets">3. Querysets are contracts</h2>
+            <p>Database performance is not a cleanup task for â€œlater.â€ Query behavior is part of the endpoint contract. If the API promises a dashboard response, the queryset has to be designed for dashboard conditions.</p>
+            <ul>
+              <li>Use <strong>select_related</strong> and <strong>prefetch_related</strong> intentionally, not reactively.</li>
+              <li>Keep list endpoints lean; detail endpoints can carry more context.</li>
+              <li>Add indexes based on real filter and ordering patterns, not guesswork.</li>
+            </ul>
+
+            <h2 id="errors">4. Make errors human</h2>
+            <p>Good error responses reduce support time. We structure errors so frontend developers, QA, and product owners can understand what happened without reading server logs every time.</p>
+            <pre><code>{
+  "error": {
+    "code": "subscription_limit_reached",
+    "message": "This workspace has reached its active project limit.",
+    "field": "workspace"
+  }
+}</code></pre>
+            <p>Readable errors make the product feel more stable because the interface can respond with clarity instead of generic failure states.</p>
+
+            <h2 id="testing">5. Test behavior</h2>
+            <p>We keep endpoint tests focused on the product promise: who can access it, what input is valid, what response shape is guaranteed, and what side effects occur.</p>
+            <ul>
+              <li>Test permission boundaries with multiple user roles.</li>
+              <li>Test list endpoints for filtering, ordering, and pagination behavior.</li>
+              <li>Test important failure states, especially billing, ownership, and data visibility.</li>
+            </ul>
+
+            <h2 id="observability">6. See production clearly</h2>
+            <p>Production APIs need enough instrumentation to explain themselves. We like structured logs around important workflow events, request IDs across service boundaries, and metrics for slow endpoints before launch.</p>
+            <p>That does not mean every small project needs enterprise ceremony. It means the team should be able to answer: â€œWhat failed, for whom, and why?â€ without guessing.</p>
+
+            <div class="article-bottom-cta">
+              <h2>Clean up the backend.</h2>
+              <p>We design, refactor, and ship Django systems that feel calm under real users: clear API contracts, thoughtful performance, and fewer production surprises.</p>
+              <div class="article-actions"><a class="article-btn-primary" href="/contact">Talk to KEHEM</a><a class="article-btn-secondary" href="/services">Explore Services</a></div>
+            </div>
+            {% endcomment %}
+            <div class="article-bottom-cta">
+              <h2>Have a project in mind?</h2>
+              <p>KEHEM designs and builds thoughtful websites, SaaS products, and business systems.</p>
+              <div class="article-actions"><a class="article-btn-primary" href="/contact">Talk to KEHEM</a><a class="article-btn-secondary" href="/services">Explore Services</a></div>
+            </div>
+          </div>
+        </article>
+
+        <aside class="article-sidebar">
+          <div class="side-card">
+            <h3>In This Article</h3>
+            <div class="toc-list">
+              {% for tag in post.tags.all %}<a href="{% url 'tag_posts' tag.slug %}">{{ tag.name }}</a>{% empty %}<a href="/blog">Studio Notes</a>{% endfor %}
+            </div>
+          </div>
+          <div class="side-card">
+              <div class="author-row">
+                <div class="author-avatar"><img loading="lazy" decoding="async" src="{% static 'kehem.webp' %}" alt="KEHEM Logo" style="width:48px;height:48px;object-fit:cover;border-radius:50%;" /></div>
+              <div>
+                <h3 class="author-heading-reset">{{ post.author.name|default:"KEHEM Team" }}</h3>
+                <p>{{ post.author.bio|default:"Design-led engineers building trusted websites, SaaS products, and business systems." }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="side-card">
+            <h3>Related Notes</h3>
+            <div class="related-list">
+              {% for related in related_posts %}<a href="{{ related.get_absolute_url }}">{{ related.title }}</a>{% empty %}<a href="/blog">Browse all Studio Notes</a>{% endfor %}
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer-apple">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand"><a class="footer-logo" href="/">
+            <div class="footer-logo-mark"><img loading="lazy" decoding="async" alt="kehem logo" src="{% static 'kehem.webp' %}" class="brand-logo-img" /></div><span>KEHEM IT</span>
+          </a>
+          <p class="footer-desc">Trusted websites, SaaS products, and business software for founders and companies that want the KEHEM feel with sharper strategy, cleaner design, and stronger engineering.</p>
+          <div class="footer-status"><span class="status-dot"></span> Accepting New Projects</div>
+        </div>
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4>Studio</h4><a href="/about">About Us</a> <a href="/team">Our Team</a> <a href="/process">Process</a> <a href="/contact">Contact</a>
+          </div>
+          <div class="footer-col">
+            <h4>Work</h4><a href="/services">Services</a> <a href="/pricing">Pricing</a> <a href="/projects">Projects</a> <a href="/testimonials">Reviews</a>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4><a href="mailto:support@kehem.com">support@kehem.com</a>
+            <p>Available via email &amp; scheduled calls</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-line"></div>
+      <div class="footer-bottom"><span class="footer-copy">&copy; 2026 KEHEM IT. All rights reserved.</span><div class="footer-legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/cookie">Cookies</a></div>
+        <div class="footer-socials"><a aria-label="Facebook" class="social-btn" href="https://facebook.com/KEHEMIT"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+            </svg></a> <a aria-label="Twitter" class="social-btn" href="https://x.com/KEHEMIT"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18">
+              <path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0012 8v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+            </svg></a> <a aria-label="LinkedIn" class="social-btn" href="https://linkedin.com/company/kehem/"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18">
+              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"></path>
+              <circle cx="4" cy="4" r="2"></circle>
+              <path d="M2 9h4v12H2z"></path>
+            </svg></a></div>
+      </div>
+    </div>
+  </footer>
+  <div class="toast" id="toast"></div>
+  
+  {{ post.content_markdown|json_script:"post-markdown-source" }}
+  <script defer src="https://cdn.jsdelivr.net/npm/markdown-it@14/dist/markdown-it.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/markdown-it-footnote@4/dist/markdown-it-footnote.min.js"></script>
+  <script defer src="{% static 'kehem/new/js/markdown-view.js' %}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.KehemMarkdown) {
+        KehemMarkdown.render(
+          JSON.parse(document.getElementById('post-markdown-source').textContent),
+          '#articleMarkdown'
+        );
+      }
+    });
+  </script>
+  <script defer src="{% static 'kehem/new/js/main.js' %}"></script>
+</body>
+
+</html>

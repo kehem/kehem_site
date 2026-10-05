@@ -1,0 +1,1730 @@
+{% extends "kehem/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section id="home"
+  class="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-[#1B7C83]/10 pt-20">
+
+  <!-- Ambient Background -->
+  <div class="absolute top-20 left-10 w-72 h-72 bg-[#1B7C83]/10 blur-3xl rounded-full"></div>
+  <div class="absolute bottom-10 right-10 w-96 h-96 bg-slate-200/70 blur-3xl rounded-full"></div>
+
+  <!-- Grid -->
+  <div class="absolute inset-0 opacity-[0.03]"
+    style="background-image:linear-gradient(to right,#000 1px,transparent 1px),linear-gradient(to bottom,#000 1px,transparent 1px);background-size:48px 48px;">
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+      <!-- Left Content -->
+      <div class="text-center lg:text-left animate-fadeInUp">
+
+        <!-- Badge -->
+        <div
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 shadow-sm text-sm font-medium text-gray-600">
+          <span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
+          Full-Service Software/Website Farm
+        </div>
+
+        <!-- Heading -->
+        <h1
+          class="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-[1.05] tracking-tight">
+          Software Teams
+          <span class="block text-brand">That Build Results.</span>
+        </h1>
+
+        <!-- Paragraph -->
+        <p class="mt-6 text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+          KEHEM IT delivers scalable software solutions, dedicated development teams, and modern web systems for startups, agencies, and growing enterprises.
+        </p>
+
+        <!-- CTA -->
+        <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <a href="#contact"
+            class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-brand text-white text-lg font-semibold shadow-lg shadow-[#1B7C83]/20 hover:opacity-90 transition">
+            Hire Team
+          </a>
+
+          <a href="#projects"
+            class="inline-flex items-center justify-center px-8 py-4 rounded-full border border-gray-300 text-gray-800 text-lg font-semibold hover:bg-white transition">
+            View Work
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="mt-10 grid grid-cols-3 gap-6 max-w-xl mx-auto lg:mx-0">
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900">50+</h3>
+            <p class="text-sm text-gray-500 mt-1">Projects Delivered</p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900">6+</h3>
+            <p class="text-sm text-gray-500 mt-1">Developers</p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900">24/7</h3>
+            <p class="text-sm text-gray-500 mt-1">Support</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Visual -->
+      <div class="relative hidden lg:block animate-fadeInUp">
+
+        <div class="bg-white rounded-3xl border border-gray-200 shadow-2xl p-6 max-w-xl ml-auto">
+
+          <!-- Top -->
+          <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+            <div>
+              <p class="text-sm text-gray-500">Project Dashboard</p>
+              <h4 class="font-semibold text-gray-900">Enterprise CRM System</h4>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs bg-emerald-100 text-emerald-700">
+              In Progress
+            </span>
+          </div>
+
+          <!-- Cards -->
+          <div class="grid grid-cols-2 gap-4 mt-6">
+            <div class="p-4 rounded-2xl bg-slate-50">
+              <p class="text-sm text-gray-500">Backend</p>
+              <h5 class="font-semibold text-gray-900 mt-1">Django API</h5>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50">
+              <p class="text-sm text-gray-500">Frontend</p>
+              <h5 class="font-semibold text-gray-900 mt-1">Vue / Nuxt</h5>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50">
+              <p class="text-sm text-gray-500">Deployment</p>
+              <h5 class="font-semibold text-gray-900 mt-1">Cloud Ready</h5>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50">
+              <p class="text-sm text-gray-500">Delivery</p>
+              <h5 class="font-semibold text-gray-900 mt-1">On Time</h5>
+            </div>
+          </div>
+
+          <!-- Bottom -->
+          <div class="mt-6 p-4 rounded-2xl bg-brand text-white">
+            <p class="text-sm opacity-80">Need a reliable software partner?</p>
+            <h4 class="font-semibold text-lg mt-1">Scale faster with KEHEM IT</h4>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     OUR EXPERTISE SECTION
+══════════════════════════════════════ -->
+<section class="py-20 sm:py-32 bg-white overflow-hidden" id="services">
+
+  <!-- Scrolling label strip -->
+  <div class="overflow-hidden mb-14 pointer-events-none select-none">
+    <div class="flex whitespace-nowrap marquee-track">
+      <span class="text-[11px] font-semibold tracking-[0.22em] uppercase mx-6" style="color:rgba(27,124,131,0.2);">
+        Django &nbsp;·&nbsp; Vue.js &nbsp;·&nbsp; Nuxt &nbsp;·&nbsp; HTML / CSS / JS &nbsp;·&nbsp; Full-Stack
+        &nbsp;·&nbsp; Scalable Systems &nbsp;·&nbsp; Bespoke Software &nbsp;·&nbsp;
+        Django &nbsp;·&nbsp; Vue.js &nbsp;·&nbsp; Nuxt &nbsp;·&nbsp; HTML / CSS / JS &nbsp;·&nbsp; Full-Stack
+        &nbsp;·&nbsp; Scalable Systems &nbsp;·&nbsp; Bespoke Software &nbsp;·&nbsp;
+        Django &nbsp;·&nbsp; Vue.js &nbsp;·&nbsp; Nuxt &nbsp;·&nbsp; HTML / CSS / JS &nbsp;·&nbsp; Full-Stack
+        &nbsp;·&nbsp; Scalable Systems &nbsp;·&nbsp; Bespoke Software &nbsp;·&nbsp;
+      </span>
+      <span aria-hidden="true" class="text-[11px] font-semibold tracking-[0.22em] uppercase mx-6"
+        style="color:rgba(27,124,131,0.2);">
+        Django &nbsp;·&nbsp; Vue.js &nbsp;·&nbsp; Nuxt &nbsp;·&nbsp; HTML / CSS / JS &nbsp;·&nbsp; Full-Stack
+        &nbsp;·&nbsp; Scalable Systems &nbsp;·&nbsp; Bespoke Software &nbsp;·&nbsp;
+        Django &nbsp;·&nbsp; Vue.js &nbsp;·&nbsp; Nuxt &nbsp;·&nbsp; HTML / CSS / JS &nbsp;·&nbsp; Full-Stack
+        &nbsp;·&nbsp; Scalable Systems &nbsp;·&nbsp; Bespoke Software &nbsp;·&nbsp;
+        Django &nbsp;·&nbsp; Vue.js &nbsp;·&nbsp; Nuxt &nbsp;·&nbsp; HTML / CSS / JS &nbsp;·&nbsp; Full-Stack
+        &nbsp;·&nbsp; Scalable Systems &nbsp;·&nbsp; Bespoke Software &nbsp;·&nbsp;
+      </span>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+      <div class="fade-in">
+        <p class="text-[11px] font-semibold tracking-[0.22em] uppercase mb-3" style="color:#1B7C83;">
+          What We Do Best
+        </p>
+        <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight tracking-tight">
+          Our<br />
+          <span style="color:#1B7C83;">Expertise</span>
+        </h2>
+      </div>
+      <p class="text-gray-500 text-base sm:text-lg max-w-sm leading-relaxed md:text-right fade-in delay-1">
+        Tailored, high-performance solutions built with a sharp focus on quality, scalability, and lasting craft.
+      </p>
+    </div>
+
+    <div class="teal-rule mb-16"></div>
+
+    <!-- ── SERVICE CARDS GRID ── -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+      <!-- Card 1 – Django -->
+      <div class="service-card bg-gray-50 rounded-2xl p-7 cursor-default fade-in delay-1">
+        <span class="bg-num">01</span>
+
+        <!-- Icon -->
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-6"
+          style="background:rgba(27,124,131,0.1);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B7C83" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" />
+            <path d="M8 21h8M12 17v4" />
+            <path d="M7 8l2 2-2 2M11 12h4" />
+          </svg>
+        </div>
+
+        <p class="card-num text-gray-300 mb-2">01 / 04</p>
+        <h3 class="text-xl font-bold text-gray-900 leading-snug mb-3">Django Development</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+          Secure, scalable backend systems built with Django for robust, production-ready applications.
+        </p>
+
+        <!-- Reveal detail -->
+        <div class="card-detail">
+          <p class="text-gray-400 text-xs leading-relaxed mb-4">
+            REST APIs, auth systems, admin panels, background tasks — engineered for performance and security.
+          </p>
+        </div>
+
+        <!-- Stack tags -->
+        <div class="flex flex-wrap gap-1.5">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">Django</span>
+          <span class="stack-tag">REST API</span>
+        </div>
+      </div>
+
+      <!-- Card 2 – Vue & Nuxt -->
+      <div class="service-card bg-gray-50 rounded-2xl p-7 cursor-default fade-in delay-2">
+        <span class="bg-num">02</span>
+
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-6"
+          style="background:rgba(27,124,131,0.1);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B7C83" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+        </div>
+
+        <p class="card-num text-gray-300 mb-2">02 / 04</p>
+        <h3 class="text-xl font-bold text-gray-900 leading-snug mb-3">Vue &amp; Nuxt</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+          Dynamic, responsive frontends crafted with Vue and Nuxt for exceptional user experiences.
+        </p>
+
+        <div class="card-detail">
+          <p class="text-gray-400 text-xs leading-relaxed mb-4">
+            SSR / SSG pages, interactive dashboards, component libraries — fast, accessible, and delightful.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-1.5">
+          <span class="stack-tag">Vue 3</span>
+          <span class="stack-tag">Nuxt</span>
+          <span class="stack-tag">Pinia</span>
+        </div>
+      </div>
+
+      <!-- Card 3 – Custom HTML/CSS/JS -->
+      <div class="service-card bg-gray-50 rounded-2xl p-7 cursor-default fade-in delay-3">
+        <span class="bg-num">03</span>
+
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-6"
+          style="background:rgba(27,124,131,0.1);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B7C83" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6" />
+            <polyline points="8 6 2 12 8 18" />
+          </svg>
+        </div>
+
+        <p class="card-num text-gray-300 mb-2">03 / 04</p>
+        <h3 class="text-xl font-bold text-gray-900 leading-snug mb-3">Custom HTML/CSS/JS</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+          Meticulously crafted, lightweight websites with pixel-perfect precision and zero bloat.
+        </p>
+
+        <div class="card-detail">
+          <p class="text-gray-400 text-xs leading-relaxed mb-4">
+            Hand-coded, performant sites with smooth animations, semantic markup, and flawless cross-browser rendering.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-1.5">
+          <span class="stack-tag">HTML5</span>
+          <span class="stack-tag">CSS3</span>
+          <span class="stack-tag">Vanilla JS</span>
+        </div>
+      </div>
+
+      <!-- Card 4 – Full-Stack -->
+      <div class="service-card bg-gray-50 rounded-2xl p-7 cursor-default fade-in delay-4">
+        <span class="bg-num">04</span>
+
+        <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-6"
+          style="background:rgba(27,124,131,0.1);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B7C83" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <ellipse cx="12" cy="5" rx="9" ry="3" />
+            <path d="M3 5v6c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+            <path d="M3 11v6c0 1.66 4 3 9 3s9-1.34 9-3v-6" />
+          </svg>
+        </div>
+
+        <p class="card-num text-gray-300 mb-2">04 / 04</p>
+        <h3 class="text-xl font-bold text-gray-900 leading-snug mb-3">Full-Stack Solutions</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+          Seamless end-to-end development for cohesive, high-performance digital products.
+        </p>
+
+        <div class="card-detail">
+          <p class="text-gray-400 text-xs leading-relaxed mb-4">
+            From database schema to pixel-perfect UI — one unified team, one coherent codebase.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-1.5">
+          <span class="stack-tag">Django</span>
+          <span class="stack-tag">Vue</span>
+          <span class="stack-tag">PostgreSQL</span>
+        </div>
+      </div>
+
+    </div>
+    <!-- /cards -->
+
+    <!-- ── BOTTOM FEATURE ROW ── -->
+    <div class="mt-16 teal-rule"></div>
+    <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+
+      <div class="fade-in delay-1">
+        <p class="text-3xl font-bold" style="color:#1B7C83;">50+</p>
+        <p class="text-xs tracking-widest uppercase text-gray-400 mt-1 font-medium">Projects</p>
+      </div>
+      <div class="fade-in delay-2">
+        <p class="text-3xl font-bold" style="color:#1B7C83;">30+</p>
+        <p class="text-xs tracking-widest uppercase text-gray-400 mt-1 font-medium">Happy Clients</p>
+      </div>
+      <div class="fade-in delay-3">
+        <p class="text-3xl font-bold" style="color:#1B7C83;">5+</p>
+        <p class="text-xs tracking-widest uppercase text-gray-400 mt-1 font-medium">Years Experience</p>
+      </div>
+      <div class="fade-in delay-4">
+        <a href="#contact"
+          class="inline-flex items-center justify-center gap-2 text-white text-sm font-semibold uppercase tracking-widest px-6 py-3 rounded-full transition-colors duration-300 w-full"
+          style="background:#1B7C83;" onmouseenter="this.style.background='#15676d'"
+          onmouseleave="this.style.background='#1B7C83'">
+          Let's Build
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     PROJECT SHOWCASE SECTION
+ ══════════════════════════════════════ -->
+<section class="py-20 sm:py-32 bg-gray-100 overflow-hidden" id="projects">
+
+  <!-- Scrolling label strip -->
+  <div class="overflow-hidden mb-14 pointer-events-none select-none">
+    <div class="flex whitespace-nowrap marquee-track">
+      <span class="text-[11px] font-semibold tracking-[0.22em] uppercase mx-6" style="color:rgba(27,124,131,0.25);">
+        Project Showcase &nbsp;·&nbsp; Our Work &nbsp;·&nbsp; Selected Projects &nbsp;·&nbsp; Case Studies &nbsp;·&nbsp;
+        Built with Precision &nbsp;·&nbsp;
+        Project Showcase &nbsp;·&nbsp; Our Work &nbsp;·&nbsp; Selected Projects &nbsp;·&nbsp; Case Studies &nbsp;·&nbsp;
+        Built with Precision &nbsp;·&nbsp;
+        Project Showcase &nbsp;·&nbsp; Our Work &nbsp;·&nbsp; Selected Projects &nbsp;·&nbsp; Case Studies &nbsp;·&nbsp;
+        Built with Precision &nbsp;·&nbsp;
+        Project Showcase &nbsp;·&nbsp; Our Work &nbsp;·&nbsp; Selected Projects &nbsp;·&nbsp; Case Studies &nbsp;·&nbsp;
+        Built with Precision &nbsp;·&nbsp;
+      </span>
+      <span class="text-[11px] font-semibold tracking-[0.22em] uppercase mx-6" style="color:rgba(27,124,131,0.25);"
+        aria-hidden="true">
+        Project Showcase &nbsp;·&nbsp; Our Work &nbsp;·&nbsp; Selected Projects &nbsp;·&nbsp; Case Studies &nbsp;·&nbsp;
+        Built with Precision &nbsp;·&nbsp;
+        Project Showcase &nbsp;·&nbsp; Our Work &nbsp;·&nbsp; Selected Projects &nbsp;·&nbsp; Case Studies &nbsp;·&nbsp;
+        Built with Precision &nbsp;·&nbsp;
+        Project Showcase &nbsp;·&nbsp; Our Work &nbsp;·&nbsp; Selected Projects &nbsp;·&nbsp; Case Studies &nbsp;·&nbsp;
+        Built with Precision &nbsp;·&nbsp;
+        Project Showcase &nbsp;·&nbsp; Our Work &nbsp;·&nbsp; Selected Projects &nbsp;·&nbsp; Case Studies &nbsp;·&nbsp;
+        Built with Precision &nbsp;·&nbsp;
+      </span>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Section Header -->
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+      <div>
+        <p class="text-[11px] font-semibold tracking-[0.2em] uppercase mb-3" style="color:#1B7C83;">
+          Selected Work — 2024 / 2025
+        </p>
+        <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight tracking-tight">
+          Project<br />
+          <span style="color:#1B7C83;">Showcase</span>
+        </h2>
+      </div>
+      <p class="text-gray-500 text-base sm:text-lg max-w-xs leading-relaxed md:text-right">
+        A curated portfolio of innovative, beautifully crafted digital experiences.
+      </p>
+    </div>
+
+    <!-- ── FEATURED HERO CARD ── -->
+    <div class="card-lift rounded-2xl overflow-hidden bg-white shadow-md mb-4 cursor-pointer group">
+      <div class="flex flex-col lg:flex-row">
+
+        <!-- Image half -->
+        <div class="lg:w-1/2 h-64 sm:h-80 lg:h-auto overflow-hidden relative min-h-[280px]">
+          <img src="https://surajit-singha-sisir.github.io/archEstimation/icon.svg" alt="Onuman by KEHEM IT"
+            class="card-img w-full h-full object-contain absolute inset-0 bg-white" loading="lazy" />
+          <div class="absolute inset-0 transition-colors duration-500" style="background:rgba(27,124,131,0);"
+            onmouseenter="this.style.background='rgba(27,124,131,0.08)'"
+            onmouseleave="this.style.background='rgba(27,124,131,0)'">
+          </div>
+        </div>
+
+        <!-- Content half -->
+        <div class="lg:w-1/2 p-8 sm:p-12 flex flex-col justify-between">
+          <div>
+            <!-- Badges -->
+            <div class="flex items-center gap-3 mb-6 flex-wrap">
+              <span class="text-[9px] font-semibold tracking-[0.16em] uppercase px-3 py-1.5 rounded-full text-white"
+                style="background:#1B7C83;">
+                Featured Project
+              </span>
+              <span class="text-[10px] font-semibold tracking-[0.18em] uppercase text-gray-300">01 / 05</span>
+            </div>
+
+            <h3 class="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight tracking-tight mb-4">
+              Onuman
+            </h3>
+            <p class="text-gray-500 leading-relaxed text-base mb-6">
+              A powerful software tool for fast and accurate architectural project estimation —
+              streamlining complex cost calculations into a clean, intuitive workflow.
+            </p>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 mb-8">
+              <span class="tag-pill">Django</span>
+              <span class="tag-pill">Vue.js</span>
+              <span class="tag-pill">Architecture</span>
+              <span class="tag-pill">SaaS</span>
+            </div>
+          </div>
+
+          <a href="https://onuman.kehem.com" target="_blank"
+            class="inline-flex items-center gap-3 font-semibold text-sm tracking-widest uppercase group/link"
+            style="color:#1B7C83;">
+            <span class="link-line">View Project</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"
+              class="transition-transform duration-300 group-hover/link:translate-x-1">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- /featured card -->
+
+    <!-- ── 4-CARD GRID ── -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+      <!-- Card 2 – Leaf Disease -->
+      <div class="card-lift rounded-2xl overflow-hidden bg-white shadow-md group cursor-pointer flex flex-col">
+        <div class="overflow-hidden h-52 relative">
+          <img src="https://www.sau.ac.bd/image/sau-logo.png" alt="Leaf Disease Detection"
+            class="card-img w-full h-full object-contain" loading="lazy" />
+          <!-- Ongoing badge -->
+          <div
+            class="absolute top-3 left-3 flex items-center gap-1.5 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm">
+            <span class="pulse-dot w-1.5 h-1.5 rounded-full inline-block" style="background:#1B7C83;"></span>
+            <span class="text-[10px] font-600 tracking-widest uppercase" style="color:#1B7C83;">Ongoing</span>
+          </div>
+        </div>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <p class="text-[10px] font-semibold tracking-[0.18em] uppercase text-gray-300 mb-2">02 / 05</p>
+            <h3 class="text-lg font-bold text-gray-900 leading-snug mb-2">Leaf Disease Detection</h3>
+            <p class="card-reveal text-gray-400 text-sm leading-relaxed">AI-powered detection of citrus leaf diseases
+              for early agricultural intervention.</p>
+          </div>
+          <a href="#"
+            class="mt-4 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest group/link"
+            style="color:#1B7C83;">
+            <span class="link-line">In Progress</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"
+              class="transition-transform duration-300 group-hover/link:translate-x-1">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 3 – Arafat Sarkar -->
+      <div class="card-lift rounded-2xl overflow-hidden bg-white shadow-md group cursor-pointer flex flex-col">
+        <div class="overflow-hidden h-52 relative">
+          <img src="https://i.ibb.co/jPr7bGPC/Untitled-1-05.jpg" alt="Arafat Sarkar Portfolio"
+            class="card-img w-full h-full object-contain" loading="lazy" />
+        </div>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <p class="text-[10px] font-semibold tracking-[0.18em] uppercase text-gray-300 mb-2">03 / 05</p>
+            <h3 class="text-lg font-bold text-gray-900 leading-snug mb-2">Arafat Sarkar</h3>
+            <p class="card-reveal text-gray-400 text-sm leading-relaxed">A personal site showcasing cinematic work
+              through curated films, reels, and visual storytelling.</p>
+          </div>
+          <a href="https://arafatsarkar.com" target="_blank"
+            class="mt-4 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest group/link"
+            style="color:#1B7C83;">
+            <span class="link-line">View Project</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"
+              class="transition-transform duration-300 group-hover/link:translate-x-1">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 4 – Architecture in Documents -->
+      <div class="card-lift rounded-2xl overflow-hidden bg-white shadow-md group cursor-pointer flex flex-col">
+        <div class="overflow-hidden h-52 relative">
+          <img src="https://archdocu.com/media/archdocu/logo.webp" alt="Architecture in Documents"
+            class="card-img w-full h-full object-contain" loading="lazy" />
+        </div>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <p class="text-[10px] font-semibold tracking-[0.18em] uppercase text-gray-300 mb-2">04 / 05</p>
+            <h3 class="text-lg font-bold text-gray-900 leading-snug mb-2">Architecture in Documents</h3>
+            <p class="card-reveal text-gray-400 text-sm leading-relaxed">Architectural marvels showcased through
+              stunning visuals and immersive design.</p>
+          </div>
+          <a href="https://archdocu.com/" target="_blank"
+            class="mt-4 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest group/link"
+            style="color:#1B7C83;">
+            <span class="link-line">View Project</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"
+              class="transition-transform duration-300 group-hover/link:translate-x-1">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 5 – Openhouse Architect -->
+      <div class="card-lift rounded-2xl overflow-hidden bg-white shadow-md group cursor-pointer flex flex-col">
+        <div class="overflow-hidden h-52 relative">
+          <img src="https://i.ibb.co/wN6xd77H/Untitled-1-03.jpg" alt="Openhouse Architect"
+            class="card-img w-full h-full object-cover" loading="lazy" />
+        </div>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <p class="text-[10px] font-semibold tracking-[0.18em] uppercase text-gray-300 mb-2">05 / 05</p>
+            <h3 class="text-lg font-bold text-gray-900 leading-snug mb-2">Openhouse Architect</h3>
+            <p class="card-reveal text-gray-400 text-sm leading-relaxed">Innovative architectural designs and projects
+              showcased for Openhouse Group.</p>
+          </div>
+          <a href="https://openhousegroupbd.com" target="_blank"
+            class="mt-4 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest group/link"
+            style="color:#1B7C83;">
+            <span class="link-line">View Project</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"
+              class="transition-transform duration-300 group-hover/link:translate-x-1">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <!-- /4-card grid -->
+
+    <!-- Bottom CTA row -->
+    <div class="mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-gray-200 pt-10">
+      <p class="text-gray-400 text-sm tracking-wide">Showing 5 of 50+ completed projects</p>
+      <a href="#contact"
+        class="inline-flex items-center gap-3 text-white px-7 py-3 rounded-full text-sm font-semibold uppercase tracking-widest transition-colors duration-300"
+        style="background:#1B7C83;" onmouseenter="this.style.background='#15676d'"
+        onmouseleave="this.style.background='#1B7C83'">
+        Start Your Project
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TESTIMONIALS SECTION
+══════════════════════════════════════ -->
+<section class="py-20 sm:py-32 bg-white overflow-hidden" id="testimonials">
+
+  <!-- Scrolling label strip -->
+  <div class="overflow-hidden mb-14 pointer-events-none select-none">
+    <div class="flex whitespace-nowrap marquee-track">
+      <span class="text-[11px] font-semibold tracking-[0.22em] uppercase mx-6" style="color:rgba(27,124,131,0.2);">
+        Client Reviews &nbsp;·&nbsp; Testimonials &nbsp;·&nbsp; What They Say &nbsp;·&nbsp; Real Feedback &nbsp;·&nbsp;
+        Trusted by Clients &nbsp;·&nbsp; Success Stories &nbsp;·&nbsp;
+        Client Reviews &nbsp;·&nbsp; Testimonials &nbsp;·&nbsp; What They Say &nbsp;·&nbsp; Real Feedback &nbsp;·&nbsp;
+        Trusted by Clients &nbsp;·&nbsp; Success Stories &nbsp;·&nbsp;
+        Client Reviews &nbsp;·&nbsp; Testimonials &nbsp;·&nbsp; What They Say &nbsp;·&nbsp; Real Feedback &nbsp;·&nbsp;
+        Trusted by Clients &nbsp;·&nbsp; Success Stories &nbsp;·&nbsp;
+      </span>
+      <span aria-hidden="true" class="text-[11px] font-semibold tracking-[0.22em] uppercase mx-6"
+        style="color:rgba(27,124,131,0.2);">
+        Client Reviews &nbsp;·&nbsp; Testimonials &nbsp;·&nbsp; What They Say &nbsp;·&nbsp; Real Feedback &nbsp;·&nbsp;
+        Trusted by Clients &nbsp;·&nbsp; Success Stories &nbsp;·&nbsp;
+        Client Reviews &nbsp;·&nbsp; Testimonials &nbsp;·&nbsp; What They Say &nbsp;·&nbsp; Real Feedback &nbsp;·&nbsp;
+        Trusted by Clients &nbsp;·&nbsp; Success Stories &nbsp;·&nbsp;
+        Client Reviews &nbsp;·&nbsp; Testimonials &nbsp;·&nbsp; What They Say &nbsp;·&nbsp; Real Feedback &nbsp;·&nbsp;
+        Trusted by Clients &nbsp;·&nbsp; Success Stories &nbsp;·&nbsp;
+      </span>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+      <div class="fade-in">
+        <p class="text-[11px] font-semibold tracking-[0.22em] uppercase mb-3" style="color:#1B7C83;">
+          Client Voices
+        </p>
+        <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight tracking-tight">
+          What Our<br />
+          <span style="color:#1B7C83;">Clients Say</span>
+        </h2>
+      </div>
+      <p class="text-gray-500 text-base sm:text-lg max-w-sm leading-relaxed md:text-right fade-in delay-1">
+        Real feedback from the people we've had the privilege of working with.
+      </p>
+    </div>
+
+    <div class="teal-rule mb-16"></div>
+
+    <!-- ── MAIN GRID ── -->
+    <!-- Row 1: Video (wide) + tall quote -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-5">
+
+      <!-- Video testimonial – spans 2 cols -->
+      <div class="video-card lg:col-span-2 bg-gray-50 rounded-2xl overflow-hidden fade-in delay-1">
+        <div class="aspect-video w-full">
+          <iframe class="w-full h-full" src="https://www.youtube.com/embed/-MwW3kFSUs8?rel=0&modestbranding=1"
+            title="Shubhro Sinha Review" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+          </iframe>
+        </div>
+        <div class="p-7 flex items-center justify-between gap-4 flex-wrap">
+          <div class="flex items-center gap-4">
+            <!-- Avatar initials -->
+            <div
+              class="avatar-ring w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-base flex-shrink-0"
+              style="background:#1B7C83;">
+              SS
+            </div>
+            <div>
+              <p class="font-bold text-gray-900 text-base">Shubhro Sinha</p>
+              <p class="text-gray-400 text-sm mt-0.5">Photographer</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="stars text-lg">★★★★★</span>
+            <span class="role-tag">Video Review</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tall quote card -->
+      <div class="quote-card bg-gray-50 rounded-2xl p-8 flex flex-col justify-between fade-in delay-2">
+        <div>
+          <div class="big-quote">"</div>
+          <p class="text-gray-700 leading-relaxed text-base -mt-4 mb-6">
+            KEHEM IT's expertise in crafting a seamless, custom dashboard revolutionized our research operations at Sylhet Agricultural University. Their professional approach, deep technical skill, and unwavering commitment to excellence made the entire process a true pleasure. I wholeheartedly recommend their services to anyone seeking top-tier software solutions.
+          </p>
+        </div>
+        <div>
+          <div class="teal-rule mb-5"></div>
+          <div class="flex items-center justify-between gap-3 flex-wrap">
+            <div class="flex items-center gap-3">
+              <div
+                class="avatar-ring w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
+                style="background:#1B7C83;">
+                CK
+              </div>
+              <div>
+                <p class="font-bold text-gray-900 text-sm">Dr. Chandra Kanta Dash</p>
+                <p class="text-gray-400 text-xs mt-0.5">Professor, SAU</p>
+              </div>
+            </div>
+            <span class="stars text-sm">★★★★★</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /row 1 -->
+
+    <!-- Row 2: Two quote cards + highlight stat card -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- Quote card 2 -->
+      <div class="quote-card bg-gray-50 rounded-2xl p-8 flex flex-col justify-between fade-in delay-1">
+        <div>
+          <div class="big-quote">"</div>
+          <p class="text-gray-700 leading-relaxed text-base -mt-4 mb-6">
+                  KEHEM IT transformed my cinematic portfolio into a visually captivating digital experience that truly reflects the art of storytelling. Their innovative design and technical expertise brought my reels and films to life in ways I never imagined, making every frame shine with precision and elegance.
+
+          </p>
+        </div>
+        <div>
+          <div class="teal-rule mb-5"></div>
+          <div class="flex items-center justify-between gap-3 flex-wrap">
+            <div class="flex items-center gap-3">
+              <div
+                class="avatar-ring w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
+                style="background:#2a939b;">
+                AS
+              </div>
+              <div>
+                <p class="font-bold text-gray-900 text-sm">Arafat Sarkar</p>
+                <p class="text-gray-400 text-xs mt-0.5">Cinematographer</p>
+              </div>
+            </div>
+            <span class="stars text-sm">★★★★★</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote card 3 (extra) -->
+      <div class="quote-card bg-gray-50 rounded-2xl p-8 flex flex-col justify-between fade-in delay-2">
+        <div>
+          <div class="big-quote">"</div>
+          <p class="text-gray-700 leading-relaxed text-base -mt-4 mb-6">
+                  KEHEM IT's innovative approach transformed our architectural visualization needs into a seamless digital experience. Their expertise in creating intuitive dashboards and responsive designs has significantly enhanced our project management and client presentations at Openhouse Group. A truly professional and reliable partner.
+
+          </p>
+        </div>
+        <div>
+          <div class="teal-rule mb-5"></div>
+          <div class="flex items-center justify-between gap-3 flex-wrap">
+            <div class="flex items-center gap-3">
+              <div
+                class="avatar-ring w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
+                style="background:#15676d;">
+                US
+              </div>
+              <div>
+                <p class="font-bold text-gray-900 text-sm">Ar. Uzzal Singha</p>
+                <p class="text-gray-400 text-xs mt-0.5">Executive Architect, Openhouse Group</p>
+              </div>
+            </div>
+            <span class="stars text-sm">★★★★★</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Highlight / CTA card -->
+      <div class="rounded-2xl p-8 flex flex-col justify-between fade-in delay-3 text-white" style="background:#1B7C83;">
+        <!-- Big stat -->
+        <div>
+          <p class="text-[11px] font-semibold tracking-[0.22em] uppercase mb-4 text-white/60">
+            Client Satisfaction
+          </p>
+          <p class="text-7xl font-bold leading-none mb-2">100<span class="text-4xl">%</span></p>
+          <p class="text-white/70 text-sm leading-relaxed mt-3">
+            Every project delivered on time, on budget, and beyond expectation.
+          </p>
+        </div>
+
+        <div>
+          <div class="h-px bg-white/15 mb-6"></div>
+          <div class="flex items-center justify-between gap-3 flex-wrap">
+            <div>
+              <p class="text-2xl font-bold">30+</p>
+              <p class="text-white/60 text-xs uppercase tracking-widest mt-0.5">Happy Clients</p>
+            </div>
+            <a href="#contact"
+              class="inline-flex items-center gap-2 bg-white text-sm font-semibold uppercase tracking-widest px-5 py-2.5 rounded-full transition-colors duration-300"
+              style="color:#1B7C83;" onmouseenter="this.style.background='#f0fafa'"
+              onmouseleave="this.style.background='#ffffff'">
+              Work with us
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /row 2 -->
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     MEET OUR TEAM SECTION
+══════════════════════════════════════ -->
+<section class="py-20 sm:py-32 bg-gray-100 overflow-hidden" id="team">
+
+  <!-- Scrolling label strip -->
+  <div class="overflow-hidden mb-14 pointer-events-none select-none">
+    <div class="flex whitespace-nowrap marquee-track">
+      <span class="text-[11px] font-semibold tracking-[0.22em] uppercase mx-6" style="color:rgba(27,124,131,0.22);">
+        Meet the Team &nbsp;·&nbsp; Django &nbsp;·&nbsp; Vue.js &nbsp;·&nbsp; UI / UX &nbsp;·&nbsp; Laravel
+        &nbsp;·&nbsp; Full-Stack &nbsp;·&nbsp; Digital Marketing &nbsp;·&nbsp; The People Behind KEHEM IT &nbsp;·&nbsp;
+        Meet the Team &nbsp;·&nbsp; Django &nbsp;·&nbsp; Vue.js &nbsp;·&nbsp; UI / UX &nbsp;·&nbsp; Laravel
+        &nbsp;·&nbsp; Full-Stack &nbsp;·&nbsp; Digital Marketing &nbsp;·&nbsp; The People Behind KEHEM IT &nbsp;·&nbsp;
+        Meet the Team &nbsp;·&nbsp; Django &nbsp;·&nbsp; Vue.js &nbsp;·&nbsp; UI / UX &nbsp;·&nbsp; Laravel
+        &nbsp;·&nbsp; Full-Stack &nbsp;·&nbsp; Digital Marketing &nbsp;·&nbsp; The People Behind KEHEM IT &nbsp;·&nbsp;
+      </span>
+      <span aria-hidden="true" class="text-[11px] font-semibold tracking-[0.22em] uppercase mx-6"
+        style="color:rgba(27,124,131,0.22);">
+        Meet the Team &nbsp;·&nbsp; Django &nbsp;·&nbsp; Vue.js &nbsp;·&nbsp; UI / UX &nbsp;·&nbsp; Laravel
+        &nbsp;·&nbsp; Full-Stack &nbsp;·&nbsp; Digital Marketing &nbsp;·&nbsp; The People Behind KEHEM IT &nbsp;·&nbsp;
+        Meet the Team &nbsp;·&nbsp; Django &nbsp;·&nbsp; Vue.js &nbsp;·&nbsp; UI / UX &nbsp;·&nbsp; Laravel
+        &nbsp;·&nbsp; Full-Stack &nbsp;·&nbsp; Digital Marketing &nbsp;·&nbsp; The People Behind KEHEM IT &nbsp;·&nbsp;
+        Meet the Team &nbsp;·&nbsp; Django &nbsp;·&nbsp; Vue.js &nbsp;·&nbsp; UI / UX &nbsp;·&nbsp; Laravel
+        &nbsp;·&nbsp; Full-Stack &nbsp;·&nbsp; Digital Marketing &nbsp;·&nbsp; The People Behind KEHEM IT &nbsp;·&nbsp;
+      </span>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+      <div class="fade-in">
+        <p class="text-[11px] font-semibold tracking-[0.22em] uppercase mb-3" style="color:#1B7C83;">
+          The Humans Behind the Code
+        </p>
+        <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight tracking-tight">
+          Meet Our<br />
+          <span style="color:#1B7C83;">Team</span>
+        </h2>
+      </div>
+      <p class="text-gray-500 text-base sm:text-lg max-w-sm leading-relaxed md:text-right fade-in delay-1">
+        Six dedicated professionals who bring expertise, craft, and passion to every single project.
+      </p>
+    </div>
+
+    <div class="teal-rule mb-16"></div>
+
+    <!-- ── ROW 1: Featured member (wide) + 2 cards ── -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-5">
+
+      <!-- Featured card – Lead Django Developer -->
+      <div class="team-card lg:col-span-1 bg-white rounded-2xl overflow-hidden cursor-default fade-in delay-1"
+        style="min-height:380px;">
+        <div class="relative h-64 overflow-hidden bg-gray-200">
+          <img src="/static/kehem/images/anirban.jpg" alt="Anirban Singha"
+            class="team-img" loading="lazy" />
+          <!-- Hover overlay -->
+          <div class="team-overlay">
+            <div class="overlay-content">
+              <div class="flex flex-wrap gap-1.5 mb-2">
+                <span
+                  class="text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-white/20 text-white border border-white/30">Python</span>
+                <span
+                  class="text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-white/20 text-white border border-white/30">Django</span>
+                <span
+                  class="text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-white/20 text-white border border-white/30">REST
+                  API</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-6 relative">
+          <span class="bg-num">01</span>
+          <div class="relative z-10">
+            <p class="card-num mb-2">01 / 06</p>
+            <h3 class="text-xl font-bold text-gray-900 mb-1">Anirban Singha</h3>
+            <span class="role-tag">Lead Django Developer</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 – Frontend Specialist -->
+      <div class="team-card bg-white rounded-2xl overflow-hidden cursor-default fade-in delay-2"
+        style="min-height:380px;">
+        <div class="relative h-64 overflow-hidden bg-gray-200">
+          <img src="/static/kehem/images/sisir.jpg" alt="Surajit Singha"
+            class="team-img" loading="lazy" />
+          <div class="team-overlay">
+            <div class="overlay-content">
+              <div class="flex flex-wrap gap-1.5 mb-2">
+                <span
+                  class="text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-white/20 text-white border border-white/30">Vue
+                  3</span>
+                <span
+                  class="text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-white/20 text-white border border-white/30">Nuxt</span>
+                <span
+                  class="text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-white/20 text-white border border-white/30">Pinia</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-6 relative">
+          <span class="bg-num">02</span>
+          <div class="relative z-10">
+            <p class="card-num mb-2">02 / 06</p>
+            <h3 class="text-xl font-bold text-gray-900 mb-1">Surajit Singha</h3>
+            <span class="role-tag">Frontend Specialist (Vue/Nuxt)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 – UI/UX Designer -->
+      <div class="team-card bg-white rounded-2xl overflow-hidden cursor-default fade-in delay-3"
+        style="min-height:380px;">
+        <div class="relative h-64 overflow-hidden bg-gray-200">
+          <img src="/static/kehem/images/shuvo.jpg" alt="Kazi Akequr Rahaman"
+            class="team-img" loading="lazy" />
+          <div class="team-overlay">
+            <div class="overlay-content">
+              <div class="flex flex-wrap gap-1.5 mb-2">
+                <span
+                  class="text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-white/20 text-white border border-white/30">Figma</span>
+                <span
+                  class="text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-white/20 text-white border border-white/30">UI/UX</span>
+                <span
+                  class="text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-white/20 text-white border border-white/30">HTML/CSS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-6 relative">
+          <span class="bg-num">03</span>
+          <div class="relative z-10">
+            <p class="card-num mb-2">03 / 06</p>
+            <h3 class="text-xl font-bold text-gray-900 mb-1">Kazi Akequr Rahaman</h3>
+            <span class="role-tag">Web Designer · UI/UX</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /row 1 -->
+
+    <!-- ── ROW 2: 2 cards + Highlight stat card ── -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- Card 4 – Web Developer -->
+      <div class="team-card bg-white rounded-2xl overflow-hidden cursor-default fade-in delay-4"
+        style="min-height:380px;">
+        <div class="relative h-64 overflow-hidden bg-gray-200">
+          <img src="/static/kehem/images/emon.jpg" alt="Md Afjal Hussain"
+            class="team-img" loading="lazy" />
+          <div class="team-overlay">
+            <div class="overlay-content">
+              <div class="flex flex-wrap gap-1.5 mb-2">
+                <span
+                  class="text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-white/20 text-white border border-white/30">HTML</span>
+                <span
+                  class="text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-white/20 text-white border border-white/30">CSS</span>
+                <span
+                  class="text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-white/20 text-white border border-white/30">JavaScript</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-6 relative">
+          <span class="bg-num">04</span>
+          <div class="relative z-10">
+            <p class="card-num mb-2">04 / 06</p>
+            <h3 class="text-xl font-bold text-gray-900 mb-1">Md Afjal Hussain</h3>
+            <span class="role-tag">Web Developer (RAW)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 – Laravel Developer -->
+      <div class="team-card bg-white rounded-2xl overflow-hidden cursor-default fade-in delay-5"
+        style="min-height:380px;">
+        <div class="relative h-64 overflow-hidden bg-gray-200">
+          <img src="https://i.ibb.co/CKSC9NSc/najmul.jpg" alt="Md. Nazmul Islam"
+            class="team-img" loading="lazy" />
+          <div class="team-overlay">
+            <div class="overlay-content">
+              <div class="flex flex-wrap gap-1.5 mb-2">
+                <span
+                  class="text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-white/20 text-white border border-white/30">Laravel</span>
+                <span
+                  class="text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-white/20 text-white border border-white/30">PHP</span>
+                <span
+                  class="text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-white/20 text-white border border-white/30">MySQL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-6 relative">
+          <span class="bg-num">05</span>
+          <div class="relative z-10">
+            <p class="card-num mb-2">05 / 06</p>
+            <h3 class="text-xl font-bold text-gray-900 mb-1">Md. Nazmul Islam</h3>
+            <span class="role-tag">Laravel Developer</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 – Digital Marketer + CTA block stacked -->
+      <div class="flex flex-col gap-5 fade-in delay-6">
+
+        <!-- Card 6 – Digital Marketer -->
+        <div class="team-card bg-white rounded-2xl overflow-hidden cursor-default flex-1" style="min-height:200px;">
+          <div class="flex items-center gap-5 p-5 h-full">
+            <div class="relative w-20 h-20 flex-shrink-0 rounded-xl overflow-hidden bg-gray-200">
+              <img src="/static/kehem/images/monir.jpg" alt="MONIRUZZAMAN"
+                class="team-img" loading="lazy" />
+            </div>
+            <div class="relative z-10 flex-1 min-w-0">
+              <p class="card-num mb-1">06 / 06</p>
+              <h3 class="text-lg font-bold text-gray-900 mb-1 truncate">MONIRUZZAMAN</h3>
+              <span class="role-tag">Digital Marketer · Analyst</span>
+              <div class="flex flex-wrap gap-1.5 mt-3">
+                <span class="text-[9px] font-semibold tracking-widest uppercase px-2 py-1 rounded-full border"
+                  style="color:#1B7C83;border-color:rgba(27,124,131,0.22);background:rgba(27,124,131,0.07);">SEO</span>
+                <span class="text-[9px] font-semibold tracking-widest uppercase px-2 py-1 rounded-full border"
+                  style="color:#1B7C83;border-color:rgba(27,124,131,0.22);background:rgba(27,124,131,0.07);">Analytics</span>
+                <span class="text-[9px] font-semibold tracking-widest uppercase px-2 py-1 rounded-full border"
+                  style="color:#1B7C83;border-color:rgba(27,124,131,0.22);background:rgba(27,124,131,0.07);">Ads</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA card – teal filled -->
+        <div class="rounded-2xl p-6 flex flex-col justify-between text-white flex-1"
+          style="background:#1B7C83; min-height:160px;">
+          <div>
+            <p class="text-[11px] font-semibold tracking-[0.2em] uppercase text-white/60 mb-2">Join Our Team</p>
+            <p class="text-2xl font-bold leading-tight">
+              We're always looking for great talent.
+            </p>
+          </div>
+          <a href="#contact"
+            class="mt-4 inline-flex items-center gap-2 bg-white font-semibold text-xs uppercase tracking-widest px-5 py-2.5 rounded-full transition-colors duration-300 self-start"
+            style="color:#1B7C83;" onmouseenter="this.style.background='#f0fafa'"
+            onmouseleave="this.style.background='#ffffff'">
+            Get in Touch
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /row 2 -->
+
+    <!-- Bottom rule + stat strip -->
+    <div class="teal-rule mt-16 mb-10"></div>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+      <div class="fade-in delay-1">
+        <p class="text-3xl font-bold" style="color:#1B7C83;">6</p>
+        <p class="text-xs tracking-widest uppercase text-gray-400 mt-1 font-medium">Team Members</p>
+      </div>
+      <div class="fade-in delay-2">
+        <p class="text-3xl font-bold" style="color:#1B7C83;">4</p>
+        <p class="text-xs tracking-widest uppercase text-gray-400 mt-1 font-medium">Core Disciplines</p>
+      </div>
+      <div class="fade-in delay-3">
+        <p class="text-3xl font-bold" style="color:#1B7C83;">5+</p>
+        <p class="text-xs tracking-widest uppercase text-gray-400 mt-1 font-medium">Years Experience</p>
+      </div>
+      <div class="fade-in delay-4">
+        <p class="text-3xl font-bold" style="color:#1B7C83;">50+</p>
+        <p class="text-xs tracking-widest uppercase text-gray-400 mt-1 font-medium">Projects Delivered</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<!-- ══════════════════════════════════════
+     ABOUT KEHEM IT SECTION
+══════════════════════════════════════ -->
+<section class="py-20 sm:py-32 bg-white overflow-hidden" id="about">
+
+  <!-- Scrolling label strip -->
+  <div class="overflow-hidden mb-14 pointer-events-none select-none">
+    <div class="flex whitespace-nowrap marquee-track">
+      <span class="text-[11px] font-semibold tracking-[0.22em] uppercase mx-6" style="color:rgba(27,124,131,0.22);">
+        Our Story &nbsp;·&nbsp; Who We Are &nbsp;·&nbsp; Our Mission &nbsp;·&nbsp; Built with Purpose &nbsp;·&nbsp;
+        Driven by Craft &nbsp;·&nbsp; Digital Excellence &nbsp;·&nbsp; KEHEM IT &nbsp;·&nbsp; Scandinavian-Inspired
+        Design &nbsp;·&nbsp;
+        Our Story &nbsp;·&nbsp; Who We Are &nbsp;·&nbsp; Our Mission &nbsp;·&nbsp; Built with Purpose &nbsp;·&nbsp;
+        Driven by Craft &nbsp;·&nbsp; Digital Excellence &nbsp;·&nbsp; KEHEM IT &nbsp;·&nbsp; Scandinavian-Inspired
+        Design &nbsp;·&nbsp;
+        Our Story &nbsp;·&nbsp; Who We Are &nbsp;·&nbsp; Our Mission &nbsp;·&nbsp; Built with Purpose &nbsp;·&nbsp;
+        Driven by Craft &nbsp;·&nbsp; Digital Excellence &nbsp;·&nbsp; KEHEM IT &nbsp;·&nbsp; Scandinavian-Inspired
+        Design &nbsp;·&nbsp;
+      </span>
+      <span aria-hidden="true" class="text-[11px] font-semibold tracking-[0.22em] uppercase mx-6"
+        style="color:rgba(27,124,131,0.22);">
+        Our Story &nbsp;·&nbsp; Who We Are &nbsp;·&nbsp; Our Mission &nbsp;·&nbsp; Built with Purpose &nbsp;·&nbsp;
+        Driven by Craft &nbsp;·&nbsp; Digital Excellence &nbsp;·&nbsp; KEHEM IT &nbsp;·&nbsp; Scandinavian-Inspired
+        Design &nbsp;·&nbsp;
+        Our Story &nbsp;·&nbsp; Who We Are &nbsp;·&nbsp; Our Mission &nbsp;·&nbsp; Built with Purpose &nbsp;·&nbsp;
+        Driven by Craft &nbsp;·&nbsp; Digital Excellence &nbsp;·&nbsp; KEHEM IT &nbsp;·&nbsp; Scandinavian-Inspired
+        Design &nbsp;·&nbsp;
+        Our Story &nbsp;·&nbsp; Who We Are &nbsp;·&nbsp; Our Mission &nbsp;·&nbsp; Built with Purpose &nbsp;·&nbsp;
+        Driven by Craft &nbsp;·&nbsp; Digital Excellence &nbsp;·&nbsp; KEHEM IT &nbsp;·&nbsp; Scandinavian-Inspired
+        Design &nbsp;·&nbsp;
+      </span>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- ── TOP: Header + Image side by side ── -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20">
+
+      <!-- Left: text -->
+      <div>
+        <p class="text-[11px] font-semibold tracking-[0.22em] uppercase mb-4 fade-in" style="color:#1B7C83;">
+          Our Story
+        </p>
+        <h2
+          class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight tracking-tight mb-8 fade-in delay-1">
+          About<br />
+          <span style="color:#1B7C83;">KEHEM IT</span>
+        </h2>
+
+        <!-- Decorative bracket quote -->
+        <div class="relative pl-6 mb-8 fade-in delay-2">
+          <div class="absolute left-0 top-0 w-4 h-4 bracket-left rounded-tl-sm"></div>
+          <p class="text-xl sm:text-2xl font-light text-gray-700 leading-relaxed italic">
+            "We don't just write code — we craft experiences that outlast trends, outlive frameworks, and outperform
+            expectations."
+          </p>
+          <div class="absolute right-0 bottom-0 w-4 h-4 bracket-right rounded-br-sm"></div>
+        </div>
+
+        <!-- Body copy -->
+        <div class="space-y-5 fade-in delay-3">
+          <p class="text-gray-600 leading-relaxed text-base sm:text-lg">
+            KEHEM IT was born from a simple but radical belief: that <span
+              class="text-highlight font-semibold text-gray-800">software should be beautiful</span> — not just
+            functional. We are a team of six passionate engineers and designers united by an obsession with craft,
+            precision, and the kind of digital work that makes people stop and say <em>"how did they do that?"</em>
+          </p>
+          <p class="text-gray-600 leading-relaxed text-base sm:text-lg">
+            Drawing deep inspiration from the minimalist clarity of <span
+              class="font-semibold text-gray-800">Scandinavian design</span> — where every element serves a purpose and
+            nothing is without intent — we approach every project as an exercise in restraint and elegance. Clean lines.
+            Honest architecture. Software that breathes.
+          </p>
+          <p class="text-gray-600 leading-relaxed text-base sm:text-lg">
+            From the robust backends of <span class="font-semibold" style="color:#1B7C83;">Django</span> to the reactive
+            frontends of <span class="font-semibold" style="color:#1B7C83;">Vue & Nuxt</span>, from pixel-perfect
+            hand-coded HTML to full-stack solutions — we build with the full spectrum of modern web technology, always
+            choosing the right tool, never the fashionable one.
+          </p>
+        </div>
+
+        <!-- Value pills -->
+        <div class="flex flex-wrap gap-2 mt-8 fade-in delay-4">
+          <span class="value-pill text-[10px] font-semibold tracking-[0.14em] uppercase px-4 py-2 rounded-full border"
+            style="color:#1B7C83; border-color:rgba(27,124,131,0.25); background:rgba(27,124,131,0.07);">Precision</span>
+          <span class="value-pill text-[10px] font-semibold tracking-[0.14em] uppercase px-4 py-2 rounded-full border"
+            style="color:#1B7C83; border-color:rgba(27,124,131,0.25); background:rgba(27,124,131,0.07);">Transparency</span>
+          <span class="value-pill text-[10px] font-semibold tracking-[0.14em] uppercase px-4 py-2 rounded-full border"
+            style="color:#1B7C83; border-color:rgba(27,124,131,0.25); background:rgba(27,124,131,0.07);">Scalability</span>
+          <span class="value-pill text-[10px] font-semibold tracking-[0.14em] uppercase px-4 py-2 rounded-full border"
+            style="color:#1B7C83; border-color:rgba(27,124,131,0.25); background:rgba(27,124,131,0.07);">Minimalism</span>
+          <span class="value-pill text-[10px] font-semibold tracking-[0.14em] uppercase px-4 py-2 rounded-full border"
+            style="color:#1B7C83; border-color:rgba(27,124,131,0.25); background:rgba(27,124,131,0.07);">Craftsmanship</span>
+          <span class="value-pill text-[10px] font-semibold tracking-[0.14em] uppercase px-4 py-2 rounded-full border"
+            style="color:#1B7C83; border-color:rgba(27,124,131,0.25); background:rgba(27,124,131,0.07);">Client-First</span>
+        </div>
+      </div>
+
+      <!-- Right: image -->
+      <div class="fade-in delay-3">
+        <div class="img-frame rounded-2xl overflow-hidden shadow-lg relative">
+          <img src="/static/kehem/images/team.webp" alt="KEHEM IT Team Working" class="w-full h-full object-cover"
+            style="min-height:420px;" />
+          <!-- Teal overlay tint on bottom -->
+          <div class="absolute inset-0 pointer-events-none"
+            style="background: linear-gradient(to top, rgba(27,124,131,0.18) 0%, transparent 50%);"></div>
+          <!-- Floating badge -->
+          <div
+            class="absolute bottom-5 left-5 flex items-center gap-3 bg-white/90 backdrop-blur-sm px-4 py-3 rounded-xl shadow-md">
+            <div
+              class="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
+              style="background:#1B7C83;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-gray-900 font-bold text-sm leading-none">6 Specialists</p>
+              <p class="text-gray-400 text-xs mt-0.5">Engineering · Design · Marketing</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /top grid -->
+
+    <div class="teal-rule mb-16"></div>
+
+    <!-- ── MIDDLE: Our Philosophy ── -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16">
+
+      <!-- Wide philosophy block -->
+      <div class="lg:col-span-2 bg-white rounded-2xl p-8 sm:p-10 fade-in delay-2">
+        <p class="text-[11px] font-semibold tracking-[0.22em] uppercase mb-4" style="color:#1B7C83;">Our Philosophy</p>
+        <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 leading-snug mb-6">
+          We believe the best software is the kind you barely notice — because it just <span
+            style="color:#1B7C83;">works.</span>
+        </h3>
+        <p class="text-gray-500 leading-relaxed text-base mb-4">
+          Great software is invisible. It doesn't shout for attention — it quietly dissolves friction, accelerates
+          decisions, and amplifies the people using it. Every line of code we write, every component we design, every
+          system we architect is driven by one question: <em>does this make someone's life genuinely better?</em>
+        </p>
+        <p class="text-gray-500 leading-relaxed text-base">
+          We aren't a factory. We don't churn out template-driven websites or copy-paste solutions. We sit down with
+          you, understand your business at its roots, and build something that is unmistakably, unapologetically <strong
+            class="text-gray-700">yours</strong>.
+        </p>
+      </div>
+
+      <!-- Teal mission card -->
+      <div class="rounded-2xl p-8 flex flex-col justify-between text-white fade-in delay-3" style="background:#1B7C83;">
+        <div>
+          <p class="text-[11px] font-semibold tracking-[0.22em] uppercase text-white/60 mb-4">Our Mission</p>
+          <p class="text-xl font-bold leading-snug mb-4">
+            To make powerful, elegant software accessible to every visionary — regardless of scale.
+          </p>
+          <p class="text-white/70 text-sm leading-relaxed">
+            From a solo founder with a bold idea to an enterprise rethinking its digital infrastructure — KEHEM IT
+            delivers with the same level of care and craft.
+          </p>
+        </div>
+        <div class="mt-8">
+          <div class="h-px bg-white/15 mb-6"></div>
+          <a href="#contact"
+            class="inline-flex items-center gap-2 bg-white font-semibold text-xs uppercase tracking-widest px-5 py-2.5 rounded-full transition-colors duration-300"
+            style="color:#1B7C83;" onmouseenter="this.style.background='#f0fafa'"
+            onmouseleave="this.style.background='#ffffff'">
+            Start a Conversation
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <!-- /philosophy -->
+
+    <!-- ── BOTTOM: 4 stat cards ── -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-5 fade-in delay-4">
+
+      <div class="stat-card bg-white rounded-2xl p-6 text-center cursor-default">
+        <p class="text-4xl sm:text-5xl font-bold leading-none mb-2" style="color:#1B7C83;">50+</p>
+        <p class="text-xs tracking-widest uppercase text-gray-400 font-medium">Projects Delivered</p>
+      </div>
+
+      <div class="stat-card bg-white rounded-2xl p-6 text-center cursor-default">
+        <p class="text-4xl sm:text-5xl font-bold leading-none mb-2" style="color:#1B7C83;">30+</p>
+        <p class="text-xs tracking-widest uppercase text-gray-400 font-medium">Happy Clients</p>
+      </div>
+
+      <div class="stat-card bg-white rounded-2xl p-6 text-center cursor-default">
+        <p class="text-4xl sm:text-5xl font-bold leading-none mb-2" style="color:#1B7C83;">5+</p>
+        <p class="text-xs tracking-widest uppercase text-gray-400 font-medium">Years of Craft</p>
+      </div>
+
+      <div class="stat-card bg-white rounded-2xl p-6 text-center cursor-default">
+        <p class="text-4xl sm:text-5xl font-bold leading-none mb-2" style="color:#1B7C83;">100%</p>
+        <p class="text-xs tracking-widest uppercase text-gray-400 font-medium">Client Satisfaction</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     CONTACT SECTION
+══════════════════════════════════════ -->
+<section class="py-20 sm:py-32 bg-gray-100 overflow-hidden" id="contact"
+  style="background: linear-gradient(135deg, rgba(27,124,131,0.04) 0%, #ffffff 50%, rgba(27,124,131,0.03) 100%);">
+
+  <!-- Scrolling label strip -->
+  <div class="overflow-hidden mb-14 pointer-events-none select-none">
+    <div class="flex whitespace-nowrap marquee-track">
+      <span class="text-[11px] font-semibold tracking-[0.22em] uppercase mx-6" style="color:rgba(27,124,131,0.22);">
+        Get in Touch &nbsp;·&nbsp; Start a Project &nbsp;·&nbsp; Let's Build Together &nbsp;·&nbsp; Request a Quote
+        &nbsp;·&nbsp; Say Hello &nbsp;·&nbsp; We'd Love to Hear from You &nbsp;·&nbsp;
+        Get in Touch &nbsp;·&nbsp; Start a Project &nbsp;·&nbsp; Let's Build Together &nbsp;·&nbsp; Request a Quote
+        &nbsp;·&nbsp; Say Hello &nbsp;·&nbsp; We'd Love to Hear from You &nbsp;·&nbsp;
+        Get in Touch &nbsp;·&nbsp; Start a Project &nbsp;·&nbsp; Let's Build Together &nbsp;·&nbsp; Request a Quote
+        &nbsp;·&nbsp; Say Hello &nbsp;·&nbsp; We'd Love to Hear from You &nbsp;·&nbsp;
+      </span>
+      <span aria-hidden="true" class="text-[11px] font-semibold tracking-[0.22em] uppercase mx-6"
+        style="color:rgba(27,124,131,0.22);">
+        Get in Touch &nbsp;·&nbsp; Start a Project &nbsp;·&nbsp; Let's Build Together &nbsp;·&nbsp; Request a Quote
+        &nbsp;·&nbsp; Say Hello &nbsp;·&nbsp; We'd Love to Hear from You &nbsp;·&nbsp;
+        Get in Touch &nbsp;·&nbsp; Start a Project &nbsp;·&nbsp; Let's Build Together &nbsp;·&nbsp; Request a Quote
+        &nbsp;·&nbsp; Say Hello &nbsp;·&nbsp; We'd Love to Hear from You &nbsp;·&nbsp;
+        Get in Touch &nbsp;·&nbsp; Start a Project &nbsp;·&nbsp; Let's Build Together &nbsp;·&nbsp; Request a Quote
+        &nbsp;·&nbsp; Say Hello &nbsp;·&nbsp; We'd Love to Hear from You &nbsp;·&nbsp;
+      </span>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 fade-in">
+      <div>
+        <p class="text-[11px] font-semibold tracking-[0.22em] uppercase mb-3" style="color:#1B7C83;">
+          Let's Talk
+        </p>
+        <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight tracking-tight">
+          Let's Create<br />
+          <span style="color:#1B7C83;">Together</span>
+        </h2>
+      </div>
+      <div class="flex items-center gap-2 md:self-end fade-in delay-1">
+        <span class="pulse-dot w-2 h-2 rounded-full inline-block flex-shrink-0" style="background:#1B7C83;"></span>
+        <p class="text-gray-500 text-sm font-medium">Usually responds within 24 hours</p>
+      </div>
+    </div>
+
+    <div class="teal-rule mb-16"></div>
+
+    <!-- ── MAIN GRID: Form (left) + Info (right) ── -->
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
+
+      <!-- ── FORM ── (spans 3 cols) -->
+      <div class="lg:col-span-3 fade-in delay-1">
+        <div class="bg-white rounded-2xl shadow-md p-8 sm:p-10 border border-gray-100">
+
+          <!-- Step label -->
+          <p class="text-[11px] font-semibold tracking-[0.2em] uppercase mb-6" style="color:#1B7C83;">
+            Tell us about your project
+          </p>
+
+          <!-- Service selector -->
+          <div class="mb-8">
+            <p class="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-3">I need help with</p>
+            <div class="flex flex-wrap gap-2" id="service-tags">
+              <span class="service-tag" onclick="toggleTag(this)">Django Development</span>
+              <span class="service-tag" onclick="toggleTag(this)">Vue / Nuxt</span>
+              <span class="service-tag" onclick="toggleTag(this)">Custom Website</span>
+              <span class="service-tag" onclick="toggleTag(this)">Full-Stack</span>
+              <span class="service-tag" onclick="toggleTag(this)">UI / UX Design</span>
+              <span class="service-tag" onclick="toggleTag(this)">Something Else</span>
+            </div>
+          </div>
+
+          <div class="teal-rule mb-8"></div>
+
+          <!-- Form fields -->
+          <form id="contact-form" onsubmit="handleContactForm(event)">
+            <div class="space-y-6">
+
+              <!-- Name + Email row -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div class="input-group">
+                  <input type="text" name="full_name" placeholder=" " required
+                    class="form-input w-full px-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 text-sm" />
+                  <label class="input-label">Your Name</label>
+                </div>
+                <div class="input-group">
+                  <input type="email" name="email" placeholder=" " required
+                    class="form-input w-full px-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 text-sm" />
+                  <label class="input-label">Email Address</label>
+                </div>
+              </div>
+
+              <!-- Subject -->
+              <div class="input-group">
+                <input type="text" name="subject" placeholder=" " required
+                  class="form-input w-full px-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 text-sm" />
+                <label class="input-label">Project Title / Subject</label>
+              </div>
+
+              <!-- Budget selector -->
+              <div>
+                <p class="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-3">Estimated Budget</p>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  <label class="budget-option cursor-pointer">
+                    <input type="radio" name="budget" class="hidden peer" value="under-1k" />
+                    <span
+                      class="block text-center text-xs font-semibold uppercase tracking-wider py-2.5 px-2 rounded-xl border border-gray-200 bg-gray-50 text-gray-500 peer-checked:bg-[#1B7C83] peer-checked:text-white peer-checked:border-[#1B7C83] transition-all duration-200 hover:border-[#1B7C83] hover:text-[#1B7C83]">
+                      &lt; $1k
+                    </span>
+                  </label>
+                  <label class="budget-option cursor-pointer">
+                    <input type="radio" name="budget" class="hidden peer" value="1k-5k" />
+                    <span
+                      class="block text-center text-xs font-semibold uppercase tracking-wider py-2.5 px-2 rounded-xl border border-gray-200 bg-gray-50 text-gray-500 peer-checked:bg-[#1B7C83] peer-checked:text-white peer-checked:border-[#1B7C83] transition-all duration-200 hover:border-[#1B7C83] hover:text-[#1B7C83]">
+                      $1k – $5k
+                    </span>
+                  </label>
+                  <label class="budget-option cursor-pointer">
+                    <input type="radio" name="budget" class="hidden peer" value="5k-15k" />
+                    <span
+                      class="block text-center text-xs font-semibold uppercase tracking-wider py-2.5 px-2 rounded-xl border border-gray-200 bg-gray-50 text-gray-500 peer-checked:bg-[#1B7C83] peer-checked:text-white peer-checked:border-[#1B7C83] transition-all duration-200 hover:border-[#1B7C83] hover:text-[#1B7C83]">
+                      $5k – $15k
+                    </span>
+                  </label>
+                  <label class="budget-option cursor-pointer">
+                    <input type="radio" name="budget" class="hidden peer" value="15k+" />
+                    <span
+                      class="block text-center text-xs font-semibold uppercase tracking-wider py-2.5 px-2 rounded-xl border border-gray-200 bg-gray-50 text-gray-500 peer-checked:bg-[#1B7C83] peer-checked:text-white peer-checked:border-[#1B7C83] transition-all duration-200 hover:border-[#1B7C83] hover:text-[#1B7C83]">
+                      $15k+
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Message -->
+              <div class="input-group">
+                <textarea name="message" placeholder=" " rows="5" required
+                  class="form-textarea w-full px-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 text-gray-900 text-sm"></textarea>
+                <label class="input-label">Tell us about your project…</label>
+              </div>
+
+              <!-- Submit -->
+              <button id="submit-btn"
+                class="submit-btn w-full text-white font-semibold text-sm uppercase tracking-widest py-4 rounded-xl flex items-center justify-center gap-3"
+                style="background:#1B7C83;" type="submit">
+                <span id="btn-text">Send Message</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" />
+                </svg>
+              </button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ── INFO SIDEBAR ── (spans 2 cols) -->
+      <div class="lg:col-span-2 flex flex-col gap-5 fade-in delay-2">
+
+        <!-- Greeting card -->
+        <div class="rounded-2xl p-8 text-white" style="background:#0a0f0f;">
+          <p class="text-[11px] font-semibold tracking-[0.22em] uppercase text-white/60 mb-4">Ready when you are</p>
+          <h3 class="text-2xl font-bold leading-snug mb-4">
+            Every great product starts with a single conversation.
+          </h3>
+          <p class="text-white/70 text-sm leading-relaxed">
+            Whether you have a fully scoped brief or just a spark of an idea — reach out. We love the early stage
+            conversations most.
+          </p>
+          <div class="h-px bg-white/15 my-6"></div>
+          <div class="flex items-center gap-2">
+            <span class="pulse-dot w-2 h-2 rounded-full flex-shrink-0 bg-white"></span>
+            <span class="text-white/80 text-sm font-medium">Available for new projects</span>
+          </div>
+        </div>
+
+        <!-- Email card -->
+        <div class="info-card bg-gray-50 rounded-2xl p-6 cursor-default">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+              style="background:rgba(27,124,131,0.1);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B7C83" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-[10px] font-semibold tracking-widest uppercase text-gray-400 mb-1">Email Us</p>
+              <a href="mailto:support@kehem.com" class="text-gray-900 font-semibold text-sm hover:underline"
+                style="text-decoration-color:#1B7C83;">
+                support@kehem.com
+              </a>
+              <p class="text-gray-400 text-xs mt-1">We reply within 24 hours</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone card -->
+        <div class="info-card bg-gray-50 rounded-2xl p-6 cursor-default">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+              style="background:rgba(27,124,131,0.1);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1B7C83" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.58 3.4 2 2 0 0 1 3.54 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.74a16 16 0 0 0 6 6l.87-.87a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.46 16z" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-[10px] font-semibold tracking-widest uppercase text-gray-400 mb-1">Call Us</p>
+              <a href="tel:+8801307711384" class="text-gray-900 font-semibold text-sm hover:underline"
+                style="text-decoration-color:#1B7C83;">
+                +880 130 77 11 384
+              </a>
+              <p class="text-gray-400 text-xs mt-1">Sun – Thu, 9 AM – 6 PM (BST)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social / links card -->
+        <div class="info-card bg-gray-50 rounded-2xl p-6 cursor-default">
+          <p class="text-[10px] font-semibold tracking-widest uppercase text-gray-400 mb-4">Find Us Online</p>
+          <div class="flex flex-col gap-3">
+            <a href="https://www.linkedin.com/company/kehem-it" target="_blank" class="flex items-center gap-3 group">
+              <div
+                class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-300 group-hover:bg-brand group-hover:text-white"
+                style="background:rgba(27,124,131,0.1);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1B7C83" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"
+                  class="group-hover:stroke-white transition-colors duration-300">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                  <rect x="2" y="9" width="4" height="12" />
+                  <circle cx="4" cy="4" r="2" />
+                </svg>
+              </div>
+              <span
+                class="text-sm font-medium text-gray-700 group-hover:text-brand transition-colors duration-200">LinkedIn</span>
+            </a>
+            <a href="https://twitter.com/kehemit" target="_blank" class="flex items-center gap-3 group">
+              <div
+                class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-300 group-hover:bg-brand"
+                style="background:rgba(27,124,131,0.1);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1B7C83" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"
+                  class="group-hover:stroke-white transition-colors duration-300">
+                  <path
+                    d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.43.36a9 9 0 0 1-2.88 1.1A4.52 4.52 0 0 0 16.11 0c-2.5 0-4.52 2.02-4.52 4.52 0 .35.04.7.11 1.03C7.69 5.37 4.07 3.58 1.64.9a4.52 4.52 0 0 0-.61 2.27c0 1.57.8 2.95 2.02 3.76a4.49 4.49 0 0 1-2.05-.57v.06c0 2.19 1.56 4.02 3.63 4.43a4.56 4.56 0 0 1-2.04.08 4.53 4.53 0 0 0 4.23 3.14A9.06 9.06 0 0 1 0 19.54a12.8 12.8 0 0 0 6.92 2.03c8.3 0 12.85-6.88 12.85-12.85 0-.2 0-.39-.01-.58A9.17 9.17 0 0 0 22 5.46a9 9 0 0 1-2.6.71A4.52 4.52 0 0 0 21.46 3z" />
+                </svg>
+              </div>
+              <span
+                class="text-sm font-medium text-gray-700 group-hover:text-brand transition-colors duration-200">Twitter
+                / X</span>
+            </a>
+            <a href="https://techbehemoths.com/company/kehem-it" target="_blank" class="flex items-center gap-3 group">
+              <div
+                class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-300 group-hover:bg-brand"
+                style="background:rgba(27,124,131,0.1);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1B7C83" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"
+                  class="group-hover:stroke-white transition-colors duration-300">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+              </div>
+              <span
+                class="text-sm font-medium text-gray-700 group-hover:text-brand transition-colors duration-200">TechBehemoths</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+      <!-- /sidebar -->
+
+    </div>
+    <!-- /main grid -->
+
+  </div>
+</section>
+
+<div id="toast" class="toast" aria-live="polite"></div>
+
+<style>
+  .toast {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(15, 23, 42, 0.95);
+    color: #ffffff;
+    border-radius: 999px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 18px 50px rgba(15, 23, 42, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 50;
+    font-weight: 600;
+    max-width: calc(100% - 2rem);
+    text-align: center;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+  }
+  .toast-close {
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.8);
+    margin-left: 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+</style>
+
+<script>
+  function toggleTag(el) {
+    el.classList.toggle('active');
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(window.toastTimeout);
+    window.toastTimeout = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 4200);
+  }
+
+  function handleContactForm(event) {
+    event.preventDefault();
+
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+
+    // Get form data
+    const formData = new FormData(form);
+    const selectedServices = Array.from(document.querySelectorAll('#service-tags .service-tag.active')).map(el => el.textContent).join(', ');
+
+    // Validate form
+    if (!formData.get('full_name') || !formData.get('email') || !formData.get('subject') || !formData.get('message')) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.get('email'))) {
+      alert('Please enter a valid email address');
+      return;
+    }
+
+    // Disable button and show loading state
+    submitBtn.disabled = true;
+    btnText.textContent = 'Sending...';
+    submitBtn.style.opacity = '0.7';
+
+    // Prepare email data
+    const emailData = {
+      full_name: formData.get('full_name'),
+      email: formData.get('email'),
+      subject: formData.get('subject'),
+      budget: formData.get('budget') || 'Not specified',
+      services: selectedServices || 'Not specified',
+      message: formData.get('message')
+    };
+
+    // Send email via fetch to backend endpoint (Django view)
+    fetch('/api/send-contact-email/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken')
+      },
+      body: JSON.stringify(emailData)
+    })
+    .then(response => {
+      if (!response.ok) throw new Error('Network response was not ok');
+      return response.json();
+    })
+    .then(data => {
+      if (data.success || data.status === 'success') {
+        btnText.textContent = '✓ Message Sent!';
+        showToast('We will reach out to you within 24 hours. Thanks for your patience.');
+        form.reset();
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          btnText.textContent = 'Send Message';
+          submitBtn.style.opacity = '1';
+        }, 3000);
+      } else {
+        throw new Error(data.message || 'Failed to send message');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Failed to send message. Please try again or contact us directly at support@kehem.com');
+      submitBtn.disabled = false;
+      btnText.textContent = 'Send Message';
+      submitBtn.style.opacity = '1';
+    });
+  }
+
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+</script>
+
+
+{% endblock content %}

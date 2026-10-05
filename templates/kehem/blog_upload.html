@@ -1,0 +1,1266 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog Dashboard — Kehem</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0F1117', paper: '#F7F6F2', muted: '#6B7280',
+            accent: '#2563EB', success: '#16A34A', warning: '#D97706',
+            danger: '#DC2626', border: '#E5E4DF',
+          },
+          fontFamily: {
+            sans: ['Inter','system-ui','sans-serif'],
+            mono: ['JetBrains Mono','monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}
+    body{background:#F7F6F2;color:#0F1117}
+    .sidebar{width:240px;min-height:100vh;background:#0F1117;flex-shrink:0}
+    .sidebar-link{display:flex;align-items:center;gap:10px;padding:10px 20px;color:#9CA3AF;font-size:14px;font-weight:500;border-radius:6px;margin:2px 8px;transition:all .15s;cursor:pointer}
+    .sidebar-link:hover{background:#1F2937;color:#F9FAFB}
+    .sidebar-link.active{background:#2563EB;color:#fff}
+    .sidebar-link svg{width:18px;height:18px;flex-shrink:0}
+    .card{background:#fff;border:1px solid #E5E4DF;border-radius:10px}
+    .stat-card{background:#fff;border:1px solid #E5E4DF;border-radius:10px;padding:20px}
+    table{width:100%;border-collapse:collapse}
+    thead th{background:#F7F6F2;padding:10px 14px;text-align:left;font-size:12px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #E5E4DF}
+    tbody tr{border-bottom:1px solid #F3F4F6;transition:background .1s}
+    tbody tr:hover{background:#FAFAFA}
+    tbody td{padding:12px 14px;font-size:14px}
+    tbody tr:last-child{border-bottom:none}
+    .badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+    .badge-published{background:#DCFCE7;color:#15803D}
+    .badge-draft{background:#F3F4F6;color:#6B7280}
+    .badge-scheduled{background:#FEF3C7;color:#B45309}
+    .form-label{display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:5px}
+    .form-input{width:100%;border:1px solid #D1D5DB;border-radius:7px;padding:9px 12px;font-size:14px;font-family:inherit;outline:none;transition:border .15s,box-shadow .15s;background:#fff}
+    .form-input:focus{border-color:#2563EB;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+    .form-input.error{border-color:#DC2626}
+    .form-textarea{resize:vertical;min-height:100px}
+    .form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236B7280' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:32px}
+    .form-error{font-size:12px;color:#DC2626;margin-top:4px}
+    .form-hint{font-size:12px;color:#9CA3AF;margin-top:4px}
+    .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:7px;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;border:none;font-family:inherit}
+    .btn:disabled{opacity:.5;cursor:not-allowed}
+    .btn-primary{background:#2563EB;color:#fff}
+    .btn-primary:hover:not(:disabled){background:#1D4ED8}
+    .btn-secondary{background:#F3F4F6;color:#374151;border:1px solid #D1D5DB}
+    .btn-secondary:hover:not(:disabled){background:#E5E7EB}
+    .btn-danger{background:#FEF2F2;color:#DC2626;border:1px solid #FECACA}
+    .btn-danger:hover:not(:disabled){background:#FEE2E2}
+    .btn-sm{padding:5px 10px;font-size:12px}
+    .tab{padding:9px 18px;font-size:14px;font-weight:500;cursor:pointer;color:#6B7280;border-bottom:2px solid transparent;transition:all .15s}
+    .tab.active{color:#2563EB;border-bottom-color:#2563EB}
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:50;display:flex;align-items:center;justify-content:center;padding:20px}
+    .modal{background:#fff;border-radius:12px;width:100%;max-width:680px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+    .post-editor-page{position:fixed;inset:0;z-index:50;background:#F7F6F2;overflow-y:auto}
+    .post-editor-shell{width:100%;min-height:100vh;background:#F7F6F2}
+    .post-editor-header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #E5E4DF}
+    .post-editor-body{width:min(1100px,calc(100% - 40px));margin:0 auto;padding:28px 0 48px}
+    .post-editor-card{background:#fff;border:1px solid #E5E4DF;border-radius:10px;overflow:hidden}
+    .editor-section{padding:24px;border-bottom:1px solid #E5E4DF}
+    .editor-section:last-child{border-bottom:0}
+    .editor-section-title{font-size:15px;font-weight:700;color:#0F1117;margin-bottom:16px}
+    .markdown-workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+    .markdown-preview{min-height:360px;max-height:620px;overflow:auto;border:1px solid #E5E4DF;border-radius:7px;padding:20px;background:#FAFAF9;font-size:14px;line-height:1.75;color:#27272A}
+    .markdown-preview h1,.markdown-preview h2,.markdown-preview h3{font-weight:700;line-height:1.3;margin:1.4em 0 .6em;color:#0F1117}
+    .markdown-preview h1{font-size:1.8em}.markdown-preview h2{font-size:1.45em}.markdown-preview h3{font-size:1.2em}
+    .markdown-preview p,.markdown-preview ul,.markdown-preview ol,.markdown-preview pre,.markdown-preview blockquote{margin:.8em 0}
+    .markdown-preview ul,.markdown-preview ol{padding-left:1.5em}.markdown-preview ul{list-style:disc}.markdown-preview ol{list-style:decimal}
+    .markdown-preview pre{overflow:auto;background:#111827;color:#F9FAFB;padding:14px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:12px}
+    .markdown-preview code{font-family:'JetBrains Mono',monospace}.markdown-preview blockquote{border-left:3px solid #2563EB;padding-left:14px;color:#6B7280}
+    .markdown-preview a{color:#2563EB;text-decoration:underline}.markdown-preview img{max-width:100%;border-radius:6px}
+    @media(max-width:900px){.markdown-workspace{grid-template-columns:1fr}}
+    .toast{position:fixed;bottom:24px;right:24px;background:#0F1117;color:#fff;padding:12px 18px;border-radius:8px;font-size:14px;font-weight:500;z-index:100;display:flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+    .toast.success{background:#15803D}
+    .toast.error{background:#DC2626}
+    .search-wrap{position:relative}
+    .search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#9CA3AF;pointer-events:none}
+    .search-input{padding-left:36px}
+    .char-count{font-size:11px;color:#9CA3AF;text-align:right;margin-top:3px}
+    .char-count.warn{color:#D97706}
+    .char-count.over{color:#DC2626;font-weight:600}
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:#D1D5DB;border-radius:3px}
+    [x-cloak]{display:none}
+    .fade-in{animation:fadeIn .2s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    .tag-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;background:#EFF6FF;color:#2563EB;border-radius:4px;font-size:12px;font-weight:500}
+    .skeleton{background:linear-gradient(90deg,#F3F4F6 25%,#E5E7EB 50%,#F3F4F6 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:4px}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    .spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+    .spinner-dark{border-color:rgba(37,99,235,.2);border-top-color:#2563EB}
+    @keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body class="font-sans" x-data="dashboard()" x-init="init()">
+
+<!-- ═══════════ CSRF token (Django injects this) ═══════════ -->
+<input type="hidden" id="csrf-token" value="{{ csrf_token }}">
+
+<div class="flex min-h-screen">
+
+  <!-- Sidebar -->
+  <aside class="sidebar flex flex-col">
+    <div class="px-5 pt-6 pb-4 flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
+        <svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+      </div>
+      <span class="text-white font-semibold text-sm tracking-wide">BlogAdmin</span>
+    </div>
+    <nav class="flex-1 px-2 py-2 space-y-0.5">
+      <div @click="activeTab='dashboard'" :class="activeTab==='dashboard'?'active':''" class="sidebar-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Overview
+      </div>
+      <div @click="activeTab='posts'" :class="activeTab==='posts'?'active':''" class="sidebar-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Posts
+      </div>
+      <div @click="activeTab='authors'" :class="activeTab==='authors'?'active':''" class="sidebar-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Authors
+      </div>
+      <div @click="activeTab='categories'" :class="activeTab==='categories'?'active':''" class="sidebar-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        Categories
+      </div>
+      <div @click="activeTab='tags'" :class="activeTab==='tags'?'active':''" class="sidebar-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        Tags
+      </div>
+    </nav>
+    <div class="p-4 border-t border-gray-800">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white text-xs font-bold">
+          {{ request.user.username|default:request.user.email|default:"A"|first|upper }}
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-white text-xs font-semibold truncate">{{ request.user.get_full_name|default:request.user.username|default:request.user.email|default:"Staff" }}</p>
+          <p class="text-gray-500 text-xs truncate">{{ request.user.email }}</p>
+        </div>
+        <a href="{% url 'admin:logout' %}" class="text-gray-500 hover:text-white transition-colors" title="Logout">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="flex-1 flex flex-col min-w-0">
+
+    <!-- Topbar -->
+    <header class="bg-white border-b border-border px-6 py-3.5 flex items-center justify-between sticky top-0 z-30">
+      <h1 class="font-semibold text-base text-ink" x-text="pageTitles[activeTab]"></h1>
+      <div class="flex items-center gap-3">
+        <button x-show="activeTab==='posts'"      @click="openPostModal(null)"     class="btn btn-primary btn-sm"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> New Post</button>
+        <button x-show="activeTab==='authors'"    @click="openAuthorModal(null)"   class="btn btn-primary btn-sm"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> New Author</button>
+        <button x-show="activeTab==='categories'" @click="openCategoryModal(null)" class="btn btn-primary btn-sm"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> New Category</button>
+        <button x-show="activeTab==='tags'"       @click="openTagModal(null)"      class="btn btn-primary btn-sm"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> New Tag</button>
+        <!-- global refresh -->
+        <button @click="loadAll()" :disabled="loading" class="btn btn-secondary btn-sm" title="Refresh">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" :class="loading?'animate-spin':''"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="flex-1 p-6">
+
+      <!-- Global error banner -->
+      <div x-show="globalError" x-cloak class="mb-4 bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 flex items-center justify-between text-sm">
+        <span x-text="globalError"></span>
+        <button @click="globalError=''" class="text-red-500 hover:text-red-700 ml-4">✕</button>
+      </div>
+
+      <!-- ── OVERVIEW ── -->
+      <div x-show="activeTab==='dashboard'" class="fade-in space-y-6">
+        <div class="grid grid-cols-2 gap-4 lg:grid-cols-4">
+          <!-- stat skeleton -->
+          <template x-if="loading">
+            <template x-for="i in [1,2,3,4]" :key="i">
+              <div class="stat-card space-y-3">
+                <div class="skeleton h-3 w-24"></div>
+                <div class="skeleton h-8 w-16"></div>
+                <div class="skeleton h-3 w-32"></div>
+              </div>
+            </template>
+          </template>
+          <template x-if="!loading">
+            <template x-for="stat in stats" :key="stat.label">
+              <div class="stat-card">
+                <p class="text-xs font-semibold text-muted uppercase tracking-wide mb-2" x-text="stat.label"></p>
+                <p class="text-3xl font-bold text-ink" x-text="stat.value"></p>
+                <p class="text-xs text-muted mt-1" x-text="stat.sub"></p>
+              </div>
+            </template>
+          </template>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div class="card lg:col-span-2">
+            <div class="px-5 py-4 border-b border-border flex items-center justify-between">
+              <h2 class="font-semibold text-sm">Recent Posts</h2>
+              <button @click="activeTab='posts'" class="text-accent text-xs font-semibold hover:underline">View all →</button>
+            </div>
+            <table>
+              <thead><tr><th>Title</th><th>Status</th><th>Views</th><th>Published</th></tr></thead>
+              <tbody>
+                <template x-if="loading">
+                  <template x-for="i in [1,2,3,4,5]" :key="i">
+                    <tr><td colspan="4"><div class="skeleton h-4 w-full"></div></td></tr>
+                  </template>
+                </template>
+                <template x-if="!loading">
+                  <template x-for="p in posts.slice(0,6)" :key="p.id">
+                    <tr>
+                      <td>
+                        <p class="font-medium text-ink truncate max-w-xs" x-text="p.title"></p>
+                        <p class="text-xs text-muted" x-text="p.author_name || '—'"></p>
+                      </td>
+                      <td><span class="badge" :class="'badge-'+p.status" x-text="p.status"></span></td>
+                      <td class="font-mono text-sm" x-text="(p.views||0).toLocaleString()"></td>
+                      <td class="text-xs text-muted whitespace-nowrap" x-text="p.published_at ? p.published_at.slice(0,10) : '—'"></td>
+                    </tr>
+                  </template>
+                </template>
+                <tr x-show="!loading && posts.length===0"><td colspan="4" class="text-center py-10 text-muted text-sm">No posts yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="space-y-3">
+            <div class="card p-5">
+              <h2 class="font-semibold text-sm mb-3">Quick Actions</h2>
+              <div class="space-y-2">
+                <button @click="activeTab='posts'; openPostModal(null)" class="btn btn-secondary w-full justify-start text-sm">
+                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                  Write new post
+                </button>
+                <button @click="activeTab='authors'; openAuthorModal(null)" class="btn btn-secondary w-full justify-start text-sm">
+                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+                  Add author
+                </button>
+                <a href="{% url 'blog' %}" target="_blank" class="btn btn-secondary w-full justify-start text-sm">
+                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  View live blog
+                </a>
+              </div>
+            </div>
+            <div class="card p-5">
+              <h2 class="font-semibold text-sm mb-3">Posts by Status</h2>
+              <div class="space-y-2">
+                <template x-for="s in statusBreakdown" :key="s.label">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                      <div class="w-2 h-2 rounded-full" :style="'background:'+s.color"></div>
+                      <span class="text-sm" x-text="s.label"></span>
+                    </div>
+                    <span class="text-sm font-semibold" x-text="s.count"></span>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── POSTS ── -->
+      <div x-show="activeTab==='posts'" class="fade-in space-y-4">
+        <div class="card p-4 flex flex-wrap items-center gap-3">
+          <div class="search-wrap flex-1 min-w-48">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input x-model="postSearch" @input="postPage=1" type="text" placeholder="Search posts…" class="form-input search-input">
+          </div>
+          <select x-model="postStatusFilter" @change="postPage=1" class="form-input form-select w-36">
+            <option value="">All status</option>
+            <option value="published">Published</option>
+            <option value="draft">Draft</option>
+            <option value="scheduled">Scheduled</option>
+          </select>
+          <select x-model="postCategoryFilter" @change="postPage=1" class="form-input form-select w-40">
+            <option value="">All categories</option>
+            <template x-for="c in categories" :key="c.id">
+              <option :value="c.id" x-text="c.name"></option>
+            </template>
+          </select>
+          <span class="text-xs text-muted" x-text="filteredPosts.length + ' posts'"></span>
+        </div>
+
+        <div class="card overflow-hidden">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:36px"><input type="checkbox" @change="toggleAll($event)" class="rounded"></th>
+                <th>Title</th><th>Category</th><th>Author</th><th>Status</th>
+                <th>Read</th><th>Views</th><th>Published</th><th style="width:80px">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- skeleton rows -->
+              <template x-if="loading">
+                <template x-for="i in [1,2,3,4,5]" :key="i">
+                  <tr><td colspan="9" class="py-3 px-4"><div class="skeleton h-4 w-full"></div></td></tr>
+                </template>
+              </template>
+              <template x-if="!loading">
+                <template x-for="p in paginatedPosts" :key="p.id">
+                  <tr>
+                    <td><input type="checkbox" :value="p.id" x-model="selectedPosts" class="rounded"></td>
+                    <td>
+                      <p class="font-medium text-ink max-w-xs truncate" x-text="p.title"></p>
+                      <p class="text-xs text-muted truncate max-w-xs" x-text="p.excerpt"></p>
+                      <div class="flex flex-wrap gap-1 mt-1">
+                        <template x-for="t in (p.tags_detail||[])" :key="t.id">
+                          <span class="tag-chip" x-text="t.name"></span>
+                        </template>
+                      </div>
+                    </td>
+                    <td class="text-sm text-muted" x-text="p.category_name || '—'"></td>
+                    <td class="text-sm" x-text="p.author_name || '—'"></td>
+                    <td><span class="badge" :class="'badge-'+p.status" x-text="p.status"></span></td>
+                    <td class="text-sm text-muted" x-text="(p.read_time||1)+' min'"></td>
+                    <td class="font-mono text-sm" x-text="(p.views||0).toLocaleString()"></td>
+                    <td class="text-xs text-muted whitespace-nowrap" x-text="p.published_at ? p.published_at.slice(0,10) : '—'"></td>
+                    <td>
+                      <div class="flex gap-1">
+                        <button @click="openPostModal(p)" class="btn btn-secondary btn-sm px-2" title="Edit">
+                          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        </button>
+                        <a :href="p.slug ? '/blog/'+p.slug+'/' : '#'" target="_blank" class="btn btn-secondary btn-sm px-2" title="View live" x-show="p.status==='published'">
+                          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        </a>
+                        <button @click="confirmDeletePost(p)" class="btn btn-danger btn-sm px-2" title="Delete">
+                          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </template>
+              </template>
+              <tr x-show="!loading && filteredPosts.length===0">
+                <td colspan="9" class="text-center py-12 text-muted">No posts found.</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Pagination -->
+          <div class="px-4 py-3 border-t border-border flex items-center justify-between" x-show="filteredPosts.length > pageSize">
+            <span class="text-xs text-muted" x-text="'Showing '+((postPage-1)*pageSize+1)+'–'+Math.min(postPage*pageSize,filteredPosts.length)+' of '+filteredPosts.length"></span>
+            <div class="flex gap-1">
+              <button @click="postPage=Math.max(1,postPage-1)" :disabled="postPage===1" class="btn btn-secondary btn-sm px-2">‹</button>
+              <template x-for="n in Math.ceil(filteredPosts.length/pageSize)" :key="n">
+                <button @click="postPage=n" :class="postPage===n?'btn-primary':'btn-secondary'" class="btn btn-sm px-3" x-text="n"></button>
+              </template>
+              <button @click="postPage=Math.min(Math.ceil(filteredPosts.length/pageSize),postPage+1)" :disabled="postPage===Math.ceil(filteredPosts.length/pageSize)" class="btn btn-secondary btn-sm px-2">›</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bulk actions -->
+        <div x-show="selectedPosts.length>0" x-cloak class="card p-3 flex items-center gap-3 bg-blue-50 border-blue-200">
+          <span class="text-sm font-semibold text-blue-800" x-text="selectedPosts.length+' selected'"></span>
+          <button @click="bulkStatusUpdate('published')" class="btn btn-sm btn-secondary" :disabled="saving">Publish</button>
+          <button @click="bulkStatusUpdate('draft')"     class="btn btn-sm btn-secondary" :disabled="saving">Draft</button>
+          <button @click="bulkDeletePosts()"             class="btn btn-sm btn-danger"    :disabled="saving">Delete</button>
+          <button @click="selectedPosts=[]" class="ml-auto btn btn-sm btn-secondary">Cancel</button>
+        </div>
+      </div>
+
+      <!-- ── AUTHORS ── -->
+      <div x-show="activeTab==='authors'" class="fade-in space-y-4">
+        <div class="search-wrap">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input x-model="authorSearch" type="text" placeholder="Search authors…" class="form-input search-input max-w-sm">
+        </div>
+        <div class="card overflow-hidden">
+          <table>
+            <thead><tr><th>Name</th><th>Title</th><th>Posts</th><th>Social</th><th style="width:80px">Actions</th></tr></thead>
+            <tbody>
+              <template x-if="loading">
+                <template x-for="i in [1,2,3]" :key="i">
+                  <tr><td colspan="5" class="py-3 px-4"><div class="skeleton h-4 w-full"></div></td></tr>
+                </template>
+              </template>
+              <template x-if="!loading">
+                <template x-for="a in filteredAuthors" :key="a.id">
+                  <tr>
+                    <td>
+                      <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold text-gray-600 flex-shrink-0" x-text="a.name.charAt(0).toUpperCase()"></div>
+                        <div>
+                          <p class="font-medium" x-text="a.name"></p>
+                          <p class="text-xs text-muted" x-text="a.bio ? a.bio.slice(0,60)+(a.bio.length>60?'…':'') : ''"></p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-sm text-muted" x-text="a.title||'—'"></td>
+                    <td class="text-sm" x-text="posts.filter(p=>p.author===a.id).length"></td>
+                    <td>
+                      <div class="flex gap-2 text-muted text-xs font-semibold">
+                        <a x-show="a.twitter"  :href="a.twitter"  target="_blank" class="hover:text-ink">𝕏</a>
+                        <a x-show="a.linkedin" :href="a.linkedin" target="_blank" class="hover:text-ink">in</a>
+                        <a x-show="a.website"  :href="a.website"  target="_blank" class="hover:text-ink">🌐</a>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="flex gap-1">
+                        <button @click="openAuthorModal(a)" class="btn btn-secondary btn-sm px-2">
+                          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        </button>
+                        <button @click="confirmDeleteAuthor(a)" class="btn btn-danger btn-sm px-2">
+                          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </template>
+              </template>
+              <tr x-show="!loading && filteredAuthors.length===0"><td colspan="5" class="text-center py-12 text-muted">No authors found.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── CATEGORIES ── -->
+      <div x-show="activeTab==='categories'" class="fade-in">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <template x-if="loading">
+            <template x-for="i in [1,2,3]" :key="i">
+              <div class="card p-5 space-y-3"><div class="skeleton h-4 w-32"></div><div class="skeleton h-3 w-20"></div></div>
+            </template>
+          </template>
+          <template x-if="!loading">
+            <template x-for="c in categories" :key="c.id">
+              <div class="card p-5 flex items-start justify-between">
+                <div>
+                  <p class="font-semibold text-ink" x-text="c.name"></p>
+                  <p class="text-xs text-muted mt-0.5" x-text="'/blog/category/'+c.slug+'/'"></p>
+                  <p class="text-sm text-muted mt-2" x-text="posts.filter(p=>p.category===c.id).length+' posts'"></p>
+                </div>
+                <div class="flex gap-1 flex-shrink-0">
+                  <button @click="openCategoryModal(c)" class="btn btn-secondary btn-sm px-2">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </button>
+                  <button @click="confirmDeleteCategory(c)" class="btn btn-danger btn-sm px-2">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                  </button>
+                </div>
+              </div>
+            </template>
+          </template>
+          <div x-show="!loading && categories.length===0" class="card p-10 text-center text-muted col-span-3">No categories yet.</div>
+        </div>
+      </div>
+
+      <!-- ── TAGS ── -->
+      <div x-show="activeTab==='tags'" class="fade-in">
+        <div class="card p-6">
+          <div x-show="loading" class="flex flex-wrap gap-2">
+            <template x-for="i in [1,2,3,4,5,6,7,8]" :key="i">
+              <div class="skeleton h-8 w-20 rounded-lg"></div>
+            </template>
+          </div>
+          <div x-show="!loading" class="flex flex-wrap gap-2">
+            <template x-for="t in tags" :key="t.id">
+              <div class="flex items-center gap-1.5 bg-white border border-border rounded-lg px-3 py-2 hover:border-accent group transition-colors">
+                <span class="text-sm font-medium text-ink" x-text="t.name"></span>
+                <span class="text-xs text-muted" x-text="'('+posts.filter(p=>(p.tags||[]).includes(t.id)).length+')'"></span>
+                <div class="flex gap-0.5 ml-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button @click="openTagModal(t)" class="text-accent hover:text-blue-700 p-0.5">
+                    <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </button>
+                  <button @click="confirmDeleteTag(t)" class="text-danger hover:text-red-700 p-0.5">
+                    <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  </button>
+                </div>
+              </div>
+            </template>
+            <div x-show="tags.length===0" class="text-muted text-sm">No tags yet.</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /p-6 -->
+  </main>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     MODALS
+════════════════════════════════════════ -->
+
+<!-- FULL-PAGE POST EDITOR -->
+<div x-show="postModalOpen" x-cloak class="post-editor-page">
+  <div class="post-editor-shell">
+    <div class="post-editor-header flex items-center justify-between px-6 py-4">
+      <div class="flex items-center gap-3">
+        <button @click="postModalOpen=false" class="btn btn-secondary btn-sm" aria-label="Back to posts">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Back to posts
+        </button>
+        <h2 class="font-semibold text-base" x-text="editingPost ? 'Edit Post' : 'Write New Post'"></h2>
+      </div>
+      <button @click="postModalOpen=false" class="text-muted hover:text-ink p-1">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="post-editor-body">
+    <div class="post-editor-card">
+    <div>
+      <!-- Content -->
+      <div class="editor-section space-y-4">
+        <h3 class="editor-section-title">Article</h3>
+        <div>
+          <label class="form-label">Title <span class="text-danger">*</span></label>
+          <input x-model="postForm.title" type="text" class="form-input" :class="postErrors.title?'error':''">
+          <p x-show="postErrors.title" class="form-error" x-text="postErrors.title"></p>
+        </div>
+        <div>
+          <label class="form-label">Excerpt <span class="text-danger">*</span></label>
+          <textarea x-model="postForm.excerpt" class="form-input form-textarea" rows="3" maxlength="500" @input="cc.excerpt=(postForm.excerpt||'').length"></textarea>
+          <p class="char-count" :class="cc.excerpt>460?'warn':cc.excerpt>=500?'over':''" x-text="(cc.excerpt||0)+'/500'"></p>
+          <p x-show="postErrors.excerpt" class="form-error" x-text="postErrors.excerpt"></p>
+        </div>
+        <div>
+          <label class="form-label">Content (Markdown) <span class="text-danger">*</span></label>
+          <textarea x-model="postForm.content_markdown" class="form-input form-textarea font-mono text-xs" rows="12" placeholder="Write in Markdown…"></textarea>
+          <p x-show="postErrors.content_markdown" class="form-error" x-text="postErrors.content_markdown"></p>
+          <div class="mt-4">
+            <div class="flex items-center justify-between mb-1">
+              <span class="form-label mb-0">Live Markdown Preview</span>
+              <span class="text-xs text-muted">Updates while you type</span>
+            </div>
+            <div class="markdown-preview article-content" x-html="markdownPreview"></div>
+          </div>
+        </div>
+        <div>
+          <label class="form-label">Cover Image</label>
+          <input type="file" accept="image/*" @change="postForm._coverFile=$event.target.files[0]" class="form-input" style="padding:6px">
+          <p class="form-hint">Recommended: 1200×630px · JPG or PNG</p>
+          <img x-show="editingPost && editingPost.cover_image" :src="editingPost && editingPost.cover_image" class="mt-2 h-24 rounded object-cover">
+        </div>
+      </div>
+
+      <!-- Organization -->
+      <div class="editor-section space-y-4">
+        <h3 class="editor-section-title">Organization</h3>
+        <div>
+          <label class="form-label">Category</label>
+          <select x-model="postForm.category" class="form-input form-select">
+            <option value="">— None —</option>
+            <template x-for="c in categories" :key="c.id">
+              <option :value="c.id" x-text="c.name"></option>
+            </template>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Author</label>
+          <input value="KEHEM Team" class="form-input bg-gray-50" disabled>
+          <p class="form-hint">Every post is published under the KEHEM Team name.</p>
+          <select x-model="postForm.author" class="hidden" disabled>
+            <option value="">— None —</option>
+            <template x-for="a in authors" :key="a.id">
+              <option :value="a.id" x-text="a.name"></option>
+            </template>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Tags</label>
+          <div class="flex flex-wrap gap-2 p-3 border border-border rounded-lg bg-gray-50">
+            <template x-for="t in tags" :key="t.id">
+              <label class="flex items-center gap-1.5 cursor-pointer">
+                <input type="checkbox" :value="t.id" x-model="postForm.tags" class="rounded">
+                <span class="text-sm" x-text="t.name"></span>
+              </label>
+            </template>
+            <span x-show="tags.length===0" class="text-xs text-muted">No tags yet.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEO -->
+      <div class="editor-section space-y-4">
+        <h3 class="editor-section-title">Search &amp; Social</h3>
+        <div>
+          <label class="form-label">Meta Title <span class="text-xs text-muted font-normal">(max 60)</span></label>
+          <input x-model="postForm.meta_title" type="text" class="form-input" :class="postErrors.meta_title?'error':''" maxlength="60" @input="cc.meta_title=(postForm.meta_title||'').length">
+          <p class="char-count" :class="cc.meta_title>50?'warn':cc.meta_title>=60?'over':''" x-text="(cc.meta_title||0)+'/60'"></p>
+          <p x-show="postErrors.meta_title" class="form-error" x-text="postErrors.meta_title"></p>
+        </div>
+        <div>
+          <label class="form-label">Meta Description <span class="text-xs text-muted font-normal">(max 160)</span></label>
+          <textarea x-model="postForm.meta_description" class="form-input form-textarea" rows="3" maxlength="160" @input="cc.meta_description=(postForm.meta_description||'').length"></textarea>
+          <p class="char-count" :class="cc.meta_description>140?'warn':cc.meta_description>=160?'over':''" x-text="(cc.meta_description||0)+'/160'"></p>
+          <p x-show="postErrors.meta_description" class="form-error" x-text="postErrors.meta_description"></p>
+        </div>
+        <div>
+          <label class="form-label">Canonical URL</label>
+          <input x-model="postForm.canonical_url" type="url" class="form-input" placeholder="https://kehem.com/blog/…">
+        </div>
+        <div>
+          <label class="form-label">OG Title</label>
+          <input x-model="postForm.og_title" type="text" class="form-input" maxlength="100">
+        </div>
+        <div>
+          <label class="form-label">OG Description</label>
+          <textarea x-model="postForm.og_description" class="form-input form-textarea" rows="2" maxlength="200"></textarea>
+        </div>
+        <div>
+          <label class="form-label">OG Image</label>
+          <input type="file" accept="image/*" @change="postForm._ogFile=$event.target.files[0]" class="form-input" style="padding:6px">
+        </div>
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="checkbox" x-model="postForm.no_index" class="rounded">
+          <span class="text-sm">No Index — hide from search engines</span>
+        </label>
+      </div>
+
+      <!-- Publishing -->
+      <div class="editor-section space-y-4">
+        <h3 class="editor-section-title">Publishing</h3>
+        <div>
+          <label class="form-label">Status</label>
+          <select x-model="postForm.status" class="form-input form-select">
+            <option value="draft">Draft</option>
+            <option value="scheduled">Scheduled</option>
+            <option value="published">Published</option>
+          </select>
+        </div>
+        <div x-show="postForm.status==='scheduled'||postForm.status==='published'">
+          <label class="form-label">Publish Date &amp; Time</label>
+          <input x-model="postForm.published_at" type="datetime-local" class="form-input">
+          <p class="form-hint">Leave blank for "publish immediately" when status is Published.</p>
+        </div>
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="checkbox" x-model="postForm.featured" class="rounded">
+          <span class="text-sm">Featured post</span>
+        </label>
+      </div>
+    </div>
+    <div class="px-6 py-4 border-t border-border flex justify-end gap-3">
+      <button @click="postModalOpen=false" class="btn btn-secondary" :disabled="saving">Cancel</button>
+      <button @click="savePost()" class="btn btn-primary" :disabled="saving">
+        <span x-show="saving" class="spinner"></span>
+        <span x-text="saving ? 'Saving…' : 'Save Post'"></span>
+      </button>
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- AUTHOR MODAL -->
+<div x-show="authorModalOpen" x-cloak class="modal-overlay" @click.self="authorModalOpen=false">
+  <div class="modal">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-border">
+      <h2 class="font-semibold text-base" x-text="editingAuthor ? 'Edit Author' : 'New Author'"></h2>
+      <button @click="authorModalOpen=false" class="text-muted hover:text-ink p-1">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="p-6 space-y-4">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="col-span-2">
+          <label class="form-label">Name <span class="text-danger">*</span></label>
+          <input x-model="authorForm.name" type="text" class="form-input" :class="authorErrors.name?'error':''">
+          <p x-show="authorErrors.name" class="form-error" x-text="authorErrors.name"></p>
+        </div>
+        <div class="col-span-2">
+          <label class="form-label">Title / Role</label>
+          <input x-model="authorForm.title" type="text" class="form-input" placeholder="e.g. Senior Editor">
+        </div>
+        <div class="col-span-2">
+          <label class="form-label">Bio</label>
+          <textarea x-model="authorForm.bio" class="form-input form-textarea" rows="3"></textarea>
+        </div>
+        <div class="col-span-2">
+          <label class="form-label">Avatar</label>
+          <input type="file" accept="image/*" @change="authorForm._avatarFile=$event.target.files[0]" class="form-input" style="padding:6px">
+          <img x-show="editingAuthor && editingAuthor.avatar" :src="editingAuthor && editingAuthor.avatar" class="mt-2 h-16 w-16 rounded-full object-cover">
+        </div>
+        <div>
+          <label class="form-label">Website</label>
+          <input x-model="authorForm.website" type="url" class="form-input" placeholder="https://…">
+        </div>
+        <div>
+          <label class="form-label">Twitter / X</label>
+          <input x-model="authorForm.twitter" type="url" class="form-input" placeholder="https://x.com/…">
+        </div>
+        <div class="col-span-2">
+          <label class="form-label">LinkedIn</label>
+          <input x-model="authorForm.linkedin" type="url" class="form-input" placeholder="https://linkedin.com/in/…">
+        </div>
+      </div>
+    </div>
+    <div class="px-6 py-4 border-t border-border flex justify-end gap-3">
+      <button @click="authorModalOpen=false" class="btn btn-secondary" :disabled="saving">Cancel</button>
+      <button @click="saveAuthor()" class="btn btn-primary" :disabled="saving">
+        <span x-show="saving" class="spinner"></span>
+        <span x-text="saving?'Saving…':'Save Author'"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY MODAL -->
+<div x-show="categoryModalOpen" x-cloak class="modal-overlay" @click.self="categoryModalOpen=false">
+  <div class="modal" style="max-width:400px">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-border">
+      <h2 class="font-semibold text-base" x-text="editingCategory ? 'Edit Category' : 'New Category'"></h2>
+      <button @click="categoryModalOpen=false" class="text-muted hover:text-ink p-1">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="p-6 space-y-4">
+      <div>
+        <label class="form-label">Name <span class="text-danger">*</span></label>
+        <input x-model="categoryForm.name" type="text" class="form-input" :class="categoryErrors.name?'error':''">
+        <p x-show="categoryErrors.name" class="form-error" x-text="categoryErrors.name"></p>
+      </div>
+      <div x-show="categoryForm.name">
+        <label class="form-label">Slug (auto-generated)</label>
+        <input :value="toSlug(categoryForm.name)" type="text" class="form-input bg-gray-50" readonly>
+      </div>
+    </div>
+    <div class="px-6 py-4 border-t border-border flex justify-end gap-3">
+      <button @click="categoryModalOpen=false" class="btn btn-secondary" :disabled="saving">Cancel</button>
+      <button @click="saveCategory()" class="btn btn-primary" :disabled="saving">
+        <span x-show="saving" class="spinner"></span>
+        <span x-text="saving?'Saving…':'Save Category'"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TAG MODAL -->
+<div x-show="tagModalOpen" x-cloak class="modal-overlay" @click.self="tagModalOpen=false">
+  <div class="modal" style="max-width:400px">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-border">
+      <h2 class="font-semibold text-base" x-text="editingTag ? 'Edit Tag' : 'New Tag'"></h2>
+      <button @click="tagModalOpen=false" class="text-muted hover:text-ink p-1">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="p-6 space-y-4">
+      <div>
+        <label class="form-label">Name <span class="text-danger">*</span></label>
+        <input x-model="tagForm.name" type="text" class="form-input" :class="tagErrors.name?'error':''">
+        <p x-show="tagErrors.name" class="form-error" x-text="tagErrors.name"></p>
+      </div>
+      <div x-show="tagForm.name">
+        <label class="form-label">Slug (auto-generated)</label>
+        <input :value="toSlug(tagForm.name)" type="text" class="form-input bg-gray-50" readonly>
+      </div>
+    </div>
+    <div class="px-6 py-4 border-t border-border flex justify-end gap-3">
+      <button @click="tagModalOpen=false" class="btn btn-secondary" :disabled="saving">Cancel</button>
+      <button @click="saveTag()" class="btn btn-primary" :disabled="saving">
+        <span x-show="saving" class="spinner"></span>
+        <span x-text="saving?'Saving…':'Save Tag'"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- DELETE CONFIRM -->
+<div x-show="confirmOpen" x-cloak class="modal-overlay">
+  <div class="modal" style="max-width:400px">
+    <div class="p-6 text-center">
+      <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg width="22" height="22" fill="none" stroke="#DC2626" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <h3 class="font-semibold text-base text-ink mb-1" x-text="confirmTitle"></h3>
+      <p class="text-sm text-muted mb-6" x-text="confirmMsg"></p>
+      <div class="flex gap-3 justify-center">
+        <button @click="confirmOpen=false" class="btn btn-secondary" :disabled="saving">Cancel</button>
+        <button @click="runConfirm()" class="btn btn-danger" :disabled="saving">
+          <span x-show="saving" class="spinner spinner-dark" style="border-top-color:#DC2626"></span>
+          <span x-text="saving?'Deleting…':'Delete'"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div x-show="toast.show" x-cloak class="toast" :class="toast.type" x-transition>
+  <svg x-show="toast.type==='success'" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  <svg x-show="toast.type==='error'"   width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  <span x-text="toast.message"></span>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     ALPINE APP
+════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/markdown-it@14/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-footnote@4/dist/markdown-it-footnote.min.js"></script>
+<script src="{% static 'kehem/new/js/markdown-view.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<script>
+/* ─────────────────────────────────────────
+   API URLs — all wired to your Django views
+   Add DRF or custom API endpoints here.
+   Format: /api/blog/posts/, /api/blog/posts/<id>/, etc.
+───────────────────────────────────────── */
+const API = {
+  posts:      '/api/blog/posts/',
+  post:       id => `/api/blog/posts/${id}/`,
+  authors:    '/api/blog/authors/',
+  author:     id => `/api/blog/authors/${id}/`,
+  categories: '/api/blog/categories/',
+  category:   id => `/api/blog/categories/${id}/`,
+  tags:       '/api/blog/tags/',
+  tag:        id => `/api/blog/tags/${id}/`,
+};
+
+function getCsrf() {
+  return document.getElementById('csrf-token').value;
+}
+
+async function apiFetch(url, options = {}) {
+  const defaults = {
+    headers: { 'X-CSRFToken': getCsrf(), ...options.headers },
+  };
+  // Don't set Content-Type for FormData — browser sets it with boundary
+  if (!(options.body instanceof FormData)) {
+    defaults.headers['Content-Type'] = 'application/json';
+  }
+  const res = await fetch(url, { ...defaults, ...options, headers: { ...defaults.headers, ...(options.headers||{}) } });
+  if (!res.ok) {
+    let msg = `HTTP ${res.status}`;
+    try { const j = await res.json(); msg = JSON.stringify(j); } catch {}
+    throw new Error(msg);
+  }
+  if (res.status === 204) return null;
+  return res.json();
+}
+
+/* Build FormData for models with file fields */
+function toFormData(obj, fileFields = []) {
+  const fd = new FormData();
+  for (const [k, v] of Object.entries(obj)) {
+    if (fileFields.includes(k)) continue; // handled separately
+    if (k.startsWith('_')) continue;       // internal JS fields
+    if (Array.isArray(v)) {
+      v.forEach(item => fd.append(k, item));
+    } else if (v === null || v === undefined) {
+      // skip nulls — let Django use field defaults
+    } else {
+      fd.append(k, v);
+    }
+  }
+  fileFields.forEach(f => {
+    const priv = f === 'cover_image' ? '_coverFile' : (f === 'og_image' ? '_ogFile' : '_' + f + 'File');
+    if (obj[priv]) fd.append(f, obj[priv]);
+  });
+  return fd;
+}
+
+function dashboard() {
+  return {
+    activeTab: 'dashboard',
+    pageTitles: { dashboard:'Overview', posts:'Posts', authors:'Authors', categories:'Categories', tags:'Tags' },
+
+    get markdownPreview() {
+      const source = (this.postForm && this.postForm.content_markdown) || '';
+      if (!source) return '<p class="text-muted">Your formatted article will appear here.</p>';
+      if (!window.KehemMarkdown) return '<p class="text-muted">Markdown viewer is loading...</p>';
+      return KehemMarkdown.parse(source).html;
+    },
+
+    /* ── state ── */
+    posts:      [],
+    authors:    [],
+    categories: [],
+    tags:       [],
+    loading:    false,
+    saving:     false,
+    globalError: '',
+
+    /* ── computed stats ── */
+    get stats() {
+      return [
+        { label:'Total Posts',  value: this.posts.length,                                          sub: this.posts.filter(p=>p.status==='published').length+' published' },
+        { label:'Total Views',  value: this.posts.reduce((s,p)=>s+(p.views||0),0).toLocaleString(), sub: 'across all posts' },
+        { label:'Authors',      value: this.authors.length,                                        sub: 'registered authors' },
+        { label:'Categories',   value: this.categories.length,                                     sub: this.tags.length+' tags' },
+      ];
+    },
+    get statusBreakdown() {
+      return [
+        { label:'Published', count:this.posts.filter(p=>p.status==='published').length, color:'#16A34A' },
+        { label:'Draft',     count:this.posts.filter(p=>p.status==='draft').length,     color:'#9CA3AF' },
+        { label:'Scheduled', count:this.posts.filter(p=>p.status==='scheduled').length, color:'#D97706' },
+      ];
+    },
+
+    /* ── post list ── */
+    postSearch: '', postStatusFilter: '', postCategoryFilter: '',
+    postPage: 1, pageSize: 10,
+    selectedPosts: [],
+
+    get filteredPosts() {
+      const q = this.postSearch.toLowerCase();
+      return this.posts.filter(p => {
+        const mQ  = !q || (p.title||'').toLowerCase().includes(q) || (p.excerpt||'').toLowerCase().includes(q);
+        const mSt = !this.postStatusFilter   || p.status   === this.postStatusFilter;
+        const mCt = !this.postCategoryFilter || p.category == this.postCategoryFilter;
+        return mQ && mSt && mCt;
+      });
+    },
+    get paginatedPosts() {
+      const s = (this.postPage-1)*this.pageSize;
+      return this.filteredPosts.slice(s, s+this.pageSize);
+    },
+    toggleAll(e) { this.selectedPosts = e.target.checked ? this.filteredPosts.map(p=>p.id) : []; },
+
+    /* ── author list ── */
+    authorSearch: '',
+    get filteredAuthors() {
+      const q = this.authorSearch.toLowerCase();
+      return this.authors.filter(a => !q || (a.name||'').toLowerCase().includes(q));
+    },
+
+    /* ─────────────────────────────────────
+       DATA LOADING
+    ───────────────────────────────────── */
+    async loadAll() {
+      this.loading = true;
+      this.globalError = '';
+      try {
+        const [posts, authors, categories, tags] = await Promise.all([
+          apiFetch(API.posts),
+          apiFetch(API.authors),
+          apiFetch(API.categories),
+          apiFetch(API.tags),
+        ]);
+        // Support both paginated DRF response {results:[…]} and plain arrays
+        this.posts      = Array.isArray(posts)      ? posts      : (posts.results      || []);
+        this.authors    = Array.isArray(authors)    ? authors    : (authors.results    || []);
+        this.categories = Array.isArray(categories) ? categories : (categories.results || []);
+        this.tags       = Array.isArray(tags)       ? tags       : (tags.results       || []);
+      } catch (err) {
+        this.globalError = 'Failed to load data: ' + err.message;
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    /* ─────────────────────────────────────
+       POST CRUD
+    ───────────────────────────────────── */
+    postModalOpen: false, editingPost: null, postFormTab: 'content',
+    postForm: {}, postErrors: {}, cc: {},
+
+    openPostModal(post) {
+      this.editingPost = post;
+      this.postFormTab = 'content';
+      this.postErrors  = {};
+      this.cc = {};
+      if (post) {
+        this.postForm = { ...post, tags: [...(post.tags || [])] };
+        this.cc.excerpt         = (post.excerpt||'').length;
+        this.cc.meta_title      = (post.meta_title||'').length;
+        this.cc.meta_description= (post.meta_description||'').length;
+      } else {
+        const kehemTeam = this.authors.find(a => a.name === 'KEHEM Team');
+        this.postForm = {
+          title:'', excerpt:'', content_markdown:'', category:'', author:kehemTeam ? kehemTeam.id : '', tags:[],
+          meta_title:'', meta_description:'', canonical_url:'', og_title:'',
+          og_description:'', no_index:false, status:'draft', featured:false, published_at:'',
+        };
+      }
+      this.postModalOpen = true;
+    },
+
+    validatePost() {
+      const e = {};
+      if (!(this.postForm.title||'').trim())            e.title            = 'Title is required.';
+      if (!(this.postForm.excerpt||'').trim())          e.excerpt          = 'Excerpt is required.';
+      if (!(this.postForm.content_markdown||'').trim()) e.content_markdown = 'Content is required.';
+      if ((this.postForm.meta_title||'').length > 60)   e.meta_title       = 'Max 60 characters.';
+      if ((this.postForm.meta_description||'').length > 160) e.meta_description = 'Max 160 characters.';
+      this.postErrors = e;
+      return !Object.keys(e).length;
+    },
+
+    async savePost() {
+      if (!this.validatePost()) {
+        if (this.postErrors.title || this.postErrors.excerpt || this.postErrors.content_markdown) this.postFormTab = 'content';
+        else this.postFormTab = 'seo';
+        return;
+      }
+      this.saving = true;
+      try {
+        const fd = toFormData(this.postForm, ['cover_image','og_image']);
+        const method = this.editingPost ? 'PUT' : 'POST';
+        const url    = this.editingPost ? API.post(this.editingPost.id) : API.posts;
+        await apiFetch(url, { method, body: fd });
+        await this.loadAll();
+        this.postModalOpen = false;
+        this.showToast(this.editingPost ? 'Post updated' : 'Post created', 'success');
+      } catch (err) {
+        this.showToast('Save failed: ' + err.message, 'error');
+      } finally {
+        this.saving = false;
+      }
+    },
+
+    confirmDeletePost(post) {
+      this.openConfirm(
+        `Delete "${post.title}"?`,
+        'This action cannot be undone.',
+        async () => {
+          await apiFetch(API.post(post.id), { method:'DELETE' });
+          await this.loadAll();
+          this.showToast('Post deleted', 'success');
+        }
+      );
+    },
+
+    async bulkStatusUpdate(status) {
+      this.saving = true;
+      try {
+        await Promise.all(
+          this.selectedPosts.map(id =>
+            apiFetch(API.post(id), {
+              method: 'PATCH',
+              body: JSON.stringify({ status }),
+            })
+          )
+        );
+        await this.loadAll();
+        this.showToast(`${this.selectedPosts.length} posts set to ${status}`, 'success');
+        this.selectedPosts = [];
+      } catch (err) {
+        this.showToast('Bulk update failed: ' + err.message, 'error');
+      } finally {
+        this.saving = false;
+      }
+    },
+
+    bulkDeletePosts() {
+      const n = this.selectedPosts.length;
+      this.openConfirm(
+        `Delete ${n} post${n>1?'s':''}?`,
+        'This cannot be undone.',
+        async () => {
+          await Promise.all(this.selectedPosts.map(id => apiFetch(API.post(id), { method:'DELETE' })));
+          await this.loadAll();
+          this.selectedPosts = [];
+          this.showToast(`${n} posts deleted`, 'success');
+        }
+      );
+    },
+
+    /* ─────────────────────────────────────
+       AUTHOR CRUD
+    ───────────────────────────────────── */
+    authorModalOpen: false, editingAuthor: null,
+    authorForm: {}, authorErrors: {},
+
+    openAuthorModal(author) {
+      this.editingAuthor  = author;
+      this.authorErrors   = {};
+      this.authorForm     = author ? { ...author } : { name:'', title:'', bio:'', linkedin:'', twitter:'', website:'' };
+      this.authorModalOpen = true;
+    },
+
+    async saveAuthor() {
+      const e = {};
+      if (!(this.authorForm.name||'').trim()) e.name = 'Name is required.';
+      this.authorErrors = e;
+      if (Object.keys(e).length) return;
+      this.saving = true;
+      try {
+        const fd     = toFormData(this.authorForm, ['avatar']);
+        const method = this.editingAuthor ? 'PUT' : 'POST';
+        const url    = this.editingAuthor ? API.author(this.editingAuthor.id) : API.authors;
+        await apiFetch(url, { method, body: fd });
+        await this.loadAll();
+        this.authorModalOpen = false;
+        this.showToast(this.editingAuthor ? 'Author updated' : 'Author created', 'success');
+      } catch (err) {
+        this.showToast('Save failed: ' + err.message, 'error');
+      } finally {
+        this.saving = false;
+      }
+    },
+
+    confirmDeleteAuthor(author) {
+      this.openConfirm(
+        `Delete "${author.name}"?`,
+        'Their posts will be unassigned.',
+        async () => {
+          await apiFetch(API.author(author.id), { method:'DELETE' });
+          await this.loadAll();
+          this.showToast('Author deleted', 'success');
+        }
+      );
+    },
+
+    /* ─────────────────────────────────────
+       CATEGORY CRUD
+    ───────────────────────────────────── */
+    categoryModalOpen: false, editingCategory: null,
+    categoryForm: { name:'' }, categoryErrors: {},
+
+    openCategoryModal(cat) {
+      this.editingCategory  = cat;
+      this.categoryErrors   = {};
+      this.categoryForm     = cat ? { ...cat } : { name:'' };
+      this.categoryModalOpen = true;
+    },
+
+    async saveCategory() {
+      const e = {};
+      if (!(this.categoryForm.name||'').trim()) e.name = 'Name is required.';
+      this.categoryErrors = e;
+      if (Object.keys(e).length) return;
+      this.saving = true;
+      try {
+        const payload = { name: this.categoryForm.name };
+        const method  = this.editingCategory ? 'PUT' : 'POST';
+        const url     = this.editingCategory ? API.category(this.editingCategory.id) : API.categories;
+        await apiFetch(url, { method, body: JSON.stringify(payload) });
+        await this.loadAll();
+        this.categoryModalOpen = false;
+        this.showToast(this.editingCategory ? 'Category updated' : 'Category created', 'success');
+      } catch (err) {
+        this.showToast('Save failed: ' + err.message, 'error');
+      } finally {
+        this.saving = false;
+      }
+    },
+
+    confirmDeleteCategory(cat) {
+      this.openConfirm(
+        `Delete "${cat.name}"?`,
+        'Posts in this category will be unassigned.',
+        async () => {
+          await apiFetch(API.category(cat.id), { method:'DELETE' });
+          await this.loadAll();
+          this.showToast('Category deleted', 'success');
+        }
+      );
+    },
+
+    /* ─────────────────────────────────────
+       TAG CRUD
+    ───────────────────────────────────── */
+    tagModalOpen: false, editingTag: null,
+    tagForm: { name:'' }, tagErrors: {},
+
+    openTagModal(tag) {
+      this.editingTag  = tag;
+      this.tagErrors   = {};
+      this.tagForm     = tag ? { ...tag } : { name:'' };
+      this.tagModalOpen = true;
+    },
+
+    async saveTag() {
+      const e = {};
+      if (!(this.tagForm.name||'').trim()) e.name = 'Name is required.';
+      this.tagErrors = e;
+      if (Object.keys(e).length) return;
+      this.saving = true;
+      try {
+        const payload = { name: this.tagForm.name };
+        const method  = this.editingTag ? 'PUT' : 'POST';
+        const url     = this.editingTag ? API.tag(this.editingTag.id) : API.tags;
+        await apiFetch(url, { method, body: JSON.stringify(payload) });
+        await this.loadAll();
+        this.tagModalOpen = false;
+        this.showToast(this.editingTag ? 'Tag updated' : 'Tag created', 'success');
+      } catch (err) {
+        this.showToast('Save failed: ' + err.message, 'error');
+      } finally {
+        this.saving = false;
+      }
+    },
+
+    confirmDeleteTag(tag) {
+      this.openConfirm(
+        `Delete tag "${tag.name}"?`,
+        'It will be removed from all posts.',
+        async () => {
+          await apiFetch(API.tag(tag.id), { method:'DELETE' });
+          await this.loadAll();
+          this.showToast('Tag deleted', 'success');
+        }
+      );
+    },
+
+    /* ─────────────────────────────────────
+       CONFIRM DIALOG
+    ───────────────────────────────────── */
+    confirmOpen: false, confirmTitle: '', confirmMsg: '', _confirmCb: null,
+
+    openConfirm(title, msg, cb) {
+      this.confirmTitle = title;
+      this.confirmMsg   = msg;
+      this._confirmCb   = cb;
+      this.confirmOpen  = true;
+    },
+
+    async runConfirm() {
+      if (!this._confirmCb) { this.confirmOpen = false; return; }
+      this.saving = true;
+      try {
+        await this._confirmCb();
+      } catch (err) {
+        this.showToast('Error: ' + err.message, 'error');
+      } finally {
+        this.saving      = false;
+        this.confirmOpen = false;
+        this._confirmCb  = null;
+      }
+    },
+
+    /* ─────────────────────────────────────
+       TOAST
+    ───────────────────────────────────── */
+    toast: { show: false, message: '', type: 'success' },
+    _toastTimer: null,
+
+    showToast(message, type = 'success') {
+      clearTimeout(this._toastTimer);
+      this.toast = { show: true, message, type };
+      this._toastTimer = setTimeout(() => { this.toast.show = false; }, 3500);
+    },
+
+    /* ─────────────────────────────────────
+       HELPERS
+    ───────────────────────────────────── */
+    toSlug(str) {
+      return (str||'').toLowerCase().trim()
+        .replace(/[^\w\s-]/g,'').replace(/[\s_-]+/g,'-').replace(/^-+|-+$/g,'');
+    },
+
+    init() {
+      this.loadAll();
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          this.postModalOpen = this.authorModalOpen = this.categoryModalOpen = this.tagModalOpen = this.confirmOpen = false;
+        }
+      });
+    },
+  };
+}
+</script>
+</body>
+</html>

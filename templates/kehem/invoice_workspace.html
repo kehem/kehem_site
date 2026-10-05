@@ -1,0 +1,272 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Invoices · KEHEM IT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            ink: "#181B1A",
+            moss: "#2D5A47",
+            mist: "#F1F4F2",
+            line: "#DCE2DE"
+          },
+          fontFamily: {
+            sans: ["DM Sans", "sans-serif"],
+            display: ["Manrope", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+    integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="{% static 'kehem/invoice/invoice.css' %}">
+</head>
+<body class="h-full overflow-hidden bg-[#f7f8f7] font-sans text-ink antialiased dark:bg-[#111413] dark:text-[#edf1ef]">
+  <div id="invoiceApp" class="flex h-full min-h-0 flex-col" data-can-edit="{{ can_edit|yesno:'true,false' }}">
+    <header class="app-header shrink-0 border-b border-line bg-white/95 dark:border-white/10 dark:bg-[#171a19]/95">
+      <div class="flex h-16 items-center gap-3 px-4 lg:px-6">
+        <a href="/" class="flex shrink-0 items-center gap-2.5" aria-label="KEHEM IT home">
+          <span class="grid h-8 w-8 place-items-center rounded-[10px] bg-ink font-display text-sm font-bold text-white dark:bg-white dark:text-ink">K</span>
+          <span class="hidden font-display text-sm font-bold tracking-[-.02em] sm:block">KEHEM IT</span>
+          <span class="hidden h-4 w-px bg-line md:block dark:bg-white/10"></span>
+          <span class="hidden text-xs text-slate-500 md:block dark:text-slate-400">Invoice desk</span>
+        </a>
+
+        <div class="relative ml-auto hidden w-full max-w-[330px] md:block">
+          <i data-lucide="search" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"></i>
+          <input id="topSearch" type="search" placeholder="Search invoices…  Ctrl F" class="control h-9 w-full pl-9 pr-3 text-sm" autocomplete="off">
+        </div>
+
+        <nav class="ml-auto flex shrink-0 items-center gap-1 md:ml-0" aria-label="Invoice actions">
+          <button id="newInvoiceBtn" class="toolbar-btn" type="button" title="New invoice">
+            <i data-lucide="plus" class="h-4 w-4"></i><span class="hidden lg:inline">New</span>
+          </button>
+          <button id="saveBtn" class="toolbar-btn toolbar-btn-primary" type="button" title="Save (Ctrl S)">
+            <i data-lucide="save" class="h-4 w-4"></i><span class="hidden lg:inline">Save</span>
+          </button>
+          <button id="printBtn" class="toolbar-btn" type="button" title="Print (Ctrl P)" onclick="window.print()">
+            <i data-lucide="printer" class="h-4 w-4"></i><span class="hidden xl:inline">Print</span>
+          </button>
+          <button id="pdfBtn" class="toolbar-btn" type="button" title="Download PDF" onclick="if (!window.KEHEM_INVOICE_READY) window.print()">
+            <i data-lucide="download" class="h-4 w-4"></i><span class="hidden xl:inline">PDF</span>
+          </button>
+          <button id="openListBtn" class="toolbar-btn md:hidden" type="button" title="Search invoices">
+            <i data-lucide="search" class="h-4 w-4"></i>
+          </button>
+          <button id="settingsBtn" class="toolbar-icon" type="button" title="Settings">
+            <i data-lucide="settings-2" class="h-4 w-4"></i>
+          </button>
+          <button id="themeBtn" class="toolbar-icon" type="button" title="Toggle dark mode">
+            <i data-lucide="moon" class="h-4 w-4 theme-icon"></i>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="documentWorkspace" class="document-workspace min-h-0 flex-1 overflow-auto bg-[#e9ecea] p-4 dark:bg-[#0d0f0e] md:p-8">
+      <div class="workspace-strip mx-auto mb-4 flex w-[210mm] items-center justify-between print:hidden">
+        <div class="flex items-center gap-2">
+          <span id="statusDot" class="status-badge status-draft">Draft</span>
+          <span id="saveState" class="text-[11px] text-slate-500 dark:text-slate-400">New invoice · Not saved</span>
+        </div>
+        <p class="flex items-center gap-1.5 text-[11px] text-slate-500 dark:text-slate-400"><i data-lucide="mouse-pointer-2" class="h-3.5 w-3.5"></i>Click any field on the paper to edit</p>
+      </div>
+
+      <form id="invoiceForm" class="mx-auto w-[210mm]" novalidate>
+        {% csrf_token %}
+        <article id="invoiceDocument" class="invoice-document bg-white text-[#1a1d1b] shadow-[0_18px_55px_rgba(28,36,32,.12)]">
+          <div class="document-accent"></div>
+          <div class="document-body">
+            <header class="document-header">
+              <div class="flex items-center gap-4">
+                <div id="previewLogoWrap"><img class="preview-logo-image kehem-direct-logo" src="https://kehem.com/static/kehem.54168f2599d9.webp" alt="KEHEM IT logo"></div>
+                <div>
+                  <h2 id="previewCompanyName" class="font-display text-[20px] font-bold tracking-[-.04em]">KEHEM IT</h2>
+                  <p id="previewCompanyWebsite" class="mt-0.5 text-[9px] text-[#68706c]">kehem.com</p>
+                </div>
+              </div>
+              <div class="text-right">
+                <p class="font-display text-[28px] font-semibold tracking-[-.04em]">INVOICE</p>
+                <input id="invoiceNumber" value="{{ suggested_number }}" class="paper-input paper-invoice-number mt-1 text-right font-mono" readonly aria-label="Invoice number">
+              </div>
+            </header>
+
+            <div class="document-rule"></div>
+
+            <section class="document-meta-grid">
+              <div class="paper-field-group">
+                <p class="document-label">Billed to</p>
+                <input id="customerName" class="paper-input mt-2 font-semibold" placeholder="Customer name *" required autocomplete="name">
+                <input id="customerCompany" class="paper-input mt-0.5" placeholder="Company name">
+                <textarea id="customerAddress" rows="2" class="paper-input paper-textarea mt-1" placeholder="Street, city, postal code"></textarea>
+                <div class="mt-1 grid grid-cols-2 gap-2">
+                  <input id="customerPhone" type="tel" class="paper-input" placeholder="Phone">
+                  <input id="customerEmail" type="email" class="paper-input" placeholder="Email">
+                </div>
+                <small class="field-error" data-error-for="customerName"></small>
+              </div>
+              <div class="grid grid-cols-2 gap-x-5 gap-y-3">
+                <label class="paper-meta-field"><span class="document-label">Issue date</span><input id="invoiceDate" type="date" value="{{ today }}" class="paper-input document-meta-value" required></label>
+                <label class="paper-meta-field"><span class="document-label">Due date</span><input id="dueDate" type="date" value="{{ default_due_date }}" class="paper-input document-meta-value"></label>
+                <label class="paper-meta-field"><span class="document-label">Status</span><select id="invoiceStatus" class="paper-input document-meta-value capitalize"><option value="draft">Draft</option><option value="pending">Pending</option><option value="paid">Paid</option><option value="cancelled">Cancelled</option><option value="overdue">Overdue</option></select></label>
+                <label class="paper-meta-field"><span class="document-label">Currency</span><select id="currency" class="paper-input document-meta-value"><option value="BDT">BDT — ৳</option><option value="USD">USD — $</option><option value="EUR">EUR — €</option><option value="GBP">GBP — £</option><option value="SEK">SEK — kr</option></select></label>
+                <label class="paper-meta-field col-span-2"><span class="document-label">Payment terms</span><input id="paymentTerms" value="Due within 14 days" class="paper-input document-meta-value" placeholder="Due within 14 days"></label>
+              </div>
+            </section>
+
+            <section class="mt-9">
+              <div class="mb-2 flex items-center justify-between">
+                <p class="document-label">Invoice items</p>
+                <button id="addItemBtn" type="button" class="paper-action print:hidden"><i data-lucide="plus" class="h-3 w-3"></i>Add line</button>
+              </div>
+              <table class="document-table document-edit-table">
+                <thead><tr><th class="w-[40%] text-left">Description</th><th>Qty</th><th>Rate</th><th>Disc.</th><th>Tax</th><th class="text-right">Amount</th><th class="w-6 print:hidden"></th></tr></thead>
+                <tbody id="itemsEditor"></tbody>
+              </table>
+              <small class="field-error mt-2 block" data-error-for="items"></small>
+            </section>
+
+            <section class="mt-8 grid grid-cols-[1fr_245px] gap-10">
+              <div>
+                <label id="notesSection" class="optional-print-section block">
+                  <span class="document-label">Notes</span>
+                  <textarea id="notes" rows="3" class="paper-input paper-textarea mt-2" placeholder="Add a note for your customer"></textarea>
+                </label>
+                <label id="paymentSection" class="optional-print-section mt-5 block">
+                  <span class="document-label">Payment instructions</span>
+                  <textarea id="paymentInstructions" rows="3" class="paper-input paper-textarea mt-2" placeholder="Bank or payment details"></textarea>
+                </label>
+              </div>
+              <div class="document-totals document-edit-totals">
+                <div><span>Subtotal</span><strong id="previewSubtotal">৳0.00</strong></div>
+                <div><span>Item discounts</span><strong id="previewDiscount">− ৳0.00</strong></div>
+                <div><span>Tax</span><strong id="previewTax">৳0.00</strong></div>
+                <label><span>Shipping</span><span class="paper-money"><i data-currency-symbol>৳</i><input id="shipping" type="number" min="0" step=".01" value="0" class="paper-input text-right"></span></label>
+                <label><span>Service charge</span><span class="paper-money"><i data-currency-symbol>৳</i><input id="serviceCharge" type="number" min="0" step=".01" value="0" class="paper-input text-right"></span></label>
+                <label><span>Extra cost</span><span class="paper-money"><i data-currency-symbol>৳</i><input id="extraCost" type="number" min="0" step=".01" value="0" class="paper-input text-right"></span></label>
+                <label title="Use a negative value to add a charge"><span>Adjustment</span><span class="paper-money"><i data-currency-symbol>৳</i><input id="additionalDiscount" type="number" step=".01" value="0" class="paper-input text-right"></span></label>
+                <div class="grand-total"><span>Total</span><strong id="previewGrandTotal">৳0.00</strong></div>
+                <label><span>Paid</span><span class="paper-money"><i data-currency-symbol>৳</i><input id="paidAmount" type="number" min="0" step=".01" value="0" class="paper-input text-right"></span></label>
+                <div class="balance-row"><span>Balance due</span><strong id="previewBalance">৳0.00</strong></div>
+              </div>
+            </section>
+
+            <section class="document-notice">
+              <strong>NB</strong>
+              <p>This is an automatically generated invoice and does not require a signature.</p>
+            </section>
+          </div>
+          <footer class="document-footer">
+            <p id="previewFooter">Thank you for choosing KEHEM IT.</p>
+            <div id="previewCompanyContact">KEHEM IT</div>
+          </footer>
+        </article>
+      </form>
+    </main>
+
+    <div id="invoiceDrawer" class="drawer" aria-hidden="true">
+      <button class="drawer-backdrop" type="button" data-close-drawer aria-label="Close invoice list"></button>
+      <aside class="drawer-panel">
+        <div class="flex items-start justify-between border-b border-line px-5 py-5 dark:border-white/10">
+          <div><h2 class="font-display text-lg font-semibold">Invoices</h2><p id="drawerCount" class="mt-1 text-xs text-slate-500 dark:text-slate-400">Latest records</p></div>
+          <button class="toolbar-icon" type="button" data-close-drawer><i data-lucide="x" class="h-4 w-4"></i></button>
+        </div>
+        <div class="space-y-3 border-b border-line p-5 dark:border-white/10">
+          <div class="relative">
+            <i data-lucide="search" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"></i>
+            <input id="drawerSearch" class="control pl-9" type="search" placeholder="Number, customer, phone…">
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <select id="filterStatus" class="control"><option value="">All statuses</option><option value="paid">Paid</option><option value="pending">Pending</option><option value="draft">Draft</option><option value="cancelled">Cancelled</option><option value="overdue">Overdue</option></select>
+            <select id="filterOrdering" class="control"><option value="-created_at">Newest first</option><option value="created_at">Oldest first</option><option value="-grand_total">Highest total</option><option value="grand_total">Lowest total</option></select>
+            <input id="filterDateFrom" class="control" type="date" aria-label="From date">
+            <input id="filterDateTo" class="control" type="date" aria-label="To date">
+          </div>
+        </div>
+        <div id="invoiceList" class="min-h-0 flex-1 overflow-y-auto"></div>
+        <div class="flex items-center justify-between border-t border-line px-5 py-3 dark:border-white/10">
+          <button id="previousPage" class="toolbar-btn" type="button"><i data-lucide="chevron-left" class="h-4 w-4"></i>Previous</button>
+          <span id="pageLabel" class="text-xs text-slate-500 dark:text-slate-400">Page 1</span>
+          <button id="nextPage" class="toolbar-btn" type="button">Next<i data-lucide="chevron-right" class="h-4 w-4"></i></button>
+        </div>
+      </aside>
+    </div>
+
+    <div id="settingsModal" class="modal" aria-hidden="true">
+      <button class="modal-backdrop" type="button" data-close-settings aria-label="Close settings"></button>
+      <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+        <header class="flex items-start justify-between border-b border-line px-6 py-5 dark:border-white/10">
+          <div><h2 id="settingsTitle" class="font-display text-lg font-semibold">Invoice settings</h2><p class="mt-1 text-xs text-slate-500 dark:text-slate-400">Used automatically on every invoice.</p></div>
+          <button class="toolbar-icon" type="button" data-close-settings><i data-lucide="x" class="h-4 w-4"></i></button>
+        </header>
+        <form id="settingsForm" class="min-h-0 flex-1 overflow-y-auto p-6">
+          <div class="settings-group">
+            <h3>Company information</h3>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="field col-span-2"><span>Company name</span><input name="company_name" class="control"></label>
+              <label class="field col-span-2"><span>Address</span><textarea name="address" rows="2" class="control resize-none"></textarea></label>
+              <label class="field"><span>Phone</span><input name="phone" class="control"></label>
+              <label class="field"><span>Email</span><input name="email" type="email" class="control"></label>
+              <label class="field col-span-2"><span>Website</span><input name="website" type="url" class="control"></label>
+              <label class="field"><span>VAT number</span><input name="vat_number" class="control"></label>
+              <label class="field"><span>Tax number</span><input name="tax_number" class="control"></label>
+              <label class="field col-span-2"><span>Company logo</span><input name="logo" type="file" accept="image/*" class="file-control"></label>
+            </div>
+          </div>
+          <div class="settings-group">
+            <h3>Defaults</h3>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="field"><span>Invoice prefix</span><input name="invoice_prefix" maxlength="12" class="control uppercase"></label>
+              <label class="field"><span>Default currency</span><select name="default_currency" class="control"><option>BDT</option><option>USD</option><option>EUR</option><option>GBP</option><option>SEK</option></select></label>
+              <label class="field col-span-2"><span>Default tax %</span><input name="default_tax" type="number" min="0" max="100" step=".01" class="control"></label>
+              <label class="field col-span-2"><span>Default notes</span><textarea name="default_notes" rows="2" class="control resize-none"></textarea></label>
+              <label class="field col-span-2"><span>Bank information</span><textarea name="bank_information" rows="3" class="control resize-none"></textarea></label>
+              <label class="field col-span-2"><span>Payment instructions</span><textarea name="payment_instructions" rows="3" class="control resize-none"></textarea></label>
+              <label class="field col-span-2"><span>Invoice footer</span><textarea name="invoice_footer" rows="2" class="control resize-none"></textarea></label>
+            </div>
+          </div>
+        </form>
+        <footer class="flex items-center justify-end gap-2 border-t border-line px-6 py-4 dark:border-white/10">
+          <button class="toolbar-btn" type="button" data-close-settings>Cancel</button>
+          <button id="saveSettingsBtn" class="toolbar-btn toolbar-btn-primary" type="button"><i data-lucide="save" class="h-4 w-4"></i>Save settings</button>
+        </footer>
+      </section>
+    </div>
+
+    <div id="toastRegion" class="toast-region" aria-live="polite"></div>
+    <div id="loadingOverlay" class="loading-overlay hidden" aria-hidden="true"><div class="loading-spinner"></div></div>
+  </div>
+
+  <script>
+    window.KEHEM_INVOICE_BOOT = {
+      company: JSON.parse("{{ company_json|escapejs }}"),
+      settings: JSON.parse("{{ settings_json|escapejs }}"),
+      suggestedNumber: "{{ suggested_number|escapejs }}",
+      today: "{{ today }}",
+      defaultDueDate: "{{ default_due_date }}",
+      endpoints: {
+        collection: "{% url 'invoice_collection_api' %}",
+        detailBase: "{% url 'invoice_collection_api' %}",
+        settings: "{% url 'invoice_settings_api' %}"
+      }
+    };
+  </script>
+  <script src="{% static 'kehem/invoice/invoice.js' %}"></script>
+</body>
+</html>

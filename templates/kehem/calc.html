@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kehem Simple Calculator</title>
+  <style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      background: #ecf0f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* Calculator Container */
+    .calculator {
+      background: #ecf0f3;
+      width: 320px;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 13px 13px 20px #cbced1,
+                  -13px -13px 20px #fff;
+    }
+
+    /* Display Container */
+    .display-container {
+      width: 95%;
+      margin-bottom: 20px;
+      padding: 10px;
+      border-radius: 10px;
+      background: #ecf0f3;
+      box-shadow: inset 5px 5px 10px #cbced1,
+                  inset -5px -5px 10px #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      min-height: 70px;
+    }
+
+    /* Expression Display (Small, above) */
+    .expression {
+      font-size: 1.2em;
+      color: #777;
+      text-align: right;
+      min-height: 25px;
+      width: 100%;
+    }
+
+    /* Result Display (Large) */
+    .result {
+      font-size: 2em;
+      color: #333;
+      text-align: right;
+      min-height: 40px;
+      width: 100%;
+    }
+
+    /* Buttons Grid */
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 15px;
+    }
+
+    /* Button Base Style */
+    .buttons button {
+      border: none;
+      outline: none;
+      padding: 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      background: #ecf0f3;
+      color: #333;
+      cursor: pointer;
+      box-shadow: 5px 5px 10px #cbced1,
+                  -5px -5px 10px #fff;
+      transition: box-shadow 0.2s;
+    }
+
+    .buttons button:active {
+      box-shadow: inset 5px 5px 10px #cbced1,
+                  inset -5px -5px 10px #fff;
+    }
+
+    /* Operator Styles */
+    .operator {
+      color: #f39c12;
+    }
+
+    .clear {
+      background: #e74c3c;
+      color: #fff;
+    }
+
+    .equal-container {
+      margin-top: 15px;
+    }
+
+    .equal-container button {
+      width: 100%;
+      padding: 20px;
+      font-size: 1.2em;
+      border-radius: 10px;
+      background: #f39c12;
+      color: #fff;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="calculator">
+    <!-- Updated Display Section -->
+    <div class="display-container">
+      <div class="expression" id="expression"></div>
+      <div class="result" id="result">0</div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="buttons">
+      <button class="clear" id="clear">C</button>
+      <button id="backspace">⌫</button>
+      <button id="percent">%</button>
+      <button class="operator" data-operator="/">÷</button>
+
+      <button data-number="7">7</button>
+      <button data-number="8">8</button>
+      <button data-number="9">9</button>
+      <button class="operator" data-operator="*">×</button>
+
+      <button data-number="4">4</button>
+      <button data-number="5">5</button>
+      <button data-number="6">6</button>
+      <button class="operator" data-operator="-">−</button>
+
+      <button data-number="1">1</button>
+      <button data-number="2">2</button>
+      <button data-number="3">3</button>
+      <button class="operator" data-operator="+">+</button>
+
+      <button data-number="0" style="grid-column: span 2;">0</button>
+      <button data-number=".">.</button>
+      <button class="equal" id="equal">=</button>
+    </div>
+  </div>
+
+  <script>
+    const expressionDisplay = document.getElementById('expression');
+    const resultDisplay = document.getElementById('result');
+    const buttons = document.querySelectorAll('button');
+    let currentExpression = "";
+    let shouldResetResult = false;
+
+    // Append value to the expression
+    function appendValue(value) {
+      if (shouldResetResult) {
+        resultDisplay.textContent = "0";
+        shouldResetResult = false;
+      }
+      currentExpression += value;
+      resultDisplay.textContent = currentExpression;
+    }
+
+    // Evaluate the expression safely
+    function calculate() {
+      try {
+        let expression = currentExpression;
+        let replacedExpression = expression
+          .replace(/×/g, '*')
+          .replace(/÷/g, '/')
+          .replace(/−/g, '-');
+        let result = eval(replacedExpression);
+
+        expressionDisplay.textContent = expression; // Move expression above
+        resultDisplay.textContent = result; // Show result in main display
+        currentExpression = result.toString();
+        shouldResetResult = true;
+      } catch (error) {
+        resultDisplay.textContent = "Error";
+        shouldResetResult = true;
+      }
+    }
+
+    // Clear the display
+    function clearDisplay() {
+      expressionDisplay.textContent = "";
+      resultDisplay.textContent = "0";
+      currentExpression = "";
+    }
+
+    // Remove the last character (backspace)
+    function backspace() {
+      currentExpression = currentExpression.slice(0, -1);
+      resultDisplay.textContent = currentExpression || "0";
+    }
+
+    // Add click event listeners to buttons
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        if (button.hasAttribute('data-number')) {
+          appendValue(button.getAttribute('data-number'));
+        } else if (button.hasAttribute('data-operator')) {
+          appendValue(button.getAttribute('data-operator'));
+        } else if (button.id === 'equal') {
+          calculate();
+        } else if (button.id === 'clear') {
+          clearDisplay();
+        } else if (button.id === 'backspace') {
+          backspace();
+        } else if (button.id === 'percent') {
+          appendValue('/100');
+        }
+      });
+    });
+
+    // Listen for keyboard input
+    document.addEventListener('keydown', event => {
+        const key = event.key;
+        if ((key >= '0' && key <= '9') || key === '.') {
+          appendValue(key);
+        } else if (['+', '-', '*', '/'].includes(key)) {
+          appendValue(key);
+        } else if (key === '%') {
+          appendValue('/100'); // Convert % to division by 100
+        } else if (key === 'Enter' || key === '=') {
+          event.preventDefault();
+          calculate();
+        } else if (key === 'Backspace') {
+          backspace();
+        } else if (key === 'Escape') {
+          clearDisplay();
+        }
+      });
+      
+      resultDisplay.addEventListener('click', () => {
+        navigator.clipboard.writeText(resultDisplay.textContent);
+    });
+  </script>
+
+</body>
+</html>
